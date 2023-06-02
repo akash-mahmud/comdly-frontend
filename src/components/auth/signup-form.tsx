@@ -43,6 +43,7 @@ export default function SignUpForm() {
 
   // TO-DO: Send data to API onSubmit.
   function handleFormSubmit(data: SignUpType) {
+    
     console.log('Submitted data', data);
   }
 
@@ -119,11 +120,7 @@ export default function SignUpForm() {
           Sign In
         </Link>
       </p>
-      <div className="relative mt-7 mb-8 text-center before:absolute before:top-1/2 before:left-0 before:h-[1px] before:w-full before:bg-gray-200">
-        <span className="relative z-10 m-auto inline-flex bg-white px-5">
-          Or
-        </span>
-      </div>
+
     </form>
   );
 }

@@ -1,0 +1,37 @@
+mutation Register($user: UserInput) {
+  register(user: $user) {
+    __typename
+    message
+  }
+}
+
+query Me {
+  me {
+    id
+    firstname
+    lastname
+    email
+  }
+}
+
+# mutation Login($user: LoginInput) {
+#   login(user: $user) {
+#     accessToken
+#     message
+#     user {
+#       firstname
+#       lastname
+#       email
+#       role
+#       id
+#     }
+#   }
+# }
+
+# mutation AddPaymentMethod($token: String!) {
+#   addPaymentMethod(token: $token)
+# }
+
+# mutation EmailVerification($token: String!) {
+#   emailVerification(token: $token)
+# }
