@@ -14,19 +14,21 @@ query Me {
   }
 }
 
-# mutation Login($user: LoginInput) {
-#   login(user: $user) {
-#     accessToken
-#     message
-#     user {
-#       firstname
-#       lastname
-#       email
-#       role
-#       id
-#     }
-#   }
-# }
+mutation Login($user: LoginInput) {
+  login(user: $user) {
+    accessToken
+    message
+    user {
+      id
+      firstname
+      lastname
+      email
+      role
+    }
+    isAuthenticated
+    success
+  }
+}
 
 # mutation AddPaymentMethod($token: String!) {
 #   addPaymentMethod(token: $token)

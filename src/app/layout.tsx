@@ -5,7 +5,7 @@ import '@/styles/globals.css';
 import GalleryCarouselView from '@/components/gallery/view';
 import DrawerContainer from '@/components/drawers/view';
 import ModalContainer from '@/components/modals/view';
-
+import ReduxStoreProvider from '@/store/provider'
 const lato = Lato({
   subsets: ['latin'],
   weight: ['300', '400', '700', '900'],
@@ -36,12 +36,15 @@ export default function RootLayout({ children }: React.PropsWithChildren<{}>) {
       )}
     >
       <head />
+      <ReduxStoreProvider>
+
       <body className="flex min-h-full flex-col">
         {children}
         <ModalContainer />
         <DrawerContainer />
         <GalleryCarouselView />
       </body>
+      </ReduxStoreProvider>
     </html>
   );
 }

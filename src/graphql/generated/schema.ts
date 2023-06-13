@@ -331,6 +331,7 @@ export type User = {
   firstname?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['String']['output']>;
   lastname?: Maybe<Scalars['String']['output']>;
+  role?: Maybe<UserRole>;
 };
 
 export type UserInput = {
@@ -341,6 +342,13 @@ export type UserInput = {
   password?: InputMaybe<Scalars['String']['input']>;
 };
 
+export enum UserRole {
+  Admin = 'admin',
+  Company = 'company',
+  Public = 'public',
+  Superadmin = 'superadmin'
+}
+
 export enum CompanyRole {
   Employee = 'employee',
   Owner = 'owner'
@@ -349,6 +357,7 @@ export enum CompanyRole {
 export type DefaultResposnce = {
   __typename?: 'defaultResposnce';
   message?: Maybe<Scalars['String']['output']>;
+  success?: Maybe<Scalars['Boolean']['output']>;
 };
 
 export type FetchAllBookingsResponsce = {
@@ -372,7 +381,10 @@ export type FetchAllServiceResponsce = {
 export type Loginresponsce = {
   __typename?: 'loginresponsce';
   accessToken?: Maybe<Scalars['String']['output']>;
+  isAuthenticated?: Maybe<Scalars['Boolean']['output']>;
   message?: Maybe<Scalars['String']['output']>;
+  success?: Maybe<Scalars['Boolean']['output']>;
+  user?: Maybe<User>;
 };
 
 export type Subscription = {
@@ -404,6 +416,13 @@ export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type MeQuery = { __typename?: 'Query', me?: { __typename?: 'User', id?: string | null, firstname?: string | null, lastname?: string | null, email?: string | null } | null };
+
+export type LoginMutationVariables = Exact<{
+  user?: InputMaybe<LoginInput>;
+}>;
+
+
+export type LoginMutation = { __typename?: 'Mutation', login?: { __typename?: 'loginresponsce', accessToken?: string | null, message?: string | null, isAuthenticated?: boolean | null, success?: boolean | null, user?: { __typename?: 'User', id?: string | null, firstname?: string | null, lastname?: string | null, email?: string | null, role?: UserRole | null } | null } | null };
 
 
 export const RegisterDocument = gql`
@@ -477,3 +496,46 @@ export function useMeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MeQuery
 export type MeQueryHookResult = ReturnType<typeof useMeQuery>;
 export type MeLazyQueryHookResult = ReturnType<typeof useMeLazyQuery>;
 export type MeQueryResult = Apollo.QueryResult<MeQuery, MeQueryVariables>;
+export const LoginDocument = gql`
+    mutation Login($user: LoginInput) {
+  login(user: $user) {
+    accessToken
+    message
+    user {
+      id
+      firstname
+      lastname
+      email
+      role
+    }
+    isAuthenticated
+    success
+  }
+}
+    `;
+export type LoginMutationFn = Apollo.MutationFunction<LoginMutation, LoginMutationVariables>;
+
+/**
+ * __useLoginMutation__
+ *
+ * To run a mutation, you first call `useLoginMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useLoginMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [loginMutation, { data, loading, error }] = useLoginMutation({
+ *   variables: {
+ *      user: // value for 'user'
+ *   },
+ * });
+ */
+export function useLoginMutation(baseOptions?: Apollo.MutationHookOptions<LoginMutation, LoginMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument, options);
+      }
+export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
+export type LoginMutationResult = Apollo.MutationResult<LoginMutation>;
+export type LoginMutationOptions = Apollo.BaseMutationOptions<LoginMutation, LoginMutationVariables>;

@@ -1,5 +1,5 @@
 
-
+import { getAuthData } from '@/utils/session';
 const auth = getAuthData();
 const token = auth.token ? `Bearer ${auth.token}` : "";
 

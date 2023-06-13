@@ -10,6 +10,12 @@ import Button from '@/components/ui/button';
 import Checkbox from '@/components/ui/form-fields/checkbox';
 import useAuth from '@/hooks/use-auth';
 import { useModal } from '@/components/modals/context';
+import {useAppDispatch, useAppSelector} from '@/store'
+
+// import {useDispatch} from 'react-redux'
+import { login } from '@/store/slices/auth/authSlice';
+import { useState } from 'react';
+import { Spin } from 'antd'
 
 const loginInfoSchema = z.object({
   email: z
@@ -18,7 +24,7 @@ const loginInfoSchema = z.object({
     .email({ message: 'The email is invalid.' }),
   password: z
     .string()
-    .min(8, { message: 'Password must be 8 character long.' }),
+    .min(4, { message: 'Password must be 4 character long.' }),
   remember: z.boolean(),
 });
 
@@ -27,9 +33,14 @@ type SignInType = z.infer<typeof loginInfoSchema>;
 export default function SigninForm() {
   const { authorize } = useAuth();
   const { closeModal } = useModal();
-
+  const { user, isAuthenticated } = useAppSelector((state) => state.auth)
+  console.log(user);
+  
+  const [loading, setloading] = useState(false)
+  const dispatch = useAppDispatch();
   const {
     register,
+    
     handleSubmit,
     formState: { errors },
   } = useForm<SignInType>({
@@ -37,13 +48,24 @@ export default function SigninForm() {
   });
 
   // TO-DO: Send data to API onSubmit.
-  function handleFormSubmit(data: SignInType) {
-    console.log('Submitted data', data);
-    authorize();
+ async function handleFormSubmit(data: SignInType) {
+    setloading(()=>true) 
+
+   
+    await dispatch(login({
+      email:data.email,
+      password:data.password,
+     }))
+    // authorize();
+
+
     closeModal();
+      setloading(()=>false);
   }
 
   return (
+    <Spin  spinning={loading}>
+      
     <form noValidate onSubmit={handleSubmit((d) => handleFormSubmit(d))}>
       <Input
         type="text"
@@ -91,5 +113,6 @@ export default function SigninForm() {
         </span>
       </div>
     </form>
+  </Spin>
   );
 }
