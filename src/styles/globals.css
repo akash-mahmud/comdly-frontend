@@ -576,3 +576,4 @@ th.rc-table-cell {
 .month {
 	@apply [&:nth-child(2)]:hidden sm:[&:nth-child(2)]:block [&:nth-child(3)]:hidden 3xl:[&:nth-child(3)]:block
 }
+

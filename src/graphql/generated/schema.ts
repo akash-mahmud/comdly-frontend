@@ -398,13 +398,6 @@ export type Subscription = {
   user?: Maybe<User>;
 };
 
-export enum UserRole {
-  Admin = 'admin',
-  Company = 'company',
-  Public = 'public',
-  Superadmin = 'superadmin'
-}
-
 export type RegisterMutationVariables = Exact<{
   user?: InputMaybe<UserInput>;
 }>;
