@@ -2,9 +2,10 @@
 
 import Image from 'next/image';
 import FindTripForm from '@/components/home/search-form/search-form';
-import { CSSProperties, useState } from 'react';
-// import { GoogleMap, Marker, OverlayView, useJsApiLoader } from '@react-google-maps/api';
-import GoogleMapReact, { MapOptions } from 'google-map-react';
+import { CSSProperties, memo, useState } from 'react';
+import { GoogleMap, LoadScriptNext, Marker, OverlayView, useJsApiLoader, } from '@react-google-maps/api';
+import GoogleMapReact, { MapOptions ,BootstrapURLKeys } from 'google-map-react';
+import { Loader } from '@googlemaps/js-api-loader';
 
 const containerStyle:CSSProperties = {
   width: '100%',
@@ -59,7 +60,7 @@ const avatarData = [
 // );}
 
 
-export default function HeroBanner() {
+ function HeroBanner() {
   interface location{
 		lat:number
 		lng:number
@@ -109,6 +110,14 @@ gestureHandling: 'cooperative', // or 'cooperative'
 
 
 	  };
+
+    const [loadedMap, setLoadedMap] = useState(false);
+    const handleApiLoaded= (_:any, maps:any) => {
+      if (maps) {
+        setLoadedMap(true);
+      }
+    };
+  
   return (
     <div className="relative flex min-h-full items-end justify-center before:absolute before:top-0 before:left-0 before:z-[1] before:block before:h-1/4 before:w-full before:bg-gradient-to-b before:from-black/60 sm:flex-none sm:justify-start sm:px-0  ">
       <Image
@@ -148,12 +157,15 @@ gestureHandling: 'cooperative', // or 'cooperative'
     </GoogleMapReact>
   </div> */}
           <div style={{ height: '100vh', width: '100%',  }} className='px-0'>
+            <LoadScriptNext googleMapsApiKey='AIzaSyBU9Sja1_zSeP3oQySDLYZ7FVYWrq-kGKU'>
+
       <GoogleMapReact 
-        bootstrapURLKeys={{ key: "AIzaSyBU9Sja1_zSeP3oQySDLYZ7FVYWrq-kGKU" }}
+
         defaultCenter={center}
         defaultZoom={10}
-        options={mapOptions}
+        options={mapOptions}    
         yesIWantToUseGoogleMapApiInternals
+  onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
         onChange={handleMapChange}
 
       >
@@ -163,7 +175,10 @@ gestureHandling: 'cooperative', // or 'cooperative'
           text="My Marker"
         /> */}
       </GoogleMapReact>
+            </LoadScriptNext>
     </div>
     </div>
   );
 }
+
+export default memo(HeroBanner)

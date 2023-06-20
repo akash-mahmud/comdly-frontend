@@ -15,14 +15,14 @@ import ChatBlock from '@/components/listing-details/chat-block';
 import { useModal } from '@/components/modals/context';
 import Button from '@/components/ui/button';
 
-export default function ListingDetails() {
+export default function ListingDetails({service}:any) {
   const { openModal } = useModal();
   return (
     <>
       <div className="flex justify-between gap-5 lg:gap-8 xl:gap-12 4xl:gap-16">
         <div className="w-full">
-          <ListingDetailsHeroBlock vendor={vendorData.vendor} />
-          <DescriptionBlock description={vendorData.description} />
+          <ListingDetailsHeroBlock vendor={service} />
+          <DescriptionBlock description={service.description} />
           <EquipmentBlock equipment={vendorData.equipment} />
           <SpecificationBlock specifications={vendorData.specifications} />
           <VendorBlock stats={reviewsData.stats} vendor={vendorData.vendor} />

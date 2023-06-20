@@ -4,10 +4,12 @@ import { persistedState, saveState } from "../utils/persisted.store";
 import { createWrapper } from 'next-redux-wrapper';
 import authSlice from "./slices/auth/authSlice";
 import  commonSlice  from "./slices/common/sidebar";
+import serviceSlice from "./slices/service/serviceSlice";
 export const store = configureStore({
   reducer: {
     auth: authSlice,
     common: commonSlice,
+    service: serviceSlice,
   },
   preloadedState: persistedState,
 });

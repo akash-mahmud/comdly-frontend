@@ -49,6 +49,10 @@ export type Company = {
   slug?: Maybe<Scalars['String']['output']>;
 };
 
+export type CompanyFilterInput = {
+  search?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type CompanyInput = {
   avater: Scalars['String']['input'];
   description: Scalars['String']['input'];
@@ -79,6 +83,7 @@ export type Mutation = {
   addPaymentMethod?: Maybe<Scalars['String']['output']>;
   createBooking?: Maybe<DefaultResposnce>;
   createCompany?: Maybe<DefaultResposnce>;
+  createCompanyWithOwner?: Maybe<Loginresponsce>;
   createEmployee?: Maybe<DefaultResposnce>;
   createPlan?: Maybe<DefaultResposnce>;
   createService?: Maybe<DefaultResposnce>;
@@ -109,6 +114,13 @@ export type MutationCreateBookingArgs = {
 
 export type MutationCreateCompanyArgs = {
   company?: InputMaybe<CompanyInput>;
+};
+
+
+export type MutationCreateCompanyWithOwnerArgs = {
+  companyInput?: InputMaybe<CompanyInput>;
+  ownerInput?: InputMaybe<OwnerInput>;
+  userInput?: InputMaybe<UserInput>;
 };
 
 
@@ -238,13 +250,14 @@ export enum PlanType {
 export type Query = {
   __typename?: 'Query';
   fetchAllBookings?: Maybe<FetchAllBookingsResponsce>;
+  fetchAllCompany?: Maybe<FetchAllCompanyResponsce>;
   fetchAllService?: Maybe<FetchAllServiceResponsce>;
+  fetchSingleService?: Maybe<FetchSingleServiceResponsce>;
   getBooking?: Maybe<Booking>;
   getCompany?: Maybe<Company>;
   getEmployee?: Maybe<Employee>;
   getOwner?: Maybe<Owner>;
   getPlan?: Maybe<Plan>;
-  getService?: Maybe<Service>;
   healthCheck?: Maybe<Scalars['String']['output']>;
   me?: Maybe<User>;
   subscription?: Maybe<Subscription>;
@@ -256,8 +269,23 @@ export type QueryFetchAllBookingsArgs = {
 };
 
 
+export type QueryFetchAllCompanyArgs = {
+  filters?: InputMaybe<CompanyFilterInput>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
 export type QueryFetchAllServiceArgs = {
-  filter?: InputMaybe<ServiceFilterInput>;
+  filters?: InputMaybe<ServiceFilterInput>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type QueryFetchSingleServiceArgs = {
+  id?: InputMaybe<Scalars['String']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -286,11 +314,6 @@ export type QueryGetPlanArgs = {
 };
 
 
-export type QueryGetServiceArgs = {
-  id?: InputMaybe<Scalars['String']['input']>;
-};
-
-
 export type QuerySubscriptionArgs = {
   id?: InputMaybe<Scalars['String']['input']>;
 };
@@ -298,19 +321,34 @@ export type QuerySubscriptionArgs = {
 export type Service = {
   __typename?: 'Service';
   booking?: Maybe<Booking>;
-  createdAt?: Maybe<Scalars['String']['output']>;
+  companyId?: Maybe<Scalars['String']['output']>;
+  createdAt?: Maybe<Scalars['Float']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  durationPreiod?: Maybe<Scalars['Int']['output']>;
+  durationType?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['String']['output']>;
   images?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   name?: Maybe<Scalars['String']['output']>;
+  price?: Maybe<Scalars['Float']['output']>;
+  serviceCategoryid?: Maybe<Scalars['String']['output']>;
+  slug?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['Float']['output']>;
 };
 
 export type ServiceFilterInput = {
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ServiceInput = {
+  companyId?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  durationPreiod?: InputMaybe<Scalars['Int']['input']>;
+  durationType?: InputMaybe<Scalars['String']['input']>;
+  images?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   name?: InputMaybe<Scalars['String']['input']>;
+  price?: InputMaybe<Scalars['Float']['input']>;
+  serviceCategoryid?: InputMaybe<Scalars['String']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type SubscriptionInput = {
@@ -369,13 +407,26 @@ export type FetchAllBookingsResponsce = {
   total?: Maybe<Scalars['Int']['output']>;
 };
 
+export type FetchAllCompanyResponsce = {
+  __typename?: 'fetchAllCompanyResponsce';
+  message?: Maybe<Scalars['String']['output']>;
+  pages?: Maybe<Scalars['Int']['output']>;
+  result?: Maybe<Array<Maybe<Company>>>;
+  total?: Maybe<Scalars['Int']['output']>;
+};
+
 export type FetchAllServiceResponsce = {
   __typename?: 'fetchAllServiceResponsce';
-  count?: Maybe<Scalars['Int']['output']>;
   message?: Maybe<Scalars['String']['output']>;
   pages?: Maybe<Scalars['Int']['output']>;
   result?: Maybe<Array<Maybe<Service>>>;
   total?: Maybe<Scalars['Int']['output']>;
+};
+
+export type FetchSingleServiceResponsce = {
+  __typename?: 'fetchSingleServiceResponsce';
+  message?: Maybe<Scalars['String']['output']>;
+  result?: Maybe<Service>;
 };
 
 export type Loginresponsce = {
@@ -398,6 +449,32 @@ export type Subscription = {
   user?: Maybe<User>;
 };
 
+export type FetchAllCompanyQueryVariables = Exact<{
+  fetchAllCompanyFilter?: InputMaybe<CompanyFilterInput>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type FetchAllCompanyQuery = { __typename?: 'Query', fetchAllCompany?: { __typename?: 'fetchAllCompanyResponsce', message?: string | null, pages?: number | null, total?: number | null, result?: Array<{ __typename?: 'Company', slug?: string | null, ownerId?: string | null, name?: string | null, logo?: string | null, id?: string | null, description?: string | null, avater?: string | null } | null> | null } | null };
+
+export type FetchAllServiceQueryVariables = Exact<{
+  page?: InputMaybe<Scalars['Int']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  filters?: InputMaybe<ServiceFilterInput>;
+}>;
+
+
+export type FetchAllServiceQuery = { __typename?: 'Query', fetchAllService?: { __typename?: 'fetchAllServiceResponsce', message?: string | null, pages?: number | null, total?: number | null, result?: Array<{ __typename?: 'Service', companyId?: string | null, createdAt?: number | null, description?: string | null, durationPreiod?: number | null, durationType?: string | null, id?: string | null, images?: Array<string | null> | null, name?: string | null, price?: number | null, serviceCategoryid?: string | null, slug?: string | null, updatedAt?: number | null } | null> | null } | null };
+
+export type FetchSingleServiceQueryVariables = Exact<{
+  id?: InputMaybe<Scalars['String']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type FetchSingleServiceQuery = { __typename?: 'Query', fetchSingleService?: { __typename?: 'fetchSingleServiceResponsce', message?: string | null, result?: { __typename?: 'Service', companyId?: string | null, createdAt?: number | null, description?: string | null, durationPreiod?: number | null, durationType?: string | null, id?: string | null, images?: Array<string | null> | null, name?: string | null, price?: number | null, serviceCategoryid?: string | null, slug?: string | null, updatedAt?: number | null } | null } | null };
+
 export type RegisterMutationVariables = Exact<{
   user?: InputMaybe<UserInput>;
 }>;
@@ -418,6 +495,157 @@ export type LoginMutationVariables = Exact<{
 export type LoginMutation = { __typename?: 'Mutation', login?: { __typename?: 'loginresponsce', accessToken?: string | null, message?: string | null, isAuthenticated?: boolean | null, success?: boolean | null, user?: { __typename?: 'User', id?: string | null, firstname?: string | null, lastname?: string | null, email?: string | null, role?: UserRole | null } | null } | null };
 
 
+export const FetchAllCompanyDocument = gql`
+    query FetchAllCompany($fetchAllCompanyFilter: CompanyFilterInput, $page: Int, $limit: Int) {
+  fetchAllCompany(filters: $fetchAllCompanyFilter, page: $page, limit: $limit) {
+    message
+    pages
+    total
+    result {
+      slug
+      ownerId
+      name
+      logo
+      id
+      description
+      avater
+    }
+  }
+}
+    `;
+
+/**
+ * __useFetchAllCompanyQuery__
+ *
+ * To run a query within a React component, call `useFetchAllCompanyQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFetchAllCompanyQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFetchAllCompanyQuery({
+ *   variables: {
+ *      fetchAllCompanyFilter: // value for 'fetchAllCompanyFilter'
+ *      page: // value for 'page'
+ *      limit: // value for 'limit'
+ *   },
+ * });
+ */
+export function useFetchAllCompanyQuery(baseOptions?: Apollo.QueryHookOptions<FetchAllCompanyQuery, FetchAllCompanyQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<FetchAllCompanyQuery, FetchAllCompanyQueryVariables>(FetchAllCompanyDocument, options);
+      }
+export function useFetchAllCompanyLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FetchAllCompanyQuery, FetchAllCompanyQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<FetchAllCompanyQuery, FetchAllCompanyQueryVariables>(FetchAllCompanyDocument, options);
+        }
+export type FetchAllCompanyQueryHookResult = ReturnType<typeof useFetchAllCompanyQuery>;
+export type FetchAllCompanyLazyQueryHookResult = ReturnType<typeof useFetchAllCompanyLazyQuery>;
+export type FetchAllCompanyQueryResult = Apollo.QueryResult<FetchAllCompanyQuery, FetchAllCompanyQueryVariables>;
+export const FetchAllServiceDocument = gql`
+    query FetchAllService($page: Int, $limit: Int, $filters: ServiceFilterInput) {
+  fetchAllService(page: $page, limit: $limit, filters: $filters) {
+    message
+    pages
+    total
+    result {
+      companyId
+      createdAt
+      description
+      durationPreiod
+      durationType
+      id
+      images
+      name
+      price
+      serviceCategoryid
+      slug
+      updatedAt
+    }
+  }
+}
+    `;
+
+/**
+ * __useFetchAllServiceQuery__
+ *
+ * To run a query within a React component, call `useFetchAllServiceQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFetchAllServiceQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFetchAllServiceQuery({
+ *   variables: {
+ *      page: // value for 'page'
+ *      limit: // value for 'limit'
+ *      filters: // value for 'filters'
+ *   },
+ * });
+ */
+export function useFetchAllServiceQuery(baseOptions?: Apollo.QueryHookOptions<FetchAllServiceQuery, FetchAllServiceQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<FetchAllServiceQuery, FetchAllServiceQueryVariables>(FetchAllServiceDocument, options);
+      }
+export function useFetchAllServiceLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FetchAllServiceQuery, FetchAllServiceQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<FetchAllServiceQuery, FetchAllServiceQueryVariables>(FetchAllServiceDocument, options);
+        }
+export type FetchAllServiceQueryHookResult = ReturnType<typeof useFetchAllServiceQuery>;
+export type FetchAllServiceLazyQueryHookResult = ReturnType<typeof useFetchAllServiceLazyQuery>;
+export type FetchAllServiceQueryResult = Apollo.QueryResult<FetchAllServiceQuery, FetchAllServiceQueryVariables>;
+export const FetchSingleServiceDocument = gql`
+    query FetchSingleService($id: String, $slug: String) {
+  fetchSingleService(id: $id, slug: $slug) {
+    message
+    result {
+      companyId
+      createdAt
+      description
+      durationPreiod
+      durationType
+      id
+      images
+      name
+      price
+      serviceCategoryid
+      slug
+      updatedAt
+    }
+  }
+}
+    `;
+
+/**
+ * __useFetchSingleServiceQuery__
+ *
+ * To run a query within a React component, call `useFetchSingleServiceQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFetchSingleServiceQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFetchSingleServiceQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *      slug: // value for 'slug'
+ *   },
+ * });
+ */
+export function useFetchSingleServiceQuery(baseOptions?: Apollo.QueryHookOptions<FetchSingleServiceQuery, FetchSingleServiceQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<FetchSingleServiceQuery, FetchSingleServiceQueryVariables>(FetchSingleServiceDocument, options);
+      }
+export function useFetchSingleServiceLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FetchSingleServiceQuery, FetchSingleServiceQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<FetchSingleServiceQuery, FetchSingleServiceQueryVariables>(FetchSingleServiceDocument, options);
+        }
+export type FetchSingleServiceQueryHookResult = ReturnType<typeof useFetchSingleServiceQuery>;
+export type FetchSingleServiceLazyQueryHookResult = ReturnType<typeof useFetchSingleServiceLazyQuery>;
+export type FetchSingleServiceQueryResult = Apollo.QueryResult<FetchSingleServiceQuery, FetchSingleServiceQueryVariables>;
 export const RegisterDocument = gql`
     mutation Register($user: UserInput) {
   register(user: $user) {

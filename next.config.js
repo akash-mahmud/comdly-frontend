@@ -1,11 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   experimental: {
     appDir: true,
   },
   images: {
-    domains: ['randomuser.me'],
+    domains: ['randomuser.me', 'assets3.thrillist.com' , 'globalgrasshopper.com','hips.hearstapps.com'],
+    
   },
 };
 

@@ -4,8 +4,11 @@ import { useState } from 'react';
 import { topBoats } from 'public/data/top-boats';
 import ListingCard from '@/components/ui/cards/listing';
 import Button from '@/components/ui/button';
+import { FetchAllServiceResponsce } from '@/graphql/generated/schema';
 
-export default function ExploreListings() {
+export default function ExploreListings({services}: {
+  services: FetchAllServiceResponsce| undefined|null
+}) {
   const [list, setList] = useState(12);
   const [isLoading, setIsLoading] = useState(false);
   function handleLoadMore() {
@@ -15,22 +18,23 @@ export default function ExploreListings() {
       setIsLoading(false);
     }, 600);
   }
+  const servicesData = services?.result|| []
   return (
     <div>
       <div className="mt-1 grid grid-cols-1 gap-y-8 gap-x-5 xs:grid-cols-2 lg:grid-cols-3 3xl:gap-y-10 4xl:grid-cols-4">
-        {topBoats.slice(0, list).map((item, index) => (
+        {servicesData.map((item, index) => (
           <ListingCard
             key={`explore-boat-${index}`}
             id={`explore-boat-${index}`}
-            slides={item.thumbnail}
-            time={item.time}
-            caption={item.caption}
-            title={item.title}
-            slug={item.slug}
-            location={item.location}
-            price={item.price}
-            ratingCount={item.ratingCount}
-            rating={item.rating}
+            slides={item?.images as string[]}
+            time={item?.createdAt as unknown as string}
+            caption={''}
+            title={item?.name as any}
+            slug={item?.slug as any}
+            location={''}
+            price={item?.price as any}
+            ratingCount={'4'}
+            rating={20}
           />
         ))}
       </div>

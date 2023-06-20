@@ -1,0 +1,18 @@
+query FetchAllCompany($fetchAllCompanyFilter: CompanyFilterInput, $page: Int, $limit: Int) {
+  fetchAllCompany(filters: $fetchAllCompanyFilter, page: $page, limit: $limit) {
+    message
+    pages
+    total
+    result {
+      slug
+      ownerId
+      name
+      logo
+      id
+      description
+      avater
+    }
+    
+  }
+}
+
