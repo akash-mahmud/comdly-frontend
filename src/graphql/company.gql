@@ -1,6 +1,6 @@
 query FetchAllCompany($fetchAllCompanyFilter: CompanyFilterInput, $page: Int, $limit: Int) {
   fetchAllCompany(filters: $fetchAllCompanyFilter, page: $page, limit: $limit) {
-    message
+ message
     pages
     total
     result {
@@ -11,6 +11,19 @@ query FetchAllCompany($fetchAllCompanyFilter: CompanyFilterInput, $page: Int, $l
       id
       description
       avater
+      location {
+        zip
+        streetAddress
+        state
+        id
+        country
+        city
+      }
+      geolocation {
+        longitude
+        latitude
+        id
+      }
     }
     
   }

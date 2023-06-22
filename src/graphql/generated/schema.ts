@@ -40,13 +40,17 @@ export type Company = {
   __typename?: 'Company';
   avater?: Maybe<Scalars['String']['output']>;
   description?: Maybe<Scalars['String']['output']>;
-  employee?: Maybe<Array<Maybe<Employee>>>;
+  employee?: Maybe<EmployeeWithoutRelationalData>;
+  geolocation?: Maybe<GeoLocationWithOutRelationalData>;
   id?: Maybe<Scalars['String']['output']>;
+  location?: Maybe<LocationWithOutRelationalData>;
   logo?: Maybe<Scalars['String']['output']>;
   name?: Maybe<Scalars['String']['output']>;
-  owner?: Maybe<User>;
+  owner?: Maybe<Owner>;
   ownerId?: Maybe<Scalars['String']['output']>;
   slug?: Maybe<Scalars['String']['output']>;
+  user?: Maybe<User>;
+  userId?: Maybe<Scalars['String']['output']>;
 };
 
 export type CompanyFilterInput = {
@@ -61,6 +65,21 @@ export type CompanyInput = {
   slug: Scalars['String']['input'];
 };
 
+export enum CompanyRole {
+  Employee = 'employee',
+  Owner = 'owner'
+}
+
+export type CompanyUser = {
+  __typename?: 'CompanyUser';
+  companyRole?: Maybe<CompanyRole>;
+  email?: Maybe<Scalars['String']['output']>;
+  firstname?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  lastname?: Maybe<Scalars['String']['output']>;
+  role?: Maybe<UserRole>;
+};
+
 export type Employee = {
   __typename?: 'Employee';
   company?: Maybe<Company>;
@@ -73,6 +92,61 @@ export type EmployeeInput = {
   name?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type EmployeeWithoutRelationalData = {
+  __typename?: 'EmployeeWithoutRelationalData';
+  name?: Maybe<Scalars['String']['output']>;
+};
+
+export type GeoLocation = {
+  __typename?: 'GeoLocation';
+  companyId?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  latitude?: Maybe<Scalars['Float']['output']>;
+  longitude?: Maybe<Scalars['Float']['output']>;
+};
+
+export type GeoLocationInput = {
+  companyId?: InputMaybe<Scalars['String']['input']>;
+  latitude?: InputMaybe<Scalars['Float']['input']>;
+  longitude?: InputMaybe<Scalars['Float']['input']>;
+};
+
+export type GeoLocationWithOutRelationalData = {
+  __typename?: 'GeoLocationWithOutRelationalData';
+  id?: Maybe<Scalars['String']['output']>;
+  latitude?: Maybe<Scalars['Float']['output']>;
+  longitude?: Maybe<Scalars['Float']['output']>;
+};
+
+export type Location = {
+  __typename?: 'Location';
+  city?: Maybe<Scalars['String']['output']>;
+  companyId?: Maybe<Scalars['String']['output']>;
+  country?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  state?: Maybe<Scalars['String']['output']>;
+  streetAddress?: Maybe<Scalars['String']['output']>;
+  zip?: Maybe<Scalars['String']['output']>;
+};
+
+export type LocationInput = {
+  city?: InputMaybe<Scalars['String']['input']>;
+  country?: InputMaybe<Scalars['String']['input']>;
+  state?: InputMaybe<Scalars['String']['input']>;
+  streetAddress?: InputMaybe<Scalars['String']['input']>;
+  zip?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type LocationWithOutRelationalData = {
+  __typename?: 'LocationWithOutRelationalData';
+  city?: Maybe<Scalars['String']['output']>;
+  country?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  state?: Maybe<Scalars['String']['output']>;
+  streetAddress?: Maybe<Scalars['String']['output']>;
+  zip?: Maybe<Scalars['String']['output']>;
+};
+
 export type LoginInput = {
   email?: InputMaybe<Scalars['String']['input']>;
   password?: InputMaybe<Scalars['String']['input']>;
@@ -83,8 +157,10 @@ export type Mutation = {
   addPaymentMethod?: Maybe<Scalars['String']['output']>;
   createBooking?: Maybe<DefaultResposnce>;
   createCompany?: Maybe<DefaultResposnce>;
-  createCompanyWithOwner?: Maybe<Loginresponsce>;
+  createCompanyWithOwner?: Maybe<CompanyLoginResponsce>;
   createEmployee?: Maybe<DefaultResposnce>;
+  createGeoLocation?: Maybe<DefaultResposnce>;
+  createLocation?: Maybe<DefaultResposnce>;
   createPlan?: Maybe<DefaultResposnce>;
   createService?: Maybe<DefaultResposnce>;
   createsubscription?: Maybe<DefaultResposnce>;
@@ -119,6 +195,8 @@ export type MutationCreateCompanyArgs = {
 
 export type MutationCreateCompanyWithOwnerArgs = {
   companyInput?: InputMaybe<CompanyInput>;
+  geoLocationInput?: InputMaybe<GeoLocationInput>;
+  locationInput?: InputMaybe<LocationInput>;
   ownerInput?: InputMaybe<OwnerInput>;
   userInput?: InputMaybe<UserInput>;
 };
@@ -127,6 +205,16 @@ export type MutationCreateCompanyWithOwnerArgs = {
 export type MutationCreateEmployeeArgs = {
   employee?: InputMaybe<EmployeeInput>;
   user?: InputMaybe<UserInput>;
+};
+
+
+export type MutationCreateGeoLocationArgs = {
+  geoLocation?: InputMaybe<GeoLocationInput>;
+};
+
+
+export type MutationCreateLocationArgs = {
+  location?: InputMaybe<LocationInput>;
 };
 
 
@@ -256,6 +344,8 @@ export type Query = {
   getBooking?: Maybe<Booking>;
   getCompany?: Maybe<Company>;
   getEmployee?: Maybe<Employee>;
+  getGeoLocation?: Maybe<GeoLocation>;
+  getLocation?: Maybe<Location>;
   getOwner?: Maybe<Owner>;
   getPlan?: Maybe<Plan>;
   healthCheck?: Maybe<Scalars['String']['output']>;
@@ -300,6 +390,16 @@ export type QueryGetCompanyArgs = {
 
 
 export type QueryGetEmployeeArgs = {
+  id?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryGetGeoLocationArgs = {
+  id?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryGetLocationArgs = {
   id?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -365,6 +465,7 @@ export enum SubscriptionStatus {
 
 export type User = {
   __typename?: 'User';
+  companyRole?: Maybe<CompanyRole>;
   email?: Maybe<Scalars['String']['output']>;
   firstname?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['String']['output']>;
@@ -378,6 +479,7 @@ export type UserInput = {
   firstname?: InputMaybe<Scalars['String']['input']>;
   lastname?: InputMaybe<Scalars['String']['input']>;
   password?: InputMaybe<Scalars['String']['input']>;
+  phoneNumber?: InputMaybe<Scalars['String']['input']>;
 };
 
 export enum UserRole {
@@ -387,10 +489,14 @@ export enum UserRole {
   Superadmin = 'superadmin'
 }
 
-export enum CompanyRole {
-  Employee = 'employee',
-  Owner = 'owner'
-}
+export type CompanyLoginResponsce = {
+  __typename?: 'companyLoginResponsce';
+  accessToken?: Maybe<Scalars['String']['output']>;
+  isAuthenticated?: Maybe<Scalars['Boolean']['output']>;
+  message?: Maybe<Scalars['String']['output']>;
+  success?: Maybe<Scalars['Boolean']['output']>;
+  user?: Maybe<CompanyUser>;
+};
 
 export type DefaultResposnce = {
   __typename?: 'defaultResposnce';
@@ -456,7 +562,7 @@ export type FetchAllCompanyQueryVariables = Exact<{
 }>;
 
 
-export type FetchAllCompanyQuery = { __typename?: 'Query', fetchAllCompany?: { __typename?: 'fetchAllCompanyResponsce', message?: string | null, pages?: number | null, total?: number | null, result?: Array<{ __typename?: 'Company', slug?: string | null, ownerId?: string | null, name?: string | null, logo?: string | null, id?: string | null, description?: string | null, avater?: string | null } | null> | null } | null };
+export type FetchAllCompanyQuery = { __typename?: 'Query', fetchAllCompany?: { __typename?: 'fetchAllCompanyResponsce', message?: string | null, pages?: number | null, total?: number | null, result?: Array<{ __typename?: 'Company', slug?: string | null, ownerId?: string | null, name?: string | null, logo?: string | null, id?: string | null, description?: string | null, avater?: string | null, location?: { __typename?: 'LocationWithOutRelationalData', zip?: string | null, streetAddress?: string | null, state?: string | null, id?: string | null, country?: string | null, city?: string | null } | null, geolocation?: { __typename?: 'GeoLocationWithOutRelationalData', longitude?: number | null, latitude?: number | null, id?: string | null } | null } | null> | null } | null };
 
 export type FetchAllServiceQueryVariables = Exact<{
   page?: InputMaybe<Scalars['Int']['input']>;
@@ -509,6 +615,19 @@ export const FetchAllCompanyDocument = gql`
       id
       description
       avater
+      location {
+        zip
+        streetAddress
+        state
+        id
+        country
+        city
+      }
+      geolocation {
+        longitude
+        latitude
+        id
+      }
     }
   }
 }

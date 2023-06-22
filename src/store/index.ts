@@ -5,11 +5,13 @@ import { createWrapper } from 'next-redux-wrapper';
 import authSlice from "./slices/auth/authSlice";
 import  commonSlice  from "./slices/common/sidebar";
 import serviceSlice from "./slices/service/serviceSlice";
+import  topbarSlice  from "./slices/common/topbar";
 export const store = configureStore({
   reducer: {
     auth: authSlice,
     common: commonSlice,
     service: serviceSlice,
+    topbap:topbarSlice
   },
   preloadedState: persistedState,
 });

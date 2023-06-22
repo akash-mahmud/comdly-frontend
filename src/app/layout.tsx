@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import type { Metadata } from 'next';
 import { Satisfy, Lato } from 'next/font/google';
 import '@/styles/globals.css';
+import '@/styles/custom.css';
 import GalleryCarouselView from '@/components/gallery/view';
 import DrawerContainer from '@/components/drawers/view';
 import ModalContainer from '@/components/modals/view';

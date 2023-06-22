@@ -24,7 +24,7 @@ export default function ProtectedRoute({ children }: {
     return () => {
       clearTimeout(timeoutId); // Cancel the timeout when the component is unmounted
     };
-  }, []);
+  }, [isAuthenticated , router]);
 
   if (showAuth) {
     return (
