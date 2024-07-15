@@ -5,7 +5,12 @@ const nextConfig = {
     appDir: true,
   },
   images: {
-    domains: ['randomuser.me'],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+      },
+    ],
   },
 };
 

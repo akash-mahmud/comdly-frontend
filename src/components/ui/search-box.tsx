@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 import InputIconOnClear from '@/components/ui/form-fields/field-clear-btn';
-import { useQueryParam } from '@/hooks/use-query-param';
 import { useModal } from '@/components/modals/context';
 import ActionIcon from '@/components/ui/action-icon';
 
@@ -18,13 +17,11 @@ export default function Searchbox({ className }: SearchboxProps) {
   const searchParams = useSearchParams();
   const search = searchParams?.get('q');
   let [state, setState] = useState('');
-  const { updateQueryparams, clearFilter } = useQueryParam();
   const [isClearable, setIsClearable] = useState(false);
 
   function handleSubmit(e: any) {
     e.preventDefault();
     if (state) {
-      updateQueryparams('q', state);
       closeModal();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -77,7 +74,6 @@ export default function Searchbox({ className }: SearchboxProps) {
           onClick={() => {
             setState('');
             if (search) {
-              clearFilter(['q']);
             }
           }}
         />

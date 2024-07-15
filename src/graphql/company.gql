@@ -1,0 +1,10 @@
+query Companies($where: CompanyWhereInput, $orderBy: [CompanyOrderByWithRelationInput!], $cursor: CompanyWhereUniqueInput, $take: Int, $skip: Int, $distinct: [CompanyScalarFieldEnum!]) {
+  companies(where: $where, orderBy: $orderBy, cursor: $cursor, take: $take, skip: $skip, distinct: $distinct) {
+    avater
+    logo
+    id
+    name
+    slug
+    fetaureImage
+  }
+}

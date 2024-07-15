@@ -11,7 +11,7 @@ const PhotoGallery = dynamic(
   () => import('@/components/ui/drawers/photo-gallery')
 );
 const SideMenu = dynamic(() => import('@/components/ui/drawers/side-menu'));
-const Filter = dynamic(() => import('@/components/explore/filter'));
+const Filter = dynamic(() => import('@/components/product/filter'));
 const BookingFormModal = dynamic(
   () => import('@/components/ui/drawers/booking-form-drawer')
 );

@@ -110,7 +110,9 @@ gestureHandling: 'cooperative', // or 'cooperative'
 
 	  };
   return (
-    <div className="relative flex min-h-full items-end justify-center before:absolute before:top-0 before:left-0 before:z-[1] before:block before:h-1/4 before:w-full before:bg-gradient-to-b before:from-black/60 sm:flex-none sm:justify-start sm:px-0  ">
+    <>
+    
+    <div className="relative flex min-h-full items-end justify-center px-4 pt-48 pb-28 before:absolute before:top-0 before:left-0 before:z-[1] before:block before:h-1/4 before:w-full before:bg-gradient-to-b before:from-black/60 sm:flex-none sm:justify-start sm:px-0 sm:pb-20 sm:pt-[120px] sm:pl-6 md:pl-16 3xl:pt-[142px] 3xl:pb-[132px] 4xl:pl-[200px]">
       <Image
         src="/images/banner/1.jpg"
         alt="Home banner 1"
@@ -118,6 +120,20 @@ gestureHandling: 'cooperative', // or 'cooperative'
         priority
         className="aspect-[2/1] h-full bg-gray-lighter object-cover"
       />
+      <FindTripForm />
+    </div>
+    </>
+
+  );
+}
+    // <div className="relative flex min-h-full items-end justify-center before:absolute before:top-0 before:left-0 before:z-[1] before:block before:h-1/4 before:w-full before:bg-gradient-to-b before:from-black/60 sm:flex-none sm:justify-start sm:px-0  ">
+    //   <Image
+    //     src="/images/banner/1.jpg"
+    //     alt="Home banner 1"
+    //     fill
+    //     priority
+    //     className="aspect-[2/1] h-full bg-gray-lighter object-cover"
+    //   />
      {/* {										isLoaded ? (
     <GoogleMap  mapContainerClassName='aspect-[2/1] h-full bg-gray-lighter object-cover'  onLoad={(map) => {
       map.addListener('zoom_changed', () => handleZoomChanged(map));
@@ -147,7 +163,7 @@ gestureHandling: 'cooperative', // or 'cooperative'
       Add your markers here
     </GoogleMapReact>
   </div> */}
-          <div style={{ height: '100vh', width: '100%',  }} className='px-0'>
+          {/* <div style={{ height: '100vh', width: '100%',  }} className='px-0'>
       <GoogleMapReact 
         bootstrapURLKeys={{ key: "AIzaSyBU9Sja1_zSeP3oQySDLYZ7FVYWrq-kGKU" }}
         defaultCenter={center}
@@ -156,14 +172,12 @@ gestureHandling: 'cooperative', // or 'cooperative'
         yesIWantToUseGoogleMapApiInternals
         onChange={handleMapChange}
 
-      >
+      > */}
         {/* <AnyReactComponent
           lat={59.955413}
           lng={30.337844}
           text="My Marker"
         /> */}
-      </GoogleMapReact>
+      {/* </GoogleMapReact>
     </div>
-    </div>
-  );
-}
+    </div> */}

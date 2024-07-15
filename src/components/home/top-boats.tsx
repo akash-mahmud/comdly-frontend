@@ -3,7 +3,7 @@
 import { topBoats } from 'public/data/top-boats';
 import { useTimeout } from '@/hooks/use-timeout';
 import ListingCardLoader from '@/components/ui/loader/listing-card-loader';
-import ListingCard from '@/components/ui/cards/listing';
+import ListingCard from '@/components/ui/cards/products';
 import SeeMore from '@/components/ui/see-more';
 import Section from '@/components/ui/section';
 

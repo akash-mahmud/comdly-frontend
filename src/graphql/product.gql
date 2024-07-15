@@ -1,0 +1,11 @@
+query Products($where: ProductWhereInput, $orderBy: [ProductOrderByWithRelationInput!], $cursor: ProductWhereUniqueInput, $take: Int, $skip: Int, $distinct: [ProductScalarFieldEnum!]) {
+  products(where: $where, orderBy: $orderBy, cursor: $cursor, take: $take, skip: $skip, distinct: $distinct) {
+    durationPreiod
+    durationType
+    id
+    images
+    name
+    price
+    slug
+  }
+}

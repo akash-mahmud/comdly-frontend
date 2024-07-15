@@ -7,7 +7,7 @@ import { makeQueryString } from '@/utils/makeQueryString';
 
 const queryAtom = atom('');
 
-export function useQueryParam(pathname: string = Routes.public.explore) {
+export function useQueryParam(pathname: string ) {
   const [query, setQuery] = useAtom(queryAtom);
   const router = useRouter();
 
