@@ -14,8 +14,11 @@ import {useAppDispatch, useAppSelector} from '@/store'
 
 // import {useDispatch} from 'react-redux'
 import { login } from '@/store/slices/auth/authSlice';
-import { useState } from 'react';
-import { Spin } from 'antd'
+import { useCallback, useState } from 'react';
+import { notification, Spin } from 'antd'
+import { useLoginMutation, User } from '@/graphql/generated/schema';
+import { USER_COOKIE } from '@/utils/session';
+import { useRouter } from 'next/navigation';
 
 const loginInfoSchema = z.object({
   email: z
@@ -25,7 +28,7 @@ const loginInfoSchema = z.object({
   password: z
     .string()
     .min(4, { message: 'Password must be 4 character long.' }),
-  remember: z.boolean(),
+  // remember: z.boolean(),
 });
 
 type SignInType = z.infer<typeof loginInfoSchema>;
@@ -33,11 +36,9 @@ type SignInType = z.infer<typeof loginInfoSchema>;
 export default function SigninForm() {
   const { authorize } = useAuth();
   const { closeModal } = useModal();
-  const { user, isAuthenticated } = useAppSelector((state) => state.auth)
-  console.log(user);
   
   const [loading, setloading] = useState(false)
-  const dispatch = useAppDispatch();
+
   const {
     register,
     
@@ -46,22 +47,45 @@ export default function SigninForm() {
   } = useForm<SignInType>({
     resolver: zodResolver(loginInfoSchema),
   });
-
+const [Login, {error}] = useLoginMutation()
   // TO-DO: Send data to API onSubmit.
- async function handleFormSubmit(data: SignInType) {
+  const router = useRouter()
+const handleFormSubmit = useCallback(
+  async(data: SignInType) => {
     setloading(()=>true) 
 
-   
-    await dispatch(login({
-      email:data.email,
-      password:data.password,
-     }))
-    // authorize();
-
-
-    closeModal();
-      setloading(()=>false);
-  }
+    const {data:res} = await Login({
+     variables:{
+     ...data
+     }
+    })
+    if (res?.login?.success) {
+     const {accessToken , user} = res?.login
+     const localStoreVal = {
+       token: accessToken
+     }
+     localStorage.setItem(USER_COOKIE,accessToken??"")
+     authorize(user as User)
+     router.push('/')
+     notification.success({
+      message:'Logged in'
+     })
+    }else{
+ 
+    }
+     // await dispatch(login({
+     //   email:data.email,
+     //   password:data.password,
+     //  }))
+     // authorize();
+ 
+ 
+     closeModal();
+       setloading(()=>false);
+  },
+  [router],
+)
+console.log(error);
 
   return (
     <Spin  spinning={loading}>
@@ -83,7 +107,7 @@ export default function SigninForm() {
         required
         {...register('password')}
       />
-      <div className="mb-7 flex items-center justify-between">
+      {/* <div className="mb-7 flex items-center justify-between">
         <Checkbox
           size="sm"
           label="Remember Me"
@@ -97,7 +121,7 @@ export default function SigninForm() {
         >
           Forget Password?
         </Link>
-      </div>
+      </div> */}
       <Button type="submit" className="mb-2 w-full" size="xl">
         Sign In
       </Button>
@@ -107,11 +131,7 @@ export default function SigninForm() {
           Create an account
         </Link>
       </p>
-      <div className="relative mt-7 mb-8 text-center before:absolute before:top-1/2 before:left-0 before:h-[1px] before:w-full before:bg-gray-200">
-        <span className="relative z-10 m-auto inline-flex bg-white px-5">
-          Or
-        </span>
-      </div>
+
     </form>
   </Spin>
   );

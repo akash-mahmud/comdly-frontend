@@ -9,9 +9,9 @@ import SelectBox from '@/components/ui/select-box';
 import Button from '@/components/ui/button';
 
 const sortingOptions = [
-  { id: 'opt-1', label: 'Recently listed', checked: true },
-  { id: 'opt-1', label: 'Previous listed', checked: true },
-  { id: 'opt-1', label: 'Newer listed', checked: true },
+  { id: 'opt-1', label: 'Recently visited', checked: true },
+  { id: 'opt-1', label: 'Previous added', checked: true },
+  { id: 'opt-1', label: 'Newer added', checked: true },
 ];
 
 export default function FilterTopbar() {
@@ -20,9 +20,9 @@ export default function FilterTopbar() {
   return (
     <div className="mb-8 flex items-center justify-between">
       <Text className="text-sm font-bold text-gray-dark md:text-base">
-        Showing 1 - 20{' '}
+        Showing 1 - 4{' '}
         <Text className="font-normal text-gray" tag="span">
-          out of 2356 Products{' '}
+          out of 4 Companies{' '}
         </Text>
       </Text>
       <Button

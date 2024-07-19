@@ -14,9 +14,9 @@ const classes = {
   },
   color: {
     DEFAULT:
-      '[&>.rc-slider-track]:bg-gray-900 [&>.rc-slider-handle]:border-gray-1000 [&>.rc-slider-handle]:hover:border-gray-1000 [&>.rc-slider-handle-dragging]:!border-gray-1000 [&>.rc-slider-handle-dragging]:ring-gray-400/60 [&>.rc-slider-step>.rc-slider-dot-active]:border-gray-1000',
+      '[&>.rc-slider-track]:bg-primaryBg [&>.rc-slider-handle]:border-gray-1000 [&>.rc-slider-handle]:hover:border-gray-1000 [&>.rc-slider-handle-dragging]:!border-gray-1000 [&>.rc-slider-handle-dragging]:ring-gray-400/60 [&>.rc-slider-step>.rc-slider-dot-active]:border-gray-1000',
     primary:
-      '[&>.rc-slider-track]:bg-primary [&>.rc-slider-handle]:border-primary-dark [&>.rc-slider-handle]:hover:border-primary-dark [&>.rc-slider-handle-dragging]:!border-primary-dark [&>.rc-slider-handle-dragging]:ring-primary-light/40 [&>.rc-slider-step>.rc-slider-dot-active]:border-primary-dark',
+      '[&>.rc-slider-track]:bg-primaryBg [&>.rc-slider-handle]:border-primary-dark [&>.rc-slider-handle]:hover:border-primary-dark [&>.rc-slider-handle-dragging]:!border-primary-dark [&>.rc-slider-handle-dragging]:ring-primary-light/40 [&>.rc-slider-step>.rc-slider-dot-active]:border-primary-dark',
     secondary:
       '[&>.rc-slider-track]:bg-secondary [&>.rc-slider-handle]:border-secondary-dark [&>.rc-slider-handle]:hover:border-secondary-dark [&>.rc-slider-handle-dragging]:!border-secondary-dark [&>.rc-slider-handle-dragging]:ring-secondary-light/40 [&>.rc-slider-step>.rc-slider-dot-active]:border-secondary-dark',
     danger:

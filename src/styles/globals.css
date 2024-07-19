@@ -25,10 +25,10 @@
     - If required we can use as background too. 
     */
 
-    /* primary/brand color */
+    /* primary/brand color */ 
     /* ----------------------------------- */
     /* For rgb(17 17 17 / <alpha-value>) = #111111 */
-    --primary: 17 17 17;
+    --primary: #433f92;
     /* For rgb(34 34 34 / <alpha-value>) = #222222 */
     --secondary: 34 34 34;
 
@@ -412,7 +412,7 @@
 }
 /* add scrolling class to header  */
 .transparent-header.is-scrolling  {
-	@apply bg-white transition shadow-card;
+	@apply  bg-white transition shadow-card;
 }
 .transparent-header.is-scrolling .brand-logo,
 .transparent-header.is-scrolling .primary-nav li a {
@@ -505,7 +505,7 @@
 	@apply !h-1
 }
 .rc-slider-handle {
-	@apply -top-[3px] !mt-0 !opacity-80 !bg-gray-dark !border-4 !border-solid !border-white outline-1 outline outline-gray-dark focus:!outline focus:!outline-1
+	@apply -top-[3px] !mt-0 !opacity-80 !bg-primaryBg !border-4 !border-solid !border-white outline-1 outline outline-primaryBg focus:!outline focus:!outline-1
 }
 .rc-slider-mark-text {
 	@apply !left-full !-translate-x-full mt-2 xl:ml-2

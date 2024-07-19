@@ -26,7 +26,7 @@ export default function SideNavButton({ className }: { className?: string }) {
         })
       }
     >
-      <Bars3CenterLeftIcon className="h-auto w-full" />
+      <Bars3CenterLeftIcon className="h-auto w-full text-primaryBg" />
     </ActionIcon>
   );
 }

@@ -24,6 +24,13 @@ export type AffectedRowsOutput = {
   count: Scalars['Int']['output'];
 };
 
+export type AggregateBooking = {
+  __typename?: 'AggregateBooking';
+  _count?: Maybe<BookingCountAggregate>;
+  _max?: Maybe<BookingMaxAggregate>;
+  _min?: Maybe<BookingMinAggregate>;
+};
+
 export type AggregateBuisnessCategory = {
   __typename?: 'AggregateBuisnessCategory';
   _count?: Maybe<BuisnessCategoryCountAggregate>;
@@ -181,6 +188,380 @@ export type AggregateUserTokens = {
   _min?: Maybe<UserTokensMinAggregate>;
 };
 
+export type Booking = {
+  __typename?: 'Booking';
+  bookingDateTime: Scalars['String']['output'];
+  company: Company;
+  companyId: Scalars['String']['output'];
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['String']['output'];
+  status: BookingStatus;
+  updatedAt: Scalars['DateTime']['output'];
+  user: User;
+  userId: Scalars['String']['output'];
+};
+
+export type BookingCountAggregate = {
+  __typename?: 'BookingCountAggregate';
+  _all: Scalars['Int']['output'];
+  bookingDateTime: Scalars['Int']['output'];
+  companyId: Scalars['Int']['output'];
+  createdAt: Scalars['Int']['output'];
+  id: Scalars['Int']['output'];
+  status: Scalars['Int']['output'];
+  updatedAt: Scalars['Int']['output'];
+  userId: Scalars['Int']['output'];
+};
+
+export type BookingCountOrderByAggregateInput = {
+  bookingDateTime?: InputMaybe<SortOrder>;
+  companyId?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  status?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+  userId?: InputMaybe<SortOrder>;
+};
+
+export type BookingCreateInput = {
+  bookingDateTime: Scalars['String']['input'];
+  company: CompanyCreateNestedOneWithoutBookingInput;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<BookingStatus>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  user: UserCreateNestedOneWithoutBookingInput;
+};
+
+export type BookingCreateManyCompanyInput = {
+  bookingDateTime: Scalars['String']['input'];
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<BookingStatus>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  userId: Scalars['String']['input'];
+};
+
+export type BookingCreateManyCompanyInputEnvelope = {
+  data: Array<BookingCreateManyCompanyInput>;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type BookingCreateManyInput = {
+  bookingDateTime: Scalars['String']['input'];
+  companyId: Scalars['String']['input'];
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<BookingStatus>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  userId: Scalars['String']['input'];
+};
+
+export type BookingCreateManyUserInput = {
+  bookingDateTime: Scalars['String']['input'];
+  companyId: Scalars['String']['input'];
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<BookingStatus>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type BookingCreateManyUserInputEnvelope = {
+  data: Array<BookingCreateManyUserInput>;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type BookingCreateNestedManyWithoutCompanyInput = {
+  connect?: InputMaybe<Array<BookingWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<BookingCreateOrConnectWithoutCompanyInput>>;
+  create?: InputMaybe<Array<BookingCreateWithoutCompanyInput>>;
+  createMany?: InputMaybe<BookingCreateManyCompanyInputEnvelope>;
+};
+
+export type BookingCreateNestedManyWithoutUserInput = {
+  connect?: InputMaybe<Array<BookingWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<BookingCreateOrConnectWithoutUserInput>>;
+  create?: InputMaybe<Array<BookingCreateWithoutUserInput>>;
+  createMany?: InputMaybe<BookingCreateManyUserInputEnvelope>;
+};
+
+export type BookingCreateOrConnectWithoutCompanyInput = {
+  create: BookingCreateWithoutCompanyInput;
+  where: BookingWhereUniqueInput;
+};
+
+export type BookingCreateOrConnectWithoutUserInput = {
+  create: BookingCreateWithoutUserInput;
+  where: BookingWhereUniqueInput;
+};
+
+export type BookingCreateWithoutCompanyInput = {
+  bookingDateTime: Scalars['String']['input'];
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<BookingStatus>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  user: UserCreateNestedOneWithoutBookingInput;
+};
+
+export type BookingCreateWithoutUserInput = {
+  bookingDateTime: Scalars['String']['input'];
+  company: CompanyCreateNestedOneWithoutBookingInput;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<BookingStatus>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type BookingGroupBy = {
+  __typename?: 'BookingGroupBy';
+  _count?: Maybe<BookingCountAggregate>;
+  _max?: Maybe<BookingMaxAggregate>;
+  _min?: Maybe<BookingMinAggregate>;
+  bookingDateTime: Scalars['String']['output'];
+  companyId: Scalars['String']['output'];
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['String']['output'];
+  status: BookingStatus;
+  updatedAt: Scalars['DateTime']['output'];
+  userId: Scalars['String']['output'];
+};
+
+export type BookingListRelationFilter = {
+  every?: InputMaybe<BookingWhereInput>;
+  none?: InputMaybe<BookingWhereInput>;
+  some?: InputMaybe<BookingWhereInput>;
+};
+
+export type BookingMaxAggregate = {
+  __typename?: 'BookingMaxAggregate';
+  bookingDateTime?: Maybe<Scalars['String']['output']>;
+  companyId?: Maybe<Scalars['String']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<BookingStatus>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  userId?: Maybe<Scalars['String']['output']>;
+};
+
+export type BookingMaxOrderByAggregateInput = {
+  bookingDateTime?: InputMaybe<SortOrder>;
+  companyId?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  status?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+  userId?: InputMaybe<SortOrder>;
+};
+
+export type BookingMinAggregate = {
+  __typename?: 'BookingMinAggregate';
+  bookingDateTime?: Maybe<Scalars['String']['output']>;
+  companyId?: Maybe<Scalars['String']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<BookingStatus>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  userId?: Maybe<Scalars['String']['output']>;
+};
+
+export type BookingMinOrderByAggregateInput = {
+  bookingDateTime?: InputMaybe<SortOrder>;
+  companyId?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  status?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+  userId?: InputMaybe<SortOrder>;
+};
+
+export type BookingOrderByRelationAggregateInput = {
+  _count?: InputMaybe<SortOrder>;
+};
+
+export type BookingOrderByWithAggregationInput = {
+  _count?: InputMaybe<BookingCountOrderByAggregateInput>;
+  _max?: InputMaybe<BookingMaxOrderByAggregateInput>;
+  _min?: InputMaybe<BookingMinOrderByAggregateInput>;
+  bookingDateTime?: InputMaybe<SortOrder>;
+  companyId?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  status?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+  userId?: InputMaybe<SortOrder>;
+};
+
+export type BookingOrderByWithRelationInput = {
+  bookingDateTime?: InputMaybe<SortOrder>;
+  company?: InputMaybe<CompanyOrderByWithRelationInput>;
+  companyId?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  status?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+  user?: InputMaybe<UserOrderByWithRelationInput>;
+  userId?: InputMaybe<SortOrder>;
+};
+
+export enum BookingScalarFieldEnum {
+  BookingDateTime = 'bookingDateTime',
+  CompanyId = 'companyId',
+  CreatedAt = 'createdAt',
+  Id = 'id',
+  Status = 'status',
+  UpdatedAt = 'updatedAt',
+  UserId = 'userId'
+}
+
+export type BookingScalarWhereInput = {
+  AND?: InputMaybe<Array<BookingScalarWhereInput>>;
+  NOT?: InputMaybe<Array<BookingScalarWhereInput>>;
+  OR?: InputMaybe<Array<BookingScalarWhereInput>>;
+  bookingDateTime?: InputMaybe<StringFilter>;
+  companyId?: InputMaybe<StringFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  id?: InputMaybe<StringFilter>;
+  status?: InputMaybe<EnumBookingStatusFilter>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+  userId?: InputMaybe<StringFilter>;
+};
+
+export type BookingScalarWhereWithAggregatesInput = {
+  AND?: InputMaybe<Array<BookingScalarWhereWithAggregatesInput>>;
+  NOT?: InputMaybe<Array<BookingScalarWhereWithAggregatesInput>>;
+  OR?: InputMaybe<Array<BookingScalarWhereWithAggregatesInput>>;
+  bookingDateTime?: InputMaybe<StringWithAggregatesFilter>;
+  companyId?: InputMaybe<StringWithAggregatesFilter>;
+  createdAt?: InputMaybe<DateTimeWithAggregatesFilter>;
+  id?: InputMaybe<StringWithAggregatesFilter>;
+  status?: InputMaybe<EnumBookingStatusWithAggregatesFilter>;
+  updatedAt?: InputMaybe<DateTimeWithAggregatesFilter>;
+  userId?: InputMaybe<StringWithAggregatesFilter>;
+};
+
+export enum BookingStatus {
+  Active = 'active',
+  Cancelled = 'cancelled',
+  NotApproved = 'notApproved',
+  Pending = 'pending'
+}
+
+export type BookingUpdateInput = {
+  bookingDateTime?: InputMaybe<StringFieldUpdateOperationsInput>;
+  company?: InputMaybe<CompanyUpdateOneRequiredWithoutBookingNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  status?: InputMaybe<EnumBookingStatusFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  user?: InputMaybe<UserUpdateOneRequiredWithoutBookingNestedInput>;
+};
+
+export type BookingUpdateManyMutationInput = {
+  bookingDateTime?: InputMaybe<StringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  status?: InputMaybe<EnumBookingStatusFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type BookingUpdateManyWithWhereWithoutCompanyInput = {
+  data: BookingUpdateManyMutationInput;
+  where: BookingScalarWhereInput;
+};
+
+export type BookingUpdateManyWithWhereWithoutUserInput = {
+  data: BookingUpdateManyMutationInput;
+  where: BookingScalarWhereInput;
+};
+
+export type BookingUpdateManyWithoutCompanyNestedInput = {
+  connect?: InputMaybe<Array<BookingWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<BookingCreateOrConnectWithoutCompanyInput>>;
+  create?: InputMaybe<Array<BookingCreateWithoutCompanyInput>>;
+  createMany?: InputMaybe<BookingCreateManyCompanyInputEnvelope>;
+  delete?: InputMaybe<Array<BookingWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<BookingScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<BookingWhereUniqueInput>>;
+  set?: InputMaybe<Array<BookingWhereUniqueInput>>;
+  update?: InputMaybe<Array<BookingUpdateWithWhereUniqueWithoutCompanyInput>>;
+  updateMany?: InputMaybe<Array<BookingUpdateManyWithWhereWithoutCompanyInput>>;
+  upsert?: InputMaybe<Array<BookingUpsertWithWhereUniqueWithoutCompanyInput>>;
+};
+
+export type BookingUpdateManyWithoutUserNestedInput = {
+  connect?: InputMaybe<Array<BookingWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<BookingCreateOrConnectWithoutUserInput>>;
+  create?: InputMaybe<Array<BookingCreateWithoutUserInput>>;
+  createMany?: InputMaybe<BookingCreateManyUserInputEnvelope>;
+  delete?: InputMaybe<Array<BookingWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<BookingScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<BookingWhereUniqueInput>>;
+  set?: InputMaybe<Array<BookingWhereUniqueInput>>;
+  update?: InputMaybe<Array<BookingUpdateWithWhereUniqueWithoutUserInput>>;
+  updateMany?: InputMaybe<Array<BookingUpdateManyWithWhereWithoutUserInput>>;
+  upsert?: InputMaybe<Array<BookingUpsertWithWhereUniqueWithoutUserInput>>;
+};
+
+export type BookingUpdateWithWhereUniqueWithoutCompanyInput = {
+  data: BookingUpdateWithoutCompanyInput;
+  where: BookingWhereUniqueInput;
+};
+
+export type BookingUpdateWithWhereUniqueWithoutUserInput = {
+  data: BookingUpdateWithoutUserInput;
+  where: BookingWhereUniqueInput;
+};
+
+export type BookingUpdateWithoutCompanyInput = {
+  bookingDateTime?: InputMaybe<StringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  status?: InputMaybe<EnumBookingStatusFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  user?: InputMaybe<UserUpdateOneRequiredWithoutBookingNestedInput>;
+};
+
+export type BookingUpdateWithoutUserInput = {
+  bookingDateTime?: InputMaybe<StringFieldUpdateOperationsInput>;
+  company?: InputMaybe<CompanyUpdateOneRequiredWithoutBookingNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  status?: InputMaybe<EnumBookingStatusFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type BookingUpsertWithWhereUniqueWithoutCompanyInput = {
+  create: BookingCreateWithoutCompanyInput;
+  update: BookingUpdateWithoutCompanyInput;
+  where: BookingWhereUniqueInput;
+};
+
+export type BookingUpsertWithWhereUniqueWithoutUserInput = {
+  create: BookingCreateWithoutUserInput;
+  update: BookingUpdateWithoutUserInput;
+  where: BookingWhereUniqueInput;
+};
+
+export type BookingWhereInput = {
+  AND?: InputMaybe<Array<BookingWhereInput>>;
+  NOT?: InputMaybe<Array<BookingWhereInput>>;
+  OR?: InputMaybe<Array<BookingWhereInput>>;
+  bookingDateTime?: InputMaybe<StringFilter>;
+  company?: InputMaybe<CompanyRelationFilter>;
+  companyId?: InputMaybe<StringFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  id?: InputMaybe<StringFilter>;
+  status?: InputMaybe<EnumBookingStatusFilter>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+  user?: InputMaybe<UserRelationFilter>;
+  userId?: InputMaybe<StringFilter>;
+};
+
+export type BookingWhereUniqueInput = {
+  id?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type BoolFieldUpdateOperationsInput = {
   set?: InputMaybe<Scalars['Boolean']['input']>;
 };
@@ -205,8 +586,10 @@ export type BuisnessCategory = {
   company: Array<Company>;
   customField: Array<CustomProductFieldForBuisnessCategory>;
   id: Scalars['String']['output'];
+  image: Scalars['String']['output'];
   name: Scalars['String']['output'];
   product: Array<Product>;
+  slug: Scalars['String']['output'];
 };
 
 
@@ -281,12 +664,16 @@ export type BuisnessCategoryCountAggregate = {
   __typename?: 'BuisnessCategoryCountAggregate';
   _all: Scalars['Int']['output'];
   id: Scalars['Int']['output'];
+  image: Scalars['Int']['output'];
   name: Scalars['Int']['output'];
+  slug: Scalars['Int']['output'];
 };
 
 export type BuisnessCategoryCountOrderByAggregateInput = {
   id?: InputMaybe<SortOrder>;
+  image?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
+  slug?: InputMaybe<SortOrder>;
 };
 
 export type BuisnessCategoryCreateInput = {
@@ -294,13 +681,17 @@ export type BuisnessCategoryCreateInput = {
   company?: InputMaybe<CompanyCreateNestedManyWithoutBuisnessCategoryInput>;
   customField?: InputMaybe<CustomProductFieldForBuisnessCategoryCreateNestedManyWithoutBuisnessCategoryInput>;
   id?: InputMaybe<Scalars['String']['input']>;
+  image: Scalars['String']['input'];
   name: Scalars['String']['input'];
   product?: InputMaybe<ProductCreateNestedManyWithoutBuisnessCategoryInput>;
+  slug: Scalars['String']['input'];
 };
 
 export type BuisnessCategoryCreateManyInput = {
   id?: InputMaybe<Scalars['String']['input']>;
+  image: Scalars['String']['input'];
   name: Scalars['String']['input'];
+  slug: Scalars['String']['input'];
 };
 
 export type BuisnessCategoryCreateNestedOneWithoutBuisnessSubCategoryInput = {
@@ -351,24 +742,30 @@ export type BuisnessCategoryCreateWithoutBuisnessSubCategoryInput = {
   company?: InputMaybe<CompanyCreateNestedManyWithoutBuisnessCategoryInput>;
   customField?: InputMaybe<CustomProductFieldForBuisnessCategoryCreateNestedManyWithoutBuisnessCategoryInput>;
   id?: InputMaybe<Scalars['String']['input']>;
+  image: Scalars['String']['input'];
   name: Scalars['String']['input'];
   product?: InputMaybe<ProductCreateNestedManyWithoutBuisnessCategoryInput>;
+  slug: Scalars['String']['input'];
 };
 
 export type BuisnessCategoryCreateWithoutCompanyInput = {
   buisnessSubCategory?: InputMaybe<BuisnessSubCategoryCreateNestedManyWithoutBuisnessCategoryInput>;
   customField?: InputMaybe<CustomProductFieldForBuisnessCategoryCreateNestedManyWithoutBuisnessCategoryInput>;
   id?: InputMaybe<Scalars['String']['input']>;
+  image: Scalars['String']['input'];
   name: Scalars['String']['input'];
   product?: InputMaybe<ProductCreateNestedManyWithoutBuisnessCategoryInput>;
+  slug: Scalars['String']['input'];
 };
 
 export type BuisnessCategoryCreateWithoutCustomFieldInput = {
   buisnessSubCategory?: InputMaybe<BuisnessSubCategoryCreateNestedManyWithoutBuisnessCategoryInput>;
   company?: InputMaybe<CompanyCreateNestedManyWithoutBuisnessCategoryInput>;
   id?: InputMaybe<Scalars['String']['input']>;
+  image: Scalars['String']['input'];
   name: Scalars['String']['input'];
   product?: InputMaybe<ProductCreateNestedManyWithoutBuisnessCategoryInput>;
+  slug: Scalars['String']['input'];
 };
 
 export type BuisnessCategoryCreateWithoutProductInput = {
@@ -376,7 +773,9 @@ export type BuisnessCategoryCreateWithoutProductInput = {
   company?: InputMaybe<CompanyCreateNestedManyWithoutBuisnessCategoryInput>;
   customField?: InputMaybe<CustomProductFieldForBuisnessCategoryCreateNestedManyWithoutBuisnessCategoryInput>;
   id?: InputMaybe<Scalars['String']['input']>;
+  image: Scalars['String']['input'];
   name: Scalars['String']['input'];
+  slug: Scalars['String']['input'];
 };
 
 export type BuisnessCategoryGroupBy = {
@@ -385,29 +784,39 @@ export type BuisnessCategoryGroupBy = {
   _max?: Maybe<BuisnessCategoryMaxAggregate>;
   _min?: Maybe<BuisnessCategoryMinAggregate>;
   id: Scalars['String']['output'];
+  image: Scalars['String']['output'];
   name: Scalars['String']['output'];
+  slug: Scalars['String']['output'];
 };
 
 export type BuisnessCategoryMaxAggregate = {
   __typename?: 'BuisnessCategoryMaxAggregate';
   id?: Maybe<Scalars['String']['output']>;
+  image?: Maybe<Scalars['String']['output']>;
   name?: Maybe<Scalars['String']['output']>;
+  slug?: Maybe<Scalars['String']['output']>;
 };
 
 export type BuisnessCategoryMaxOrderByAggregateInput = {
   id?: InputMaybe<SortOrder>;
+  image?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
+  slug?: InputMaybe<SortOrder>;
 };
 
 export type BuisnessCategoryMinAggregate = {
   __typename?: 'BuisnessCategoryMinAggregate';
   id?: Maybe<Scalars['String']['output']>;
+  image?: Maybe<Scalars['String']['output']>;
   name?: Maybe<Scalars['String']['output']>;
+  slug?: Maybe<Scalars['String']['output']>;
 };
 
 export type BuisnessCategoryMinOrderByAggregateInput = {
   id?: InputMaybe<SortOrder>;
+  image?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
+  slug?: InputMaybe<SortOrder>;
 };
 
 export type BuisnessCategoryOrderByWithAggregationInput = {
@@ -415,7 +824,9 @@ export type BuisnessCategoryOrderByWithAggregationInput = {
   _max?: InputMaybe<BuisnessCategoryMaxOrderByAggregateInput>;
   _min?: InputMaybe<BuisnessCategoryMinOrderByAggregateInput>;
   id?: InputMaybe<SortOrder>;
+  image?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
+  slug?: InputMaybe<SortOrder>;
 };
 
 export type BuisnessCategoryOrderByWithRelationInput = {
@@ -423,8 +834,10 @@ export type BuisnessCategoryOrderByWithRelationInput = {
   company?: InputMaybe<CompanyOrderByRelationAggregateInput>;
   customField?: InputMaybe<CustomProductFieldForBuisnessCategoryOrderByRelationAggregateInput>;
   id?: InputMaybe<SortOrder>;
+  image?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
   product?: InputMaybe<ProductOrderByRelationAggregateInput>;
+  slug?: InputMaybe<SortOrder>;
 };
 
 export type BuisnessCategoryRelationFilter = {
@@ -434,7 +847,9 @@ export type BuisnessCategoryRelationFilter = {
 
 export enum BuisnessCategoryScalarFieldEnum {
   Id = 'id',
-  Name = 'name'
+  Image = 'image',
+  Name = 'name',
+  Slug = 'slug'
 }
 
 export type BuisnessCategoryScalarWhereWithAggregatesInput = {
@@ -442,7 +857,9 @@ export type BuisnessCategoryScalarWhereWithAggregatesInput = {
   NOT?: InputMaybe<Array<BuisnessCategoryScalarWhereWithAggregatesInput>>;
   OR?: InputMaybe<Array<BuisnessCategoryScalarWhereWithAggregatesInput>>;
   id?: InputMaybe<StringWithAggregatesFilter>;
+  image?: InputMaybe<StringWithAggregatesFilter>;
   name?: InputMaybe<StringWithAggregatesFilter>;
+  slug?: InputMaybe<StringWithAggregatesFilter>;
 };
 
 export type BuisnessCategoryUpdateInput = {
@@ -450,13 +867,17 @@ export type BuisnessCategoryUpdateInput = {
   company?: InputMaybe<CompanyUpdateManyWithoutBuisnessCategoryNestedInput>;
   customField?: InputMaybe<CustomProductFieldForBuisnessCategoryUpdateManyWithoutBuisnessCategoryNestedInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  image?: InputMaybe<StringFieldUpdateOperationsInput>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
   product?: InputMaybe<ProductUpdateManyWithoutBuisnessCategoryNestedInput>;
+  slug?: InputMaybe<StringFieldUpdateOperationsInput>;
 };
 
 export type BuisnessCategoryUpdateManyMutationInput = {
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  image?: InputMaybe<StringFieldUpdateOperationsInput>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  slug?: InputMaybe<StringFieldUpdateOperationsInput>;
 };
 
 export type BuisnessCategoryUpdateOneRequiredWithoutBuisnessSubCategoryNestedInput = {
@@ -499,24 +920,30 @@ export type BuisnessCategoryUpdateWithoutBuisnessSubCategoryInput = {
   company?: InputMaybe<CompanyUpdateManyWithoutBuisnessCategoryNestedInput>;
   customField?: InputMaybe<CustomProductFieldForBuisnessCategoryUpdateManyWithoutBuisnessCategoryNestedInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  image?: InputMaybe<StringFieldUpdateOperationsInput>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
   product?: InputMaybe<ProductUpdateManyWithoutBuisnessCategoryNestedInput>;
+  slug?: InputMaybe<StringFieldUpdateOperationsInput>;
 };
 
 export type BuisnessCategoryUpdateWithoutCompanyInput = {
   buisnessSubCategory?: InputMaybe<BuisnessSubCategoryUpdateManyWithoutBuisnessCategoryNestedInput>;
   customField?: InputMaybe<CustomProductFieldForBuisnessCategoryUpdateManyWithoutBuisnessCategoryNestedInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  image?: InputMaybe<StringFieldUpdateOperationsInput>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
   product?: InputMaybe<ProductUpdateManyWithoutBuisnessCategoryNestedInput>;
+  slug?: InputMaybe<StringFieldUpdateOperationsInput>;
 };
 
 export type BuisnessCategoryUpdateWithoutCustomFieldInput = {
   buisnessSubCategory?: InputMaybe<BuisnessSubCategoryUpdateManyWithoutBuisnessCategoryNestedInput>;
   company?: InputMaybe<CompanyUpdateManyWithoutBuisnessCategoryNestedInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  image?: InputMaybe<StringFieldUpdateOperationsInput>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
   product?: InputMaybe<ProductUpdateManyWithoutBuisnessCategoryNestedInput>;
+  slug?: InputMaybe<StringFieldUpdateOperationsInput>;
 };
 
 export type BuisnessCategoryUpdateWithoutProductInput = {
@@ -524,7 +951,9 @@ export type BuisnessCategoryUpdateWithoutProductInput = {
   company?: InputMaybe<CompanyUpdateManyWithoutBuisnessCategoryNestedInput>;
   customField?: InputMaybe<CustomProductFieldForBuisnessCategoryUpdateManyWithoutBuisnessCategoryNestedInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  image?: InputMaybe<StringFieldUpdateOperationsInput>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  slug?: InputMaybe<StringFieldUpdateOperationsInput>;
 };
 
 export type BuisnessCategoryUpsertWithoutBuisnessSubCategoryInput = {
@@ -555,12 +984,15 @@ export type BuisnessCategoryWhereInput = {
   company?: InputMaybe<CompanyListRelationFilter>;
   customField?: InputMaybe<CustomProductFieldForBuisnessCategoryListRelationFilter>;
   id?: InputMaybe<StringFilter>;
+  image?: InputMaybe<StringFilter>;
   name?: InputMaybe<StringFilter>;
   product?: InputMaybe<ProductListRelationFilter>;
+  slug?: InputMaybe<StringFilter>;
 };
 
 export type BuisnessCategoryWhereUniqueInput = {
   id?: InputMaybe<Scalars['String']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type BuisnessSubCategory = {
@@ -910,6 +1342,7 @@ export type Company = {
   __typename?: 'Company';
   _count?: Maybe<CompanyCount>;
   avater: Scalars['String']['output'];
+  booking: Array<Booking>;
   buisnessCategory?: Maybe<BuisnessCategory>;
   buisnessCategoryId?: Maybe<Scalars['String']['output']>;
   buisnessSubCategory?: Maybe<BuisnessSubCategory>;
@@ -938,6 +1371,16 @@ export type Company = {
 };
 
 
+export type CompanyBookingArgs = {
+  cursor?: InputMaybe<BookingWhereUniqueInput>;
+  distinct?: InputMaybe<Array<BookingScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<BookingOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<BookingWhereInput>;
+};
+
+
 export type CompanyEmployeeArgs = {
   cursor?: InputMaybe<EmployeeWhereUniqueInput>;
   distinct?: InputMaybe<Array<EmployeeScalarFieldEnum>>;
@@ -959,8 +1402,14 @@ export type CompanyProductArgs = {
 
 export type CompanyCount = {
   __typename?: 'CompanyCount';
+  booking: Scalars['Int']['output'];
   employee: Scalars['Int']['output'];
   product: Scalars['Int']['output'];
+};
+
+
+export type CompanyCountBookingArgs = {
+  where?: InputMaybe<BookingWhereInput>;
 };
 
 
@@ -1013,6 +1462,7 @@ export type CompanyCountOrderByAggregateInput = {
 
 export type CompanyCreateInput = {
   avater: Scalars['String']['input'];
+  booking?: InputMaybe<BookingCreateNestedManyWithoutCompanyInput>;
   buisnessCategory?: InputMaybe<BuisnessCategoryCreateNestedOneWithoutCompanyInput>;
   buisnessSubCategory?: InputMaybe<BuisnessSubCategoryCreateNestedOneWithoutCompanyInput>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -1140,6 +1590,12 @@ export type CompanyCreateNestedManyWithoutPlanInput = {
   createMany?: InputMaybe<CompanyCreateManyPlanInputEnvelope>;
 };
 
+export type CompanyCreateNestedOneWithoutBookingInput = {
+  connect?: InputMaybe<CompanyWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<CompanyCreateOrConnectWithoutBookingInput>;
+  create?: InputMaybe<CompanyCreateWithoutBookingInput>;
+};
+
 export type CompanyCreateNestedOneWithoutEmployeeInput = {
   connect?: InputMaybe<CompanyWhereUniqueInput>;
   connectOrCreate?: InputMaybe<CompanyCreateOrConnectWithoutEmployeeInput>;
@@ -1186,6 +1642,11 @@ export type CompanyCreateNestedOneWithoutUserInput = {
   connect?: InputMaybe<CompanyWhereUniqueInput>;
   connectOrCreate?: InputMaybe<CompanyCreateOrConnectWithoutUserInput>;
   create?: InputMaybe<CompanyCreateWithoutUserInput>;
+};
+
+export type CompanyCreateOrConnectWithoutBookingInput = {
+  create: CompanyCreateWithoutBookingInput;
+  where: CompanyWhereUniqueInput;
 };
 
 export type CompanyCreateOrConnectWithoutBuisnessCategoryInput = {
@@ -1243,8 +1704,33 @@ export type CompanyCreateOrConnectWithoutUserInput = {
   where: CompanyWhereUniqueInput;
 };
 
+export type CompanyCreateWithoutBookingInput = {
+  avater: Scalars['String']['input'];
+  buisnessCategory?: InputMaybe<BuisnessCategoryCreateNestedOneWithoutCompanyInput>;
+  buisnessSubCategory?: InputMaybe<BuisnessSubCategoryCreateNestedOneWithoutCompanyInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  customer_Id?: InputMaybe<Scalars['String']['input']>;
+  description: Scalars['String']['input'];
+  employee?: InputMaybe<EmployeeCreateNestedManyWithoutCompanyInput>;
+  fetaureImage: Scalars['String']['input'];
+  geolocation?: InputMaybe<GeolocationCreateNestedOneWithoutCompanyInput>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  location?: InputMaybe<LocationCreateNestedOneWithoutCompanyInput>;
+  logo: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  owner?: InputMaybe<OwnerCreateNestedOneWithoutCompanyInput>;
+  plan?: InputMaybe<PlanCreateNestedOneWithoutCompanyInput>;
+  product?: InputMaybe<ProductCreateNestedManyWithoutCompanyInput>;
+  siteDesighn?: InputMaybe<SiteDesighnCreateNestedOneWithoutCompanyInput>;
+  slug: Scalars['String']['input'];
+  subscription?: InputMaybe<SubscriptionCreateNestedOneWithoutCompanyInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  user: UserCreateNestedOneWithoutCompanyInput;
+};
+
 export type CompanyCreateWithoutBuisnessCategoryInput = {
   avater: Scalars['String']['input'];
+  booking?: InputMaybe<BookingCreateNestedManyWithoutCompanyInput>;
   buisnessSubCategory?: InputMaybe<BuisnessSubCategoryCreateNestedOneWithoutCompanyInput>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   customer_Id?: InputMaybe<Scalars['String']['input']>;
@@ -1268,6 +1754,7 @@ export type CompanyCreateWithoutBuisnessCategoryInput = {
 
 export type CompanyCreateWithoutBuisnessSubCategoryInput = {
   avater: Scalars['String']['input'];
+  booking?: InputMaybe<BookingCreateNestedManyWithoutCompanyInput>;
   buisnessCategory?: InputMaybe<BuisnessCategoryCreateNestedOneWithoutCompanyInput>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   customer_Id?: InputMaybe<Scalars['String']['input']>;
@@ -1291,6 +1778,7 @@ export type CompanyCreateWithoutBuisnessSubCategoryInput = {
 
 export type CompanyCreateWithoutEmployeeInput = {
   avater: Scalars['String']['input'];
+  booking?: InputMaybe<BookingCreateNestedManyWithoutCompanyInput>;
   buisnessCategory?: InputMaybe<BuisnessCategoryCreateNestedOneWithoutCompanyInput>;
   buisnessSubCategory?: InputMaybe<BuisnessSubCategoryCreateNestedOneWithoutCompanyInput>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -1314,6 +1802,7 @@ export type CompanyCreateWithoutEmployeeInput = {
 
 export type CompanyCreateWithoutGeolocationInput = {
   avater: Scalars['String']['input'];
+  booking?: InputMaybe<BookingCreateNestedManyWithoutCompanyInput>;
   buisnessCategory?: InputMaybe<BuisnessCategoryCreateNestedOneWithoutCompanyInput>;
   buisnessSubCategory?: InputMaybe<BuisnessSubCategoryCreateNestedOneWithoutCompanyInput>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -1337,6 +1826,7 @@ export type CompanyCreateWithoutGeolocationInput = {
 
 export type CompanyCreateWithoutLocationInput = {
   avater: Scalars['String']['input'];
+  booking?: InputMaybe<BookingCreateNestedManyWithoutCompanyInput>;
   buisnessCategory?: InputMaybe<BuisnessCategoryCreateNestedOneWithoutCompanyInput>;
   buisnessSubCategory?: InputMaybe<BuisnessSubCategoryCreateNestedOneWithoutCompanyInput>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -1360,6 +1850,7 @@ export type CompanyCreateWithoutLocationInput = {
 
 export type CompanyCreateWithoutOwnerInput = {
   avater: Scalars['String']['input'];
+  booking?: InputMaybe<BookingCreateNestedManyWithoutCompanyInput>;
   buisnessCategory?: InputMaybe<BuisnessCategoryCreateNestedOneWithoutCompanyInput>;
   buisnessSubCategory?: InputMaybe<BuisnessSubCategoryCreateNestedOneWithoutCompanyInput>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -1383,6 +1874,7 @@ export type CompanyCreateWithoutOwnerInput = {
 
 export type CompanyCreateWithoutPlanInput = {
   avater: Scalars['String']['input'];
+  booking?: InputMaybe<BookingCreateNestedManyWithoutCompanyInput>;
   buisnessCategory?: InputMaybe<BuisnessCategoryCreateNestedOneWithoutCompanyInput>;
   buisnessSubCategory?: InputMaybe<BuisnessSubCategoryCreateNestedOneWithoutCompanyInput>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -1406,6 +1898,7 @@ export type CompanyCreateWithoutPlanInput = {
 
 export type CompanyCreateWithoutProductInput = {
   avater: Scalars['String']['input'];
+  booking?: InputMaybe<BookingCreateNestedManyWithoutCompanyInput>;
   buisnessCategory?: InputMaybe<BuisnessCategoryCreateNestedOneWithoutCompanyInput>;
   buisnessSubCategory?: InputMaybe<BuisnessSubCategoryCreateNestedOneWithoutCompanyInput>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -1429,6 +1922,7 @@ export type CompanyCreateWithoutProductInput = {
 
 export type CompanyCreateWithoutSiteDesighnInput = {
   avater: Scalars['String']['input'];
+  booking?: InputMaybe<BookingCreateNestedManyWithoutCompanyInput>;
   buisnessCategory?: InputMaybe<BuisnessCategoryCreateNestedOneWithoutCompanyInput>;
   buisnessSubCategory?: InputMaybe<BuisnessSubCategoryCreateNestedOneWithoutCompanyInput>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -1452,6 +1946,7 @@ export type CompanyCreateWithoutSiteDesighnInput = {
 
 export type CompanyCreateWithoutSubscriptionInput = {
   avater: Scalars['String']['input'];
+  booking?: InputMaybe<BookingCreateNestedManyWithoutCompanyInput>;
   buisnessCategory?: InputMaybe<BuisnessCategoryCreateNestedOneWithoutCompanyInput>;
   buisnessSubCategory?: InputMaybe<BuisnessSubCategoryCreateNestedOneWithoutCompanyInput>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -1475,6 +1970,7 @@ export type CompanyCreateWithoutSubscriptionInput = {
 
 export type CompanyCreateWithoutUserInput = {
   avater: Scalars['String']['input'];
+  booking?: InputMaybe<BookingCreateNestedManyWithoutCompanyInput>;
   buisnessCategory?: InputMaybe<BuisnessCategoryCreateNestedOneWithoutCompanyInput>;
   buisnessSubCategory?: InputMaybe<BuisnessSubCategoryCreateNestedOneWithoutCompanyInput>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -1625,6 +2121,7 @@ export type CompanyOrderByWithAggregationInput = {
 
 export type CompanyOrderByWithRelationInput = {
   avater?: InputMaybe<SortOrder>;
+  booking?: InputMaybe<BookingOrderByRelationAggregateInput>;
   buisnessCategory?: InputMaybe<BuisnessCategoryOrderByWithRelationInput>;
   buisnessCategoryId?: InputMaybe<SortOrderInput>;
   buisnessSubCategory?: InputMaybe<BuisnessSubCategoryOrderByWithRelationInput>;
@@ -1724,6 +2221,7 @@ export type CompanyScalarWhereWithAggregatesInput = {
 
 export type CompanyUpdateInput = {
   avater?: InputMaybe<StringFieldUpdateOperationsInput>;
+  booking?: InputMaybe<BookingUpdateManyWithoutCompanyNestedInput>;
   buisnessCategory?: InputMaybe<BuisnessCategoryUpdateOneWithoutCompanyNestedInput>;
   buisnessSubCategory?: InputMaybe<BuisnessSubCategoryUpdateOneWithoutCompanyNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -1816,6 +2314,14 @@ export type CompanyUpdateManyWithoutPlanNestedInput = {
   upsert?: InputMaybe<Array<CompanyUpsertWithWhereUniqueWithoutPlanInput>>;
 };
 
+export type CompanyUpdateOneRequiredWithoutBookingNestedInput = {
+  connect?: InputMaybe<CompanyWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<CompanyCreateOrConnectWithoutBookingInput>;
+  create?: InputMaybe<CompanyCreateWithoutBookingInput>;
+  update?: InputMaybe<CompanyUpdateWithoutBookingInput>;
+  upsert?: InputMaybe<CompanyUpsertWithoutBookingInput>;
+};
+
 export type CompanyUpdateOneRequiredWithoutGeolocationNestedInput = {
   connect?: InputMaybe<CompanyWhereUniqueInput>;
   connectOrCreate?: InputMaybe<CompanyCreateOrConnectWithoutGeolocationInput>;
@@ -1905,8 +2411,33 @@ export type CompanyUpdateWithWhereUniqueWithoutPlanInput = {
   where: CompanyWhereUniqueInput;
 };
 
+export type CompanyUpdateWithoutBookingInput = {
+  avater?: InputMaybe<StringFieldUpdateOperationsInput>;
+  buisnessCategory?: InputMaybe<BuisnessCategoryUpdateOneWithoutCompanyNestedInput>;
+  buisnessSubCategory?: InputMaybe<BuisnessSubCategoryUpdateOneWithoutCompanyNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  customer_Id?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
+  employee?: InputMaybe<EmployeeUpdateManyWithoutCompanyNestedInput>;
+  fetaureImage?: InputMaybe<StringFieldUpdateOperationsInput>;
+  geolocation?: InputMaybe<GeolocationUpdateOneWithoutCompanyNestedInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  location?: InputMaybe<LocationUpdateOneWithoutCompanyNestedInput>;
+  logo?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  owner?: InputMaybe<OwnerUpdateOneWithoutCompanyNestedInput>;
+  plan?: InputMaybe<PlanUpdateOneWithoutCompanyNestedInput>;
+  product?: InputMaybe<ProductUpdateManyWithoutCompanyNestedInput>;
+  siteDesighn?: InputMaybe<SiteDesighnUpdateOneWithoutCompanyNestedInput>;
+  slug?: InputMaybe<StringFieldUpdateOperationsInput>;
+  subscription?: InputMaybe<SubscriptionUpdateOneWithoutCompanyNestedInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  user?: InputMaybe<UserUpdateOneRequiredWithoutCompanyNestedInput>;
+};
+
 export type CompanyUpdateWithoutBuisnessCategoryInput = {
   avater?: InputMaybe<StringFieldUpdateOperationsInput>;
+  booking?: InputMaybe<BookingUpdateManyWithoutCompanyNestedInput>;
   buisnessSubCategory?: InputMaybe<BuisnessSubCategoryUpdateOneWithoutCompanyNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   customer_Id?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
@@ -1930,6 +2461,7 @@ export type CompanyUpdateWithoutBuisnessCategoryInput = {
 
 export type CompanyUpdateWithoutBuisnessSubCategoryInput = {
   avater?: InputMaybe<StringFieldUpdateOperationsInput>;
+  booking?: InputMaybe<BookingUpdateManyWithoutCompanyNestedInput>;
   buisnessCategory?: InputMaybe<BuisnessCategoryUpdateOneWithoutCompanyNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   customer_Id?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
@@ -1953,6 +2485,7 @@ export type CompanyUpdateWithoutBuisnessSubCategoryInput = {
 
 export type CompanyUpdateWithoutEmployeeInput = {
   avater?: InputMaybe<StringFieldUpdateOperationsInput>;
+  booking?: InputMaybe<BookingUpdateManyWithoutCompanyNestedInput>;
   buisnessCategory?: InputMaybe<BuisnessCategoryUpdateOneWithoutCompanyNestedInput>;
   buisnessSubCategory?: InputMaybe<BuisnessSubCategoryUpdateOneWithoutCompanyNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -1976,6 +2509,7 @@ export type CompanyUpdateWithoutEmployeeInput = {
 
 export type CompanyUpdateWithoutGeolocationInput = {
   avater?: InputMaybe<StringFieldUpdateOperationsInput>;
+  booking?: InputMaybe<BookingUpdateManyWithoutCompanyNestedInput>;
   buisnessCategory?: InputMaybe<BuisnessCategoryUpdateOneWithoutCompanyNestedInput>;
   buisnessSubCategory?: InputMaybe<BuisnessSubCategoryUpdateOneWithoutCompanyNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -1999,6 +2533,7 @@ export type CompanyUpdateWithoutGeolocationInput = {
 
 export type CompanyUpdateWithoutLocationInput = {
   avater?: InputMaybe<StringFieldUpdateOperationsInput>;
+  booking?: InputMaybe<BookingUpdateManyWithoutCompanyNestedInput>;
   buisnessCategory?: InputMaybe<BuisnessCategoryUpdateOneWithoutCompanyNestedInput>;
   buisnessSubCategory?: InputMaybe<BuisnessSubCategoryUpdateOneWithoutCompanyNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -2022,6 +2557,7 @@ export type CompanyUpdateWithoutLocationInput = {
 
 export type CompanyUpdateWithoutOwnerInput = {
   avater?: InputMaybe<StringFieldUpdateOperationsInput>;
+  booking?: InputMaybe<BookingUpdateManyWithoutCompanyNestedInput>;
   buisnessCategory?: InputMaybe<BuisnessCategoryUpdateOneWithoutCompanyNestedInput>;
   buisnessSubCategory?: InputMaybe<BuisnessSubCategoryUpdateOneWithoutCompanyNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -2045,6 +2581,7 @@ export type CompanyUpdateWithoutOwnerInput = {
 
 export type CompanyUpdateWithoutPlanInput = {
   avater?: InputMaybe<StringFieldUpdateOperationsInput>;
+  booking?: InputMaybe<BookingUpdateManyWithoutCompanyNestedInput>;
   buisnessCategory?: InputMaybe<BuisnessCategoryUpdateOneWithoutCompanyNestedInput>;
   buisnessSubCategory?: InputMaybe<BuisnessSubCategoryUpdateOneWithoutCompanyNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -2068,6 +2605,7 @@ export type CompanyUpdateWithoutPlanInput = {
 
 export type CompanyUpdateWithoutProductInput = {
   avater?: InputMaybe<StringFieldUpdateOperationsInput>;
+  booking?: InputMaybe<BookingUpdateManyWithoutCompanyNestedInput>;
   buisnessCategory?: InputMaybe<BuisnessCategoryUpdateOneWithoutCompanyNestedInput>;
   buisnessSubCategory?: InputMaybe<BuisnessSubCategoryUpdateOneWithoutCompanyNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -2091,6 +2629,7 @@ export type CompanyUpdateWithoutProductInput = {
 
 export type CompanyUpdateWithoutSiteDesighnInput = {
   avater?: InputMaybe<StringFieldUpdateOperationsInput>;
+  booking?: InputMaybe<BookingUpdateManyWithoutCompanyNestedInput>;
   buisnessCategory?: InputMaybe<BuisnessCategoryUpdateOneWithoutCompanyNestedInput>;
   buisnessSubCategory?: InputMaybe<BuisnessSubCategoryUpdateOneWithoutCompanyNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -2114,6 +2653,7 @@ export type CompanyUpdateWithoutSiteDesighnInput = {
 
 export type CompanyUpdateWithoutSubscriptionInput = {
   avater?: InputMaybe<StringFieldUpdateOperationsInput>;
+  booking?: InputMaybe<BookingUpdateManyWithoutCompanyNestedInput>;
   buisnessCategory?: InputMaybe<BuisnessCategoryUpdateOneWithoutCompanyNestedInput>;
   buisnessSubCategory?: InputMaybe<BuisnessSubCategoryUpdateOneWithoutCompanyNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -2137,6 +2677,7 @@ export type CompanyUpdateWithoutSubscriptionInput = {
 
 export type CompanyUpdateWithoutUserInput = {
   avater?: InputMaybe<StringFieldUpdateOperationsInput>;
+  booking?: InputMaybe<BookingUpdateManyWithoutCompanyNestedInput>;
   buisnessCategory?: InputMaybe<BuisnessCategoryUpdateOneWithoutCompanyNestedInput>;
   buisnessSubCategory?: InputMaybe<BuisnessSubCategoryUpdateOneWithoutCompanyNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -2174,6 +2715,11 @@ export type CompanyUpsertWithWhereUniqueWithoutPlanInput = {
   create: CompanyCreateWithoutPlanInput;
   update: CompanyUpdateWithoutPlanInput;
   where: CompanyWhereUniqueInput;
+};
+
+export type CompanyUpsertWithoutBookingInput = {
+  create: CompanyCreateWithoutBookingInput;
+  update: CompanyUpdateWithoutBookingInput;
 };
 
 export type CompanyUpsertWithoutEmployeeInput = {
@@ -2221,6 +2767,7 @@ export type CompanyWhereInput = {
   NOT?: InputMaybe<Array<CompanyWhereInput>>;
   OR?: InputMaybe<Array<CompanyWhereInput>>;
   avater?: InputMaybe<StringFilter>;
+  booking?: InputMaybe<BookingListRelationFilter>;
   buisnessCategory?: InputMaybe<BuisnessCategoryRelationFilter>;
   buisnessCategoryId?: InputMaybe<StringNullableFilter>;
   buisnessSubCategory?: InputMaybe<BuisnessSubCategoryRelationFilter>;
@@ -3371,6 +3918,27 @@ export type EmployeeWhereUniqueInput = {
   companyId?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
   userId?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type EnumBookingStatusFieldUpdateOperationsInput = {
+  set?: InputMaybe<BookingStatus>;
+};
+
+export type EnumBookingStatusFilter = {
+  equals?: InputMaybe<BookingStatus>;
+  in?: InputMaybe<Array<BookingStatus>>;
+  not?: InputMaybe<NestedEnumBookingStatusFilter>;
+  notIn?: InputMaybe<Array<BookingStatus>>;
+};
+
+export type EnumBookingStatusWithAggregatesFilter = {
+  _count?: InputMaybe<NestedIntFilter>;
+  _max?: InputMaybe<NestedEnumBookingStatusFilter>;
+  _min?: InputMaybe<NestedEnumBookingStatusFilter>;
+  equals?: InputMaybe<BookingStatus>;
+  in?: InputMaybe<Array<BookingStatus>>;
+  not?: InputMaybe<NestedEnumBookingStatusWithAggregatesFilter>;
+  notIn?: InputMaybe<Array<BookingStatus>>;
 };
 
 export type EnumCompanyRoleNullableFilter = {
@@ -4664,7 +5232,12 @@ export type LoginResponsce = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  adminLogin?: Maybe<LoginResponsce>;
+  adminRegister?: Maybe<DefaultResponsce>;
   cancelSubscription?: Maybe<DefaultResponsce>;
+  companyLogin?: Maybe<LoginResponsce>;
+  companyRegister?: Maybe<DefaultResponsce>;
+  createManyBooking: AffectedRowsOutput;
   createManyBuisnessCategory: AffectedRowsOutput;
   createManyBuisnessSubCategory: AffectedRowsOutput;
   createManyCompany: AffectedRowsOutput;
@@ -4686,6 +5259,7 @@ export type Mutation = {
   createManySubscription: AffectedRowsOutput;
   createManyUser: AffectedRowsOutput;
   createManyUserTokens: AffectedRowsOutput;
+  createOneBooking: Booking;
   createOneBuisnessCategory: BuisnessCategory;
   createOneBuisnessSubCategory: BuisnessSubCategory;
   createOneCompany: Company;
@@ -4709,6 +5283,7 @@ export type Mutation = {
   createOneUserTokens: UserTokens;
   createPlan?: Maybe<DefaultResponsce>;
   createSubscription?: Maybe<DefaultResponsce>;
+  deleteManyBooking: AffectedRowsOutput;
   deleteManyBuisnessCategory: AffectedRowsOutput;
   deleteManyBuisnessSubCategory: AffectedRowsOutput;
   deleteManyCompany: AffectedRowsOutput;
@@ -4730,6 +5305,7 @@ export type Mutation = {
   deleteManySubscription: AffectedRowsOutput;
   deleteManyUser: AffectedRowsOutput;
   deleteManyUserTokens: AffectedRowsOutput;
+  deleteOneBooking?: Maybe<Booking>;
   deleteOneBuisnessCategory?: Maybe<BuisnessCategory>;
   deleteOneBuisnessSubCategory?: Maybe<BuisnessSubCategory>;
   deleteOneCompany?: Maybe<Company>;
@@ -4758,6 +5334,7 @@ export type Mutation = {
   refreshToken?: Maybe<Scalars['String']['output']>;
   register?: Maybe<DefaultResponsce>;
   resetPassByVerficationLink?: Maybe<DefaultResponsce>;
+  updateManyBooking: AffectedRowsOutput;
   updateManyBuisnessCategory: AffectedRowsOutput;
   updateManyBuisnessSubCategory: AffectedRowsOutput;
   updateManyCompany: AffectedRowsOutput;
@@ -4779,6 +5356,7 @@ export type Mutation = {
   updateManySubscription: AffectedRowsOutput;
   updateManyUser: AffectedRowsOutput;
   updateManyUserTokens: AffectedRowsOutput;
+  updateOneBooking?: Maybe<Booking>;
   updateOneBuisnessCategory?: Maybe<BuisnessCategory>;
   updateOneBuisnessSubCategory?: Maybe<BuisnessSubCategory>;
   updateOneCompany?: Maybe<Company>;
@@ -4801,6 +5379,7 @@ export type Mutation = {
   updateOneUser?: Maybe<User>;
   updateOneUserTokens?: Maybe<UserTokens>;
   updateProfile?: Maybe<DefaultResponsce>;
+  upsertOneBooking: Booking;
   upsertOneBuisnessCategory: BuisnessCategory;
   upsertOneBuisnessSubCategory: BuisnessSubCategory;
   upsertOneCompany: Company;
@@ -4823,6 +5402,34 @@ export type Mutation = {
   upsertOneUser: User;
   upsertOneUserTokens: UserTokens;
   verifyEmail?: Maybe<DefaultResponsce>;
+};
+
+
+export type MutationAdminLoginArgs = {
+  email: Scalars['String']['input'];
+  password: Scalars['String']['input'];
+};
+
+
+export type MutationAdminRegisterArgs = {
+  input: CreateOneUserArgsCustom;
+};
+
+
+export type MutationCompanyLoginArgs = {
+  email: Scalars['String']['input'];
+  password: Scalars['String']['input'];
+};
+
+
+export type MutationCompanyRegisterArgs = {
+  input: CreateOneUserArgsCustom;
+};
+
+
+export type MutationCreateManyBookingArgs = {
+  data: Array<BookingCreateManyInput>;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
@@ -4952,6 +5559,11 @@ export type MutationCreateManyUserTokensArgs = {
 };
 
 
+export type MutationCreateOneBookingArgs = {
+  data: BookingCreateInput;
+};
+
+
 export type MutationCreateOneBuisnessCategoryArgs = {
   data: BuisnessCategoryCreateInput;
 };
@@ -5067,6 +5679,11 @@ export type MutationCreateSubscriptionArgs = {
 };
 
 
+export type MutationDeleteManyBookingArgs = {
+  where?: InputMaybe<BookingWhereInput>;
+};
+
+
 export type MutationDeleteManyBuisnessCategoryArgs = {
   where?: InputMaybe<BuisnessCategoryWhereInput>;
 };
@@ -5169,6 +5786,11 @@ export type MutationDeleteManyUserArgs = {
 
 export type MutationDeleteManyUserTokensArgs = {
   where?: InputMaybe<UserTokensWhereInput>;
+};
+
+
+export type MutationDeleteOneBookingArgs = {
+  where: BookingWhereUniqueInput;
 };
 
 
@@ -5303,6 +5925,12 @@ export type MutationResetPassByVerficationLinkArgs = {
 };
 
 
+export type MutationUpdateManyBookingArgs = {
+  data: BookingUpdateManyMutationInput;
+  where?: InputMaybe<BookingWhereInput>;
+};
+
+
 export type MutationUpdateManyBuisnessCategoryArgs = {
   data: BuisnessCategoryUpdateManyMutationInput;
   where?: InputMaybe<BuisnessCategoryWhereInput>;
@@ -5426,6 +6054,12 @@ export type MutationUpdateManyUserArgs = {
 export type MutationUpdateManyUserTokensArgs = {
   data: UserTokensUpdateManyMutationInput;
   where?: InputMaybe<UserTokensWhereInput>;
+};
+
+
+export type MutationUpdateOneBookingArgs = {
+  data: BookingUpdateInput;
+  where: BookingWhereUniqueInput;
 };
 
 
@@ -5561,6 +6195,13 @@ export type MutationUpdateProfileArgs = {
   newPass?: InputMaybe<Scalars['String']['input']>;
   oldPassword?: InputMaybe<Scalars['String']['input']>;
   updatePass?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+export type MutationUpsertOneBookingArgs = {
+  create: BookingCreateInput;
+  update: BookingUpdateInput;
+  where: BookingWhereUniqueInput;
 };
 
 
@@ -5776,6 +6417,23 @@ export type NestedDateTimeWithAggregatesFilter = {
   lte?: InputMaybe<Scalars['DateTime']['input']>;
   not?: InputMaybe<NestedDateTimeWithAggregatesFilter>;
   notIn?: InputMaybe<Array<Scalars['DateTime']['input']>>;
+};
+
+export type NestedEnumBookingStatusFilter = {
+  equals?: InputMaybe<BookingStatus>;
+  in?: InputMaybe<Array<BookingStatus>>;
+  not?: InputMaybe<NestedEnumBookingStatusFilter>;
+  notIn?: InputMaybe<Array<BookingStatus>>;
+};
+
+export type NestedEnumBookingStatusWithAggregatesFilter = {
+  _count?: InputMaybe<NestedIntFilter>;
+  _max?: InputMaybe<NestedEnumBookingStatusFilter>;
+  _min?: InputMaybe<NestedEnumBookingStatusFilter>;
+  equals?: InputMaybe<BookingStatus>;
+  in?: InputMaybe<Array<BookingStatus>>;
+  not?: InputMaybe<NestedEnumBookingStatusWithAggregatesFilter>;
+  notIn?: InputMaybe<Array<BookingStatus>>;
 };
 
 export type NestedEnumCompanyRoleNullableFilter = {
@@ -7822,6 +8480,7 @@ export type ProviderWhereUniqueInput = {
 
 export type Query = {
   __typename?: 'Query';
+  aggregateBooking: AggregateBooking;
   aggregateBuisnessCategory: AggregateBuisnessCategory;
   aggregateBuisnessSubCategory: AggregateBuisnessSubCategory;
   aggregateCompany: AggregateCompany;
@@ -7843,6 +8502,8 @@ export type Query = {
   aggregateSubscription: AggregateSubscription;
   aggregateUser: AggregateUser;
   aggregateUserTokens: AggregateUserTokens;
+  booking?: Maybe<Booking>;
+  bookings: Array<Booking>;
   buisnessCategories: Array<BuisnessCategory>;
   buisnessCategory?: Maybe<BuisnessCategory>;
   buisnessSubCategories: Array<BuisnessSubCategory>;
@@ -7861,6 +8522,8 @@ export type Query = {
   events: Array<Event>;
   fetaureCategories: Array<FetaureCategory>;
   fetaureCategory?: Maybe<FetaureCategory>;
+  findFirstBooking?: Maybe<Booking>;
+  findFirstBookingOrThrow?: Maybe<Booking>;
   findFirstBuisnessCategory?: Maybe<BuisnessCategory>;
   findFirstBuisnessCategoryOrThrow?: Maybe<BuisnessCategory>;
   findFirstBuisnessSubCategory?: Maybe<BuisnessSubCategory>;
@@ -7911,6 +8574,7 @@ export type Query = {
   findUniqueUserTokensOrThrow?: Maybe<UserTokens>;
   geolocation?: Maybe<Geolocation>;
   geolocations: Array<Geolocation>;
+  getBooking?: Maybe<Booking>;
   getBuisnessCategory?: Maybe<BuisnessCategory>;
   getBuisnessSubCategory?: Maybe<BuisnessSubCategory>;
   getCompany?: Maybe<Company>;
@@ -7930,6 +8594,7 @@ export type Query = {
   getSiteDesighn?: Maybe<SiteDesighn>;
   getSubscription?: Maybe<Subscription>;
   getUser?: Maybe<User>;
+  groupByBooking: Array<BookingGroupBy>;
   groupByBuisnessCategory: Array<BuisnessCategoryGroupBy>;
   groupByBuisnessSubCategory: Array<BuisnessSubCategoryGroupBy>;
   groupByCompany: Array<CompanyGroupBy>;
@@ -7971,6 +8636,15 @@ export type Query = {
   subscriptions: Array<Subscription>;
   user?: Maybe<User>;
   users: Array<User>;
+};
+
+
+export type QueryAggregateBookingArgs = {
+  cursor?: InputMaybe<BookingWhereUniqueInput>;
+  orderBy?: InputMaybe<Array<BookingOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<BookingWhereInput>;
 };
 
 
@@ -8163,6 +8837,21 @@ export type QueryAggregateUserTokensArgs = {
 };
 
 
+export type QueryBookingArgs = {
+  where: BookingWhereUniqueInput;
+};
+
+
+export type QueryBookingsArgs = {
+  cursor?: InputMaybe<BookingWhereUniqueInput>;
+  distinct?: InputMaybe<Array<BookingScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<BookingOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<BookingWhereInput>;
+};
+
+
 export type QueryBuisnessCategoriesArgs = {
   cursor?: InputMaybe<BuisnessCategoryWhereUniqueInput>;
   distinct?: InputMaybe<Array<BuisnessCategoryScalarFieldEnum>>;
@@ -8295,6 +8984,26 @@ export type QueryFetaureCategoriesArgs = {
 
 export type QueryFetaureCategoryArgs = {
   where: FetaureCategoryWhereUniqueInput;
+};
+
+
+export type QueryFindFirstBookingArgs = {
+  cursor?: InputMaybe<BookingWhereUniqueInput>;
+  distinct?: InputMaybe<Array<BookingScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<BookingOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<BookingWhereInput>;
+};
+
+
+export type QueryFindFirstBookingOrThrowArgs = {
+  cursor?: InputMaybe<BookingWhereUniqueInput>;
+  distinct?: InputMaybe<Array<BookingScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<BookingOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<BookingWhereInput>;
 };
 
 
@@ -8773,6 +9482,11 @@ export type QueryGeolocationsArgs = {
 };
 
 
+export type QueryGetBookingArgs = {
+  where: BookingWhereUniqueInput;
+};
+
+
 export type QueryGetBuisnessCategoryArgs = {
   where: BuisnessCategoryWhereUniqueInput;
 };
@@ -8865,6 +9579,16 @@ export type QueryGetSubscriptionArgs = {
 
 export type QueryGetUserArgs = {
   where: UserWhereUniqueInput;
+};
+
+
+export type QueryGroupByBookingArgs = {
+  by: Array<BookingScalarFieldEnum>;
+  having?: InputMaybe<BookingScalarWhereWithAggregatesInput>;
+  orderBy?: InputMaybe<Array<BookingOrderByWithAggregationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<BookingWhereInput>;
 };
 
 
@@ -10397,6 +11121,7 @@ export type User = {
   __typename?: 'User';
   _count?: Maybe<UserCount>;
   avater?: Maybe<Scalars['String']['output']>;
+  booking: Array<Booking>;
   company?: Maybe<Company>;
   companyRole?: Maybe<CompanyRole>;
   createdAt: Scalars['DateTime']['output'];
@@ -10413,6 +11138,16 @@ export type User = {
   status: UserAccountStatus;
   subscription?: Maybe<Subscription>;
   updatedAt: Scalars['DateTime']['output'];
+};
+
+
+export type UserBookingArgs = {
+  cursor?: InputMaybe<BookingWhereUniqueInput>;
+  distinct?: InputMaybe<Array<BookingScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<BookingOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<BookingWhereInput>;
 };
 
 
@@ -10435,7 +11170,13 @@ export enum UserAccountStatus {
 
 export type UserCount = {
   __typename?: 'UserCount';
+  booking: Scalars['Int']['output'];
   reveiws: Scalars['Int']['output'];
+};
+
+
+export type UserCountBookingArgs = {
+  where?: InputMaybe<BookingWhereInput>;
 };
 
 
@@ -10477,6 +11218,7 @@ export type UserCountOrderByAggregateInput = {
 
 export type UserCreateInput = {
   avater?: InputMaybe<Scalars['String']['input']>;
+  booking?: InputMaybe<BookingCreateNestedManyWithoutUserInput>;
   company?: InputMaybe<CompanyCreateNestedOneWithoutUserInput>;
   companyRole?: InputMaybe<CompanyRole>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -10510,6 +11252,12 @@ export type UserCreateManyInput = {
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
+export type UserCreateNestedOneWithoutBookingInput = {
+  connect?: InputMaybe<UserWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutBookingInput>;
+  create?: InputMaybe<UserCreateWithoutBookingInput>;
+};
+
 export type UserCreateNestedOneWithoutCompanyInput = {
   connect?: InputMaybe<UserWhereUniqueInput>;
   connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutCompanyInput>;
@@ -10540,6 +11288,11 @@ export type UserCreateNestedOneWithoutSubscriptionInput = {
   create?: InputMaybe<UserCreateWithoutSubscriptionInput>;
 };
 
+export type UserCreateOrConnectWithoutBookingInput = {
+  create: UserCreateWithoutBookingInput;
+  where: UserWhereUniqueInput;
+};
+
 export type UserCreateOrConnectWithoutCompanyInput = {
   create: UserCreateWithoutCompanyInput;
   where: UserWhereUniqueInput;
@@ -10565,8 +11318,29 @@ export type UserCreateOrConnectWithoutSubscriptionInput = {
   where: UserWhereUniqueInput;
 };
 
+export type UserCreateWithoutBookingInput = {
+  avater?: InputMaybe<Scalars['String']['input']>;
+  company?: InputMaybe<CompanyCreateNestedOneWithoutUserInput>;
+  companyRole?: InputMaybe<CompanyRole>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  email: Scalars['String']['input'];
+  employee?: InputMaybe<EmployeeCreateNestedOneWithoutUserInput>;
+  firstname: Scalars['String']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  lastname: Scalars['String']['input'];
+  owner?: InputMaybe<OwnerCreateNestedOneWithoutUserInput>;
+  password: Scalars['String']['input'];
+  phoneNumber?: InputMaybe<Scalars['String']['input']>;
+  reveiws?: InputMaybe<ReviewCreateNestedManyWithoutUserInput>;
+  role: UserRole;
+  status?: InputMaybe<UserAccountStatus>;
+  subscription?: InputMaybe<SubscriptionCreateNestedOneWithoutUserInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
 export type UserCreateWithoutCompanyInput = {
   avater?: InputMaybe<Scalars['String']['input']>;
+  booking?: InputMaybe<BookingCreateNestedManyWithoutUserInput>;
   companyRole?: InputMaybe<CompanyRole>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   email: Scalars['String']['input'];
@@ -10586,6 +11360,7 @@ export type UserCreateWithoutCompanyInput = {
 
 export type UserCreateWithoutEmployeeInput = {
   avater?: InputMaybe<Scalars['String']['input']>;
+  booking?: InputMaybe<BookingCreateNestedManyWithoutUserInput>;
   company?: InputMaybe<CompanyCreateNestedOneWithoutUserInput>;
   companyRole?: InputMaybe<CompanyRole>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -10605,6 +11380,7 @@ export type UserCreateWithoutEmployeeInput = {
 
 export type UserCreateWithoutOwnerInput = {
   avater?: InputMaybe<Scalars['String']['input']>;
+  booking?: InputMaybe<BookingCreateNestedManyWithoutUserInput>;
   company?: InputMaybe<CompanyCreateNestedOneWithoutUserInput>;
   companyRole?: InputMaybe<CompanyRole>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -10624,6 +11400,7 @@ export type UserCreateWithoutOwnerInput = {
 
 export type UserCreateWithoutReveiwsInput = {
   avater?: InputMaybe<Scalars['String']['input']>;
+  booking?: InputMaybe<BookingCreateNestedManyWithoutUserInput>;
   company?: InputMaybe<CompanyCreateNestedOneWithoutUserInput>;
   companyRole?: InputMaybe<CompanyRole>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -10643,6 +11420,7 @@ export type UserCreateWithoutReveiwsInput = {
 
 export type UserCreateWithoutSubscriptionInput = {
   avater?: InputMaybe<Scalars['String']['input']>;
+  booking?: InputMaybe<BookingCreateNestedManyWithoutUserInput>;
   company?: InputMaybe<CompanyCreateNestedOneWithoutUserInput>;
   companyRole?: InputMaybe<CompanyRole>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -10664,6 +11442,7 @@ export type UserForResponsce = {
   __typename?: 'UserForResponsce';
   email?: Maybe<Scalars['String']['output']>;
   firstname?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
   lastname?: Maybe<Scalars['String']['output']>;
   role?: Maybe<Scalars['String']['output']>;
   status: Scalars['String']['output'];
@@ -10770,6 +11549,7 @@ export type UserOrderByWithAggregationInput = {
 
 export type UserOrderByWithRelationInput = {
   avater?: InputMaybe<SortOrderInput>;
+  booking?: InputMaybe<BookingOrderByRelationAggregateInput>;
   company?: InputMaybe<CompanyOrderByWithRelationInput>;
   companyRole?: InputMaybe<SortOrderInput>;
   createdAt?: InputMaybe<SortOrder>;
@@ -10994,6 +11774,7 @@ export type UserTokensWhereUniqueInput = {
 
 export type UserUpdateInput = {
   avater?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  booking?: InputMaybe<BookingUpdateManyWithoutUserNestedInput>;
   company?: InputMaybe<CompanyUpdateOneWithoutUserNestedInput>;
   companyRole?: InputMaybe<NullableEnumCompanyRoleFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -11025,6 +11806,14 @@ export type UserUpdateManyMutationInput = {
   role?: InputMaybe<EnumUserRoleFieldUpdateOperationsInput>;
   status?: InputMaybe<EnumUserAccountStatusFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type UserUpdateOneRequiredWithoutBookingNestedInput = {
+  connect?: InputMaybe<UserWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutBookingInput>;
+  create?: InputMaybe<UserCreateWithoutBookingInput>;
+  update?: InputMaybe<UserUpdateWithoutBookingInput>;
+  upsert?: InputMaybe<UserUpsertWithoutBookingInput>;
 };
 
 export type UserUpdateOneRequiredWithoutCompanyNestedInput = {
@@ -11067,8 +11856,29 @@ export type UserUpdateOneRequiredWithoutSubscriptionNestedInput = {
   upsert?: InputMaybe<UserUpsertWithoutSubscriptionInput>;
 };
 
+export type UserUpdateWithoutBookingInput = {
+  avater?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  company?: InputMaybe<CompanyUpdateOneWithoutUserNestedInput>;
+  companyRole?: InputMaybe<NullableEnumCompanyRoleFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  email?: InputMaybe<StringFieldUpdateOperationsInput>;
+  employee?: InputMaybe<EmployeeUpdateOneWithoutUserNestedInput>;
+  firstname?: InputMaybe<StringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  lastname?: InputMaybe<StringFieldUpdateOperationsInput>;
+  owner?: InputMaybe<OwnerUpdateOneWithoutUserNestedInput>;
+  password?: InputMaybe<StringFieldUpdateOperationsInput>;
+  phoneNumber?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  reveiws?: InputMaybe<ReviewUpdateManyWithoutUserNestedInput>;
+  role?: InputMaybe<EnumUserRoleFieldUpdateOperationsInput>;
+  status?: InputMaybe<EnumUserAccountStatusFieldUpdateOperationsInput>;
+  subscription?: InputMaybe<SubscriptionUpdateOneWithoutUserNestedInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
 export type UserUpdateWithoutCompanyInput = {
   avater?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  booking?: InputMaybe<BookingUpdateManyWithoutUserNestedInput>;
   companyRole?: InputMaybe<NullableEnumCompanyRoleFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -11088,6 +11898,7 @@ export type UserUpdateWithoutCompanyInput = {
 
 export type UserUpdateWithoutEmployeeInput = {
   avater?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  booking?: InputMaybe<BookingUpdateManyWithoutUserNestedInput>;
   company?: InputMaybe<CompanyUpdateOneWithoutUserNestedInput>;
   companyRole?: InputMaybe<NullableEnumCompanyRoleFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -11107,6 +11918,7 @@ export type UserUpdateWithoutEmployeeInput = {
 
 export type UserUpdateWithoutOwnerInput = {
   avater?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  booking?: InputMaybe<BookingUpdateManyWithoutUserNestedInput>;
   company?: InputMaybe<CompanyUpdateOneWithoutUserNestedInput>;
   companyRole?: InputMaybe<NullableEnumCompanyRoleFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -11126,6 +11938,7 @@ export type UserUpdateWithoutOwnerInput = {
 
 export type UserUpdateWithoutReveiwsInput = {
   avater?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  booking?: InputMaybe<BookingUpdateManyWithoutUserNestedInput>;
   company?: InputMaybe<CompanyUpdateOneWithoutUserNestedInput>;
   companyRole?: InputMaybe<NullableEnumCompanyRoleFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -11145,6 +11958,7 @@ export type UserUpdateWithoutReveiwsInput = {
 
 export type UserUpdateWithoutSubscriptionInput = {
   avater?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  booking?: InputMaybe<BookingUpdateManyWithoutUserNestedInput>;
   company?: InputMaybe<CompanyUpdateOneWithoutUserNestedInput>;
   companyRole?: InputMaybe<NullableEnumCompanyRoleFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -11160,6 +11974,11 @@ export type UserUpdateWithoutSubscriptionInput = {
   role?: InputMaybe<EnumUserRoleFieldUpdateOperationsInput>;
   status?: InputMaybe<EnumUserAccountStatusFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type UserUpsertWithoutBookingInput = {
+  create: UserCreateWithoutBookingInput;
+  update: UserUpdateWithoutBookingInput;
 };
 
 export type UserUpsertWithoutCompanyInput = {
@@ -11192,6 +12011,7 @@ export type UserWhereInput = {
   NOT?: InputMaybe<Array<UserWhereInput>>;
   OR?: InputMaybe<Array<UserWhereInput>>;
   avater?: InputMaybe<StringNullableFilter>;
+  booking?: InputMaybe<BookingListRelationFilter>;
   company?: InputMaybe<CompanyRelationFilter>;
   companyRole?: InputMaybe<EnumCompanyRoleNullableFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
@@ -11221,6 +12041,25 @@ export type DefaultResponsce = {
   success: Scalars['Boolean']['output'];
 };
 
+export type BuisnessCategoriesQueryVariables = Exact<{
+  where?: InputMaybe<BuisnessCategoryWhereInput>;
+  orderBy?: InputMaybe<Array<BuisnessCategoryOrderByWithRelationInput> | BuisnessCategoryOrderByWithRelationInput>;
+  cursor?: InputMaybe<BuisnessCategoryWhereUniqueInput>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  distinct?: InputMaybe<Array<BuisnessCategoryScalarFieldEnum> | BuisnessCategoryScalarFieldEnum>;
+}>;
+
+
+export type BuisnessCategoriesQuery = { __typename?: 'Query', buisnessCategories: Array<{ __typename?: 'BuisnessCategory', image: string, name: string, slug: string }> };
+
+export type CreateOneBuisnessCategoryMutationVariables = Exact<{
+  data: BuisnessCategoryCreateInput;
+}>;
+
+
+export type CreateOneBuisnessCategoryMutation = { __typename?: 'Mutation', createOneBuisnessCategory: { __typename?: 'BuisnessCategory', id: string } };
+
 export type CompaniesQueryVariables = Exact<{
   where?: InputMaybe<CompanyWhereInput>;
   orderBy?: InputMaybe<Array<CompanyOrderByWithRelationInput> | CompanyOrderByWithRelationInput>;
@@ -11232,6 +12071,13 @@ export type CompaniesQueryVariables = Exact<{
 
 
 export type CompaniesQuery = { __typename?: 'Query', companies: Array<{ __typename?: 'Company', avater: string, logo: string, id: string, name: string, slug: string, fetaureImage: string }> };
+
+export type CompanyQueryVariables = Exact<{
+  where: CompanyWhereUniqueInput;
+}>;
+
+
+export type CompanyQuery = { __typename?: 'Query', company?: { __typename?: 'Company', avater: string, description: string, fetaureImage: string, logo: string, name: string, slug: string } | null };
 
 export type ProductsQueryVariables = Exact<{
   where?: InputMaybe<ProductWhereInput>;
@@ -11245,7 +12091,114 @@ export type ProductsQueryVariables = Exact<{
 
 export type ProductsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', durationPreiod: number, durationType: string, id: string, images: Array<string>, name: string, price: number, slug: string }> };
 
+export type RegisterMutationVariables = Exact<{
+  input: CreateOneUserArgsCustom;
+}>;
 
+
+export type RegisterMutation = { __typename?: 'Mutation', register?: { __typename: 'defaultResponsce', message: string, success: boolean } | null };
+
+export type MeQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MeQuery = { __typename?: 'Query', me?: { __typename?: 'UserForResponsce', id?: string | null, firstname?: string | null, lastname?: string | null, email?: string | null } | null };
+
+export type LoginMutationVariables = Exact<{
+  password: Scalars['String']['input'];
+  email: Scalars['String']['input'];
+}>;
+
+
+export type LoginMutation = { __typename?: 'Mutation', login?: { __typename?: 'LoginResponsce', accessToken?: string | null, isAuthenticated: boolean, message: string, success: boolean, user?: { __typename?: 'UserForResponsce', id?: string | null, firstname?: string | null, lastname?: string | null, email?: string | null, role?: string | null, status: string } | null } | null };
+
+export type RefreshTokenMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type RefreshTokenMutation = { __typename?: 'Mutation', refreshToken?: string | null };
+
+
+export const BuisnessCategoriesDocument = gql`
+    query BuisnessCategories($where: BuisnessCategoryWhereInput, $orderBy: [BuisnessCategoryOrderByWithRelationInput!], $cursor: BuisnessCategoryWhereUniqueInput, $take: Int, $skip: Int, $distinct: [BuisnessCategoryScalarFieldEnum!]) {
+  buisnessCategories(
+    where: $where
+    orderBy: $orderBy
+    cursor: $cursor
+    take: $take
+    skip: $skip
+    distinct: $distinct
+  ) {
+    image
+    name
+    slug
+  }
+}
+    `;
+
+/**
+ * __useBuisnessCategoriesQuery__
+ *
+ * To run a query within a React component, call `useBuisnessCategoriesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useBuisnessCategoriesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useBuisnessCategoriesQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *      orderBy: // value for 'orderBy'
+ *      cursor: // value for 'cursor'
+ *      take: // value for 'take'
+ *      skip: // value for 'skip'
+ *      distinct: // value for 'distinct'
+ *   },
+ * });
+ */
+export function useBuisnessCategoriesQuery(baseOptions?: Apollo.QueryHookOptions<BuisnessCategoriesQuery, BuisnessCategoriesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<BuisnessCategoriesQuery, BuisnessCategoriesQueryVariables>(BuisnessCategoriesDocument, options);
+      }
+export function useBuisnessCategoriesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<BuisnessCategoriesQuery, BuisnessCategoriesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<BuisnessCategoriesQuery, BuisnessCategoriesQueryVariables>(BuisnessCategoriesDocument, options);
+        }
+export type BuisnessCategoriesQueryHookResult = ReturnType<typeof useBuisnessCategoriesQuery>;
+export type BuisnessCategoriesLazyQueryHookResult = ReturnType<typeof useBuisnessCategoriesLazyQuery>;
+export type BuisnessCategoriesQueryResult = Apollo.QueryResult<BuisnessCategoriesQuery, BuisnessCategoriesQueryVariables>;
+export const CreateOneBuisnessCategoryDocument = gql`
+    mutation CreateOneBuisnessCategory($data: BuisnessCategoryCreateInput!) {
+  createOneBuisnessCategory(data: $data) {
+    id
+  }
+}
+    `;
+export type CreateOneBuisnessCategoryMutationFn = Apollo.MutationFunction<CreateOneBuisnessCategoryMutation, CreateOneBuisnessCategoryMutationVariables>;
+
+/**
+ * __useCreateOneBuisnessCategoryMutation__
+ *
+ * To run a mutation, you first call `useCreateOneBuisnessCategoryMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateOneBuisnessCategoryMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createOneBuisnessCategoryMutation, { data, loading, error }] = useCreateOneBuisnessCategoryMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useCreateOneBuisnessCategoryMutation(baseOptions?: Apollo.MutationHookOptions<CreateOneBuisnessCategoryMutation, CreateOneBuisnessCategoryMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateOneBuisnessCategoryMutation, CreateOneBuisnessCategoryMutationVariables>(CreateOneBuisnessCategoryDocument, options);
+      }
+export type CreateOneBuisnessCategoryMutationHookResult = ReturnType<typeof useCreateOneBuisnessCategoryMutation>;
+export type CreateOneBuisnessCategoryMutationResult = Apollo.MutationResult<CreateOneBuisnessCategoryMutation>;
+export type CreateOneBuisnessCategoryMutationOptions = Apollo.BaseMutationOptions<CreateOneBuisnessCategoryMutation, CreateOneBuisnessCategoryMutationVariables>;
 export const CompaniesDocument = gql`
     query Companies($where: CompanyWhereInput, $orderBy: [CompanyOrderByWithRelationInput!], $cursor: CompanyWhereUniqueInput, $take: Int, $skip: Int, $distinct: [CompanyScalarFieldEnum!]) {
   companies(
@@ -11298,6 +12251,46 @@ export function useCompaniesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<
 export type CompaniesQueryHookResult = ReturnType<typeof useCompaniesQuery>;
 export type CompaniesLazyQueryHookResult = ReturnType<typeof useCompaniesLazyQuery>;
 export type CompaniesQueryResult = Apollo.QueryResult<CompaniesQuery, CompaniesQueryVariables>;
+export const CompanyDocument = gql`
+    query Company($where: CompanyWhereUniqueInput!) {
+  company(where: $where) {
+    avater
+    description
+    fetaureImage
+    logo
+    name
+    slug
+  }
+}
+    `;
+
+/**
+ * __useCompanyQuery__
+ *
+ * To run a query within a React component, call `useCompanyQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCompanyQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCompanyQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useCompanyQuery(baseOptions: Apollo.QueryHookOptions<CompanyQuery, CompanyQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<CompanyQuery, CompanyQueryVariables>(CompanyDocument, options);
+      }
+export function useCompanyLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CompanyQuery, CompanyQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<CompanyQuery, CompanyQueryVariables>(CompanyDocument, options);
+        }
+export type CompanyQueryHookResult = ReturnType<typeof useCompanyQuery>;
+export type CompanyLazyQueryHookResult = ReturnType<typeof useCompanyLazyQuery>;
+export type CompanyQueryResult = Apollo.QueryResult<CompanyQuery, CompanyQueryVariables>;
 export const ProductsDocument = gql`
     query Products($where: ProductWhereInput, $orderBy: [ProductOrderByWithRelationInput!], $cursor: ProductWhereUniqueInput, $take: Int, $skip: Int, $distinct: [ProductScalarFieldEnum!]) {
   products(
@@ -11351,3 +12344,150 @@ export function useProductsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<P
 export type ProductsQueryHookResult = ReturnType<typeof useProductsQuery>;
 export type ProductsLazyQueryHookResult = ReturnType<typeof useProductsLazyQuery>;
 export type ProductsQueryResult = Apollo.QueryResult<ProductsQuery, ProductsQueryVariables>;
+export const RegisterDocument = gql`
+    mutation Register($input: CreateOneUserArgsCustom!) {
+  register(input: $input) {
+    __typename
+    message
+    success
+  }
+}
+    `;
+export type RegisterMutationFn = Apollo.MutationFunction<RegisterMutation, RegisterMutationVariables>;
+
+/**
+ * __useRegisterMutation__
+ *
+ * To run a mutation, you first call `useRegisterMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useRegisterMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [registerMutation, { data, loading, error }] = useRegisterMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useRegisterMutation(baseOptions?: Apollo.MutationHookOptions<RegisterMutation, RegisterMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument, options);
+      }
+export type RegisterMutationHookResult = ReturnType<typeof useRegisterMutation>;
+export type RegisterMutationResult = Apollo.MutationResult<RegisterMutation>;
+export type RegisterMutationOptions = Apollo.BaseMutationOptions<RegisterMutation, RegisterMutationVariables>;
+export const MeDocument = gql`
+    query Me {
+  me {
+    id
+    firstname
+    lastname
+    email
+  }
+}
+    `;
+
+/**
+ * __useMeQuery__
+ *
+ * To run a query within a React component, call `useMeQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMeQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMeQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useMeQuery(baseOptions?: Apollo.QueryHookOptions<MeQuery, MeQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<MeQuery, MeQueryVariables>(MeDocument, options);
+      }
+export function useMeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MeQuery, MeQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<MeQuery, MeQueryVariables>(MeDocument, options);
+        }
+export type MeQueryHookResult = ReturnType<typeof useMeQuery>;
+export type MeLazyQueryHookResult = ReturnType<typeof useMeLazyQuery>;
+export type MeQueryResult = Apollo.QueryResult<MeQuery, MeQueryVariables>;
+export const LoginDocument = gql`
+    mutation Login($password: String!, $email: String!) {
+  login(password: $password, email: $email) {
+    accessToken
+    isAuthenticated
+    message
+    success
+    user {
+      id
+      firstname
+      lastname
+      email
+      role
+      status
+    }
+  }
+}
+    `;
+export type LoginMutationFn = Apollo.MutationFunction<LoginMutation, LoginMutationVariables>;
+
+/**
+ * __useLoginMutation__
+ *
+ * To run a mutation, you first call `useLoginMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useLoginMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [loginMutation, { data, loading, error }] = useLoginMutation({
+ *   variables: {
+ *      password: // value for 'password'
+ *      email: // value for 'email'
+ *   },
+ * });
+ */
+export function useLoginMutation(baseOptions?: Apollo.MutationHookOptions<LoginMutation, LoginMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument, options);
+      }
+export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
+export type LoginMutationResult = Apollo.MutationResult<LoginMutation>;
+export type LoginMutationOptions = Apollo.BaseMutationOptions<LoginMutation, LoginMutationVariables>;
+export const RefreshTokenDocument = gql`
+    mutation RefreshToken {
+  refreshToken
+}
+    `;
+export type RefreshTokenMutationFn = Apollo.MutationFunction<RefreshTokenMutation, RefreshTokenMutationVariables>;
+
+/**
+ * __useRefreshTokenMutation__
+ *
+ * To run a mutation, you first call `useRefreshTokenMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useRefreshTokenMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [refreshTokenMutation, { data, loading, error }] = useRefreshTokenMutation({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useRefreshTokenMutation(baseOptions?: Apollo.MutationHookOptions<RefreshTokenMutation, RefreshTokenMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<RefreshTokenMutation, RefreshTokenMutationVariables>(RefreshTokenDocument, options);
+      }
+export type RefreshTokenMutationHookResult = ReturnType<typeof useRefreshTokenMutation>;
+export type RefreshTokenMutationResult = Apollo.MutationResult<RefreshTokenMutation>;
+export type RefreshTokenMutationOptions = Apollo.BaseMutationOptions<RefreshTokenMutation, RefreshTokenMutationVariables>;

@@ -31,7 +31,7 @@ export default function ListingDetailsHeader() {
         </div>
         <Searchbox className="hidden lg:block" />
         <div className="flex items-center justify-end gap-5">
-          <SearchIconBtn />
+          <SearchIconBtn className=' ' />
           {mounted ? (
             <>
               {isAuthorized ? (
@@ -40,10 +40,10 @@ export default function ListingDetailsHeader() {
                 <Button
                   size="sm"
                   onClick={() => openModal('SIGN_IN')}
-                  className="rounded-lg !px-4 py-2 text-sm capitalize md:text-base"
+                  className="rounded-lg !px-4 py-2 text-sm capitalize md:text-base bg-primaryBg"
                 >
-                  Log in
-                </Button>
+                  Download Now
+                  </Button>
               )}
             </>
           ) : null}

@@ -7,6 +7,7 @@ import ProfileMenu from '@/components/header/profile-menu';
 import { useModal } from '@/components/modals/context';
 import { useIsMounted } from '@/hooks/use-is-mounted';
 import Button from '@/components/ui/button';
+import { Spin } from 'antd';
 
 const menuItems = [
   {
@@ -33,7 +34,7 @@ const menuItems = [
 
 export default function Menu() {
   const { openModal } = useModal();
-  const { isAuthorized } = useAuth();
+  const { isAuthorized , loading } = useAuth();
   const mounted = useIsMounted();
 
   return (
@@ -41,7 +42,7 @@ export default function Menu() {
       <ul className="hidden flex-wrap md:flex">
         {menuItems.map((item) => (
           <li key={item.id}>
-            <Link href={item.path} className="px-5 capitalize text-white">
+            <Link href={item.path} className="px-5 capitalize text-black">
               {item.label}
             </Link>
           </li>
@@ -49,18 +50,25 @@ export default function Menu() {
       </ul>
       {mounted ? (
         <>
-          {isAuthorized ? (
+          {
+          loading? 
+          <Spin/> :
+          isAuthorized ? (
             <div className="ml-7 flex justify-end">
               <ProfileMenu className="hidden md:block" />
             </div>
           ) : (
             <Button
               onClick={() => openModal('SIGN_IN')}
-              className="ml-5 rounded-lg px-6 py-2 text-sm capitalize md:text-base 4xl:px-8 4xl:py-2.5"
+              className="ml-5 rounded-lg px-6 py-2 text-sm capitalize md:text-base 4xl:px-8 4xl:py-2.5  bg-primaryBg"
             >
-              Log in
-            </Button>
+                 Login
+                  </Button>
           )}
+             <Button              className="ml-5 rounded-lg px-6 py-2 text-sm capitalize md:text-base 4xl:px-8 4xl:py-2.5  bg-primaryBg"
+            >
+                 Download Now
+                  </Button>
         </>
       ) : null}
     </nav>

@@ -22,9 +22,9 @@ const classes = {
   variant: {
     solid: {
       base: 'border border-transparent',
-      color: {
+      color: { 
         DEFAULT:
-          'bg-gray-900 text-white hover:enabled:bg-gray-1000 focus:ring-gray-900/30 text-gray-0',
+          'bg-primaryBg text-white hover:enabled:bg-primaryBg focus:ring-gray-900/30 text-gray-0',
       },
     },
     flat: {

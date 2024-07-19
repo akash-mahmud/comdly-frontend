@@ -15,7 +15,7 @@ export default function GuestFilter() {
   return (
     <div className="flex items-center justify-between py-2">
       <Text className="block !text-sm font-bold capitalize text-gray-dark lg:!text-base">
-        Number of people
+        Number of Menus
       </Text>
       <Counter
         count={peopleCount}

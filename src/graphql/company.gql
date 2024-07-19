@@ -8,3 +8,14 @@ query Companies($where: CompanyWhereInput, $orderBy: [CompanyOrderByWithRelation
     fetaureImage
   }
 }
+
+query Company($where: CompanyWhereUniqueInput!) {
+  company(where: $where) {
+    avater
+    description
+    fetaureImage
+    logo
+    name
+    slug
+  }
+}

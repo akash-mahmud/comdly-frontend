@@ -3,12 +3,12 @@
 import Image from 'next/image';
 import FindTripForm from '@/components/home/search-form/search-form';
 import { CSSProperties, useState } from 'react';
-// import { GoogleMap, Marker, OverlayView, useJsApiLoader } from '@react-google-maps/api';
+import { GoogleMap, Marker, OverlayView, useJsApiLoader } from '@react-google-maps/api';
 import GoogleMapReact, { MapOptions } from 'google-map-react';
 
 const containerStyle:CSSProperties = {
   width: '100%',
-  height: '100%',
+  // height: '100%',
   position:'relative'
 };
 
@@ -64,18 +64,18 @@ export default function HeroBanner() {
 		lat:number
 		lng:number
 	}
-	// const [selectedLocation, setSelectedLocation] = useState<null|location>(null);
+	const [selectedLocation, setSelectedLocation] = useState<null|location>(null);
 
-	// const { isLoaded } = useJsApiLoader({
-	//   googleMapsApiKey: 'AIzaSyBU9Sja1_zSeP3oQySDLYZ7FVYWrq-kGKU',
-	// });
+	const { isLoaded } = useJsApiLoader({
+	  googleMapsApiKey: 'AIzaSyBU9Sja1_zSeP3oQySDLYZ7FVYWrq-kGKU',
+	});
   
-	// const handleMapClick = (event:google.maps.MapMouseEvent) => {
-	//   setSelectedLocation({
-	// 	lat: event?.latLng?.lat() as number,
-	// 	lng: event?.latLng?.lng() as number,
-	//   });
-	// };
+	const handleMapClick = (event:google.maps.MapMouseEvent) => {
+	  setSelectedLocation({
+		lat: event?.latLng?.lat() as number,
+		lng: event?.latLng?.lng() as number,
+	  });
+	};
 
   const [mapType, setMapType] = useState('roadmap');
 
@@ -112,7 +112,7 @@ gestureHandling: 'cooperative', // or 'cooperative'
   return (
     <>
     
-    <div className="relative flex min-h-full items-end justify-center px-4 pt-48 pb-28 before:absolute before:top-0 before:left-0 before:z-[1] before:block before:h-1/4 before:w-full before:bg-gradient-to-b before:from-black/60 sm:flex-none sm:justify-start sm:px-0 sm:pb-20 sm:pt-[120px] sm:pl-6 md:pl-16 3xl:pt-[142px] 3xl:pb-[132px] 4xl:pl-[200px]">
+    {/* <div className="relative flex  h-1/2 items-end justify-center px-4 pt-48 pb-28 before:absolute before:top-0 before:left-0 before:z-[1] before:block before:h-1/4 before:w-full before:bg-gradient-to-b before:from-black/60 sm:flex-none sm:justify-start sm:px-0 sm:pb-20 sm:pt-[120px] sm:pl-6 md:pl-16 3xl:pt-[142px] 3xl:pb-[132px] 4xl:pl-[200px]">
       <Image
         src="/images/banner/1.jpg"
         alt="Home banner 1"
@@ -121,7 +121,45 @@ gestureHandling: 'cooperative', // or 'cooperative'
         className="aspect-[2/1] h-full bg-gray-lighter object-cover"
       />
       <FindTripForm />
+    </div> */}
+
+
+
+
+{/* !Map version */}
+
+<div className="relative flex max-hh-80  items-end justify-center before:absolute before:top-0 before:left-0 before:z-[1] before:block before:h-1/4 before:w-full before:bg-gradient-to-b before:from-black/60 sm:flex-none sm:justify-start sm:px-0  ">
+    <Image
+      src="/images/banner/1.jpg"
+      alt="Home banner 1"
+      fill
+      priority
+      className="aspect-[2/1]  bg-gray-lighter h-80 object-cover mt- "
+    />
     </div>
+
+  {										isLoaded ? (
+    <GoogleMap  mapContainerClassName='aspect-[2/1] h-80 bg-gray-lighter object-cover mt-24'  
+    // onLoad={(map) => {
+    //   map.addListener('zoom_changed', () => handleZoomChanged(map));
+    // }} 
+    options={{...mapOptions,        
+
+   }}
+      mapContainerStyle={containerStyle}
+      center={center}
+      zoom={15}
+      onClick={handleMapClick}
+    >
+      {/* {selectedLocation && <Marker position={selectedLocation} />} 
+      {avatarData.map((avatar) => (
+        <AvatarMarker key={avatar.id} avatar={avatar} />
+      ))} */}
+    </GoogleMap>
+  ) : (
+    <></>
+
+  )}
     </>
 
   );
@@ -154,6 +192,11 @@ gestureHandling: 'cooperative', // or 'cooperative'
     <></>
 
   )} */}
+
+
+
+
+
   {/* <div style={containerStyle}>
   <GoogleMapReact 
       defaultCenter={center}

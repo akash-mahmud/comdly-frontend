@@ -1,0 +1,14 @@
+query BuisnessCategories($where: BuisnessCategoryWhereInput, $orderBy: [BuisnessCategoryOrderByWithRelationInput!], $cursor: BuisnessCategoryWhereUniqueInput, $take: Int, $skip: Int, $distinct: [BuisnessCategoryScalarFieldEnum!]) {
+  buisnessCategories(where: $where, orderBy: $orderBy, cursor: $cursor, take: $take, skip: $skip, distinct: $distinct) {
+    image
+    name
+    slug
+  }
+}
+
+
+mutation CreateOneBuisnessCategory($data: BuisnessCategoryCreateInput!) {
+  createOneBuisnessCategory(data: $data) {
+    id
+  }
+}

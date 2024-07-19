@@ -5,7 +5,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid';
 import { Swiper, SwiperSlide, Navigation } from '@/components/ui/slider';
 import ActionIcon from '@/components/ui/action-icon';
 import BusinessCard from '@/components/ui/cards/businessSectionCard';
-
+import BusinessCategoryCard from '@/components/ui/cards/businessCategoryCard';
 export default function BuisnessSectionCarousel({ data }: any) {
   return (
     <div className="group/section relative">
@@ -46,11 +46,10 @@ export default function BuisnessSectionCarousel({ data }: any) {
       >
         {data?.map((item: DestinationTypes, index: number) => (
           <SwiperSlide key={`destinaion-${index}`}>
-            <BusinessCard
+            <BusinessCategoryCard
               slug={`/${item.slug}`}
               name={item.name}
-              location={item.location}
-              thumbnail={item.fetaureImage}
+              thumbnail={item.image}
             />
           </SwiperSlide>
         ))}

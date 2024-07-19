@@ -1,16 +1,13 @@
 import { TokenRefreshLink } from 'apollo-link-token-refresh';
-import {getAuthData} from '../utils/session'
+import {getAuthData, USER_COOKIE} from '../utils/session'
 const auth = getAuthData();
 import {isJwtExpired} from 'jwt-check-expiration'
 import { refreshToken } from './renew';
-import { store } from '../store';
-import { setRenewdToken } from '../store/slices/auth/authSlice';
-import client from './client';
-import { link } from './link';
+
 export const tokenRefreshLink=   new TokenRefreshLink({
     isTokenValidOrUndefined: async () => {
         try {
-            return !isJwtExpired(auth.token)
+            return !isJwtExpired(auth)
 
         } catch (error) {
             return false            
@@ -23,8 +20,8 @@ export const tokenRefreshLink=   new TokenRefreshLink({
     },
     handleFetch: (accessToken , operation) => {
         if (accessToken) {
-
-          store.dispatch(setRenewdToken(accessToken))
+localStorage.setItem(USER_COOKIE , accessToken)
+          // store.dispatch(setRenewdToken(accessToken))
      
 
         }

@@ -35,7 +35,7 @@ const classes = {
       base: 'border border-transparent',
       color: {
         DEFAULT:
-          'bg-gray-900 hover:enabled:bg-gray-1000 focus:ring-gray-900/20 text-gray-0',
+          'bg-primaryBg hover:enabled:bg-primaryBg focus:ring-gray-900/20 text-gray-0',
         invert:
           'bg-white text-primary focus:ring-gray-dark hover:enabled:bg-gray-dark hover:enabled:text-white',
         light: 'bg-white/70 hover:enabled:bg-white/100 focus:ring-white',

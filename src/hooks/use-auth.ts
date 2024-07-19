@@ -1,7 +1,10 @@
 'use client';
 
+import { useMeQuery, User } from '@/graphql/generated/schema';
+import { USER_COOKIE } from '@/utils/session';
 import { useAtom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
+import { useEffect, useState } from 'react';
 
 interface UserType {
   name: string;
@@ -16,27 +19,34 @@ const demoUser = {
   role: 'admin',
 };
 
-const isLoggedIn =
-  typeof window !== 'undefined'
-    ? localStorage.getItem('isAuthorized')
-    : 'false';
-const userAtom = atomWithStorage<Partial<UserType>>('loggedUser', {});
-const authorizationAtom = atomWithStorage('isAuthorized', Boolean(isLoggedIn));
-
 export default function useAuth() {
-  const [isAuthorized, setAuthorized] = useAtom(authorizationAtom);
-  const [user, setUser] = useAtom(userAtom);
-
+  const [user, setUser] = useState({});
+  const [isAuthorized, setisAuthorized] = useState(false)
+const {data , loading} = useMeQuery()
+  useEffect(() => {
+ 
+if (data?.me) {
+  setUser(data?.me)
+  setisAuthorized(data?.me?.id?true:false)
+}
+    return ()=> {}
+  }, [loading, data])
+  console.log(user);
+  
   return {
     isAuthorized,
     user,
-    authorize() {
-      setAuthorized(true);
-      setUser(demoUser);
+    loading,
+    authorize(user: User) {
+      setisAuthorized(true);
+      setUser(user);
     },
     unauthorize() {
-      setAuthorized(false);
+      setisAuthorized(false);
       setUser({});
+      //? call server logout and all localstorage and cookie clear function
+
+
     },
   };
 }

@@ -11,28 +11,28 @@ import SelectBox from '@/components/ui/select-box';
 
 const options = [
   {
-    label: 'Choose boat type',
+    label: 'Choose food type',
     icon: <SailBoatIcon className="h-auto w-5" />,
     disabled: true,
   },
   {
-    label: 'Sail boat',
+    label: 'Mexican',
     icon: <HouseBoatIcon className="h-auto w-5" />,
   },
   {
-    label: 'Fishing boat',
+    label: 'Chinese',
     icon: <MotorBoatIcon className="h-auto w-5" />,
   },
   {
-    label: 'Bass boat',
+    label: 'Italian',
     icon: <JetskiBoatIcon className="h-auto w-5" />,
   },
   {
-    label: 'Cabin cruiser',
+    label: 'Thai',
     icon: <RibBoatIcon className="h-auto w-5" />,
   },
   {
-    label: 'Dinghies',
+    label: 'First Food',
     icon: <HouseBoatIcon className="h-auto w-5" />,
   },
 ];
@@ -59,9 +59,10 @@ export default function BoatTypeFilter() {
   return (
     <SelectBox
       value={selected}
-      label="Select Boat Type"
+      label="Select food type"
       options={options}
-      optionIcon={true}
+      // optionIcon={true}
+      optionIcon={false}
       onChange={(data: any) => setSelected(data)}
       labelClassName="mb-2 !text-sm lg:!text-base"
       buttonClassName="h-10 lg:h-11 2xl:h-12"

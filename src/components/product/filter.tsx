@@ -73,15 +73,15 @@ export default function Filter({ className }: FilterTypes) {
       </div>
       <div className="grid grid-cols-1 gap-8 px-5 pb-3 md:px-7 xl:p-0 xl:pb-0">
         <LocationInputFilter />
-        <TripdateFilter />
+        {/* <TripdateFilter /> */}
         <BoatTypeFilter />
-        <CategoryFilter />
+        {/* <CategoryFilter />
         <DistanceFilter />
-        <Manufacturer />
+        <Manufacturer /> */}
         <PriceFilter />
         <GuestFilter />
-        <WithCrewFilter />
-        <FreeCancellation />
+        {/* <WithCrewFilter />
+        <FreeCancellation /> */}
       </div>
       <div className="sticky inset-x-0 bottom-0 z-10 mt-4 flex items-center justify-between bg-white py-3 px-5 uppercase shadow-card sm:hidden md:px-7 xl:px-0">
         <div>

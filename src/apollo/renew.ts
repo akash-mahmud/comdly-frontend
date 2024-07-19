@@ -2,11 +2,9 @@ import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client";
 import { RefreshTokenDocument } from "../graphql/generated/schema";
 import fetch from 'cross-fetch';
 
-import {getAuthData} from '../utils/session'
 import { SERVER_1 } from "../config/secrets";
-const auth = getAuthData();
 
-const token = auth.token ? `Bearer ${auth.token}` : "";
+const token =  `Bearer ${localStorage.getItem('yellow-cartee')??''}` ;
 export const renewTokenApiClient = new ApolloClient({
     link:     new HttpLink({
       uri: SERVER_1,

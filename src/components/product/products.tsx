@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { topBoats } from 'public/data/top-boats';
 import Button from '@/components/ui/button';
 import { useProductsQuery } from '@/graphql/generated/schema';
-import ProductCard from '../ui/cards/products';
 import { useParams } from 'next/navigation';
 
 export default function Products({}) {
