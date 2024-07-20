@@ -75,9 +75,9 @@ export default function ProfileMenu({ className }: { className?: string }) {
         )}
       >
         <Menu.Button className="relative h-full w-full rounded-full bg-white">
-          <Avatar
+          <Avatar name={`${user?.firstname} ${user?.lastname}`}
             className="cursor-pointer"
-            src={user?.avatar}
+            src={user?.avater??''}
             rounded="full"
             size="100%"
           />

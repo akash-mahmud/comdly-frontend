@@ -20,13 +20,12 @@ const demoUser = {
 };
 
 export default function useAuth() {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState< User | undefined>({});
   const [isAuthorized, setisAuthorized] = useState(false)
 const {data , loading} = useMeQuery()
   useEffect(() => {
- 
 if (data?.me) {
-  setUser(data?.me)
+  setUser(data?.me as User)
   setisAuthorized(data?.me?.id?true:false)
 }
     return ()=> {}

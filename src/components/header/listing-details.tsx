@@ -11,11 +11,12 @@ import Searchbox from '@/components/ui/search-box';
 import Button from '@/components/ui/button';
 import Logo from '@/components/ui/logo';
 import { useIsMounted } from '@/hooks/use-is-mounted';
+import { Spin } from 'antd';
 
 export default function ListingDetailsHeader() {
   const mounted = useIsMounted();
   const { openModal } = useModal();
-  const { isAuthorized } = useAuth();
+  const { isAuthorized , loading} = useAuth();
   const headerRef = useRef(null);
   addScrollingClass(headerRef);
 
@@ -33,20 +34,29 @@ export default function ListingDetailsHeader() {
         <div className="flex items-center justify-end gap-5">
           <SearchIconBtn className=' ' />
           {mounted ? (
-            <>
-              {isAuthorized ? (
-                <ProfileMenu className="hidden md:block" />
-              ) : (
-                <Button
-                  size="sm"
-                  onClick={() => openModal('SIGN_IN')}
-                  className="rounded-lg !px-4 py-2 text-sm capitalize md:text-base bg-primaryBg"
-                >
-                  Download Now
+        <>
+          <Button              className="ml-5 rounded-lg px-6 py-2 text-sm capitalize md:text-base 4xl:px-8 4xl:py-2.5  bg-primaryBg"
+            >
+                 Download
                   </Button>
-              )}
-            </>
-          ) : null}
+          {
+          loading? 
+          <Spin/> :
+          isAuthorized ? (
+            <div className="ml-7 flex justify-end">
+              <ProfileMenu className="hidden md:block" />
+            </div>
+          ) : (
+            <Button
+              onClick={() => openModal('SIGN_IN')}
+              className="ml-5 rounded-lg px-6 py-2 text-sm capitalize md:text-base 4xl:px-8 4xl:py-2.5  bg-primaryBg"
+            >
+                 Login
+                  </Button>
+          )}
+           
+        </>
+      )  : null}
         </div>
       </div>
     </header>
