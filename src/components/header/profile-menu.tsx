@@ -7,6 +7,7 @@ import useAuth from '@/hooks/use-auth';
 import { Menu, Transition } from '@headlessui/react';
 import Avatar from '@/components/ui/avatar';
 import { Routes } from '@/config/routes';
+import { useRouter } from 'next/navigation';
 
 interface MenuItemProps {
   text: string;
@@ -63,8 +64,8 @@ function MenuItem({ text, link }: MenuItemProps) {
 }
 
 export default function ProfileMenu({ className }: { className?: string }) {
-  const { user, unauthorize } = useAuth();
-
+  const { user } = useAuth();
+const router = useRouter()
   return (
     <>
       <Menu
@@ -74,43 +75,17 @@ export default function ProfileMenu({ className }: { className?: string }) {
           className
         )}
       >
-        <Menu.Button className="relative h-full w-full rounded-full bg-white">
+        <Menu.Button className="relative h-full w-full rounded-full bg-white" onClick={  ()=>         router.push(Routes.private.account)
+}>
           <Avatar name={`${user?.firstname} ${user?.lastname}`}
             className="cursor-pointer"
+            
             src={user?.avater??''}
             rounded="full"
             size="100%"
           />
         </Menu.Button>
-        <Transition
-          as={Fragment}
-          enter="transition ease-out duration-100"
-          enterFrom="transform opacity-0 scale-95"
-          enterTo="transform opacity-100 scale-100"
-          leave="transition ease-in duration-75"
-          leaveFrom="transform opacity-100 scale-100"
-          leaveTo="transform opacity-0 scale-95"
-        >
-          <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-lighter rounded-md bg-white py-2 shadow-card focus:outline-none">
-            <div className="pb-1">
-              {menu.top.map((item) => (
-                <MenuItem key={item.text} text={item.text} link={item.path} />
-              ))}
-            </div>
-            <div className="pt-1">
-              {menu.bottom.map((item) => (
-                <MenuItem key={item.text} text={item.text} link={item.path} />
-              ))}
-              <Menu.Item
-                className="block w-full rounded-sm py-2 px-5 text-left   text-base font-normal text-gray-dark hover:bg-gray-lightest"
-                as="button"
-                onClick={() => unauthorize()}
-              >
-                Log out
-              </Menu.Item>
-            </div>
-          </Menu.Items>
-        </Transition>
+   
       </Menu>
     </>
   );

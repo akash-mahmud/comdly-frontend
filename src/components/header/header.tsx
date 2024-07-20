@@ -12,6 +12,8 @@ import Logo from '@/components/ui/logo';
 import useAuth from '@/hooks/use-auth';
 import { useIsMounted } from '@/hooks/use-is-mounted';
 import { Spin } from 'antd';
+import { Routes } from '@/config/routes';
+import { useRouter } from 'next/navigation';
 
 export default function Header() {
   const mounted = useIsMounted();
@@ -19,7 +21,7 @@ export default function Header() {
   const { isAuthorized , loading} = useAuth();
   const headerRef = useRef(null);
   addScrollingClass(headerRef);
-
+const router = useRouter()
   return (
     <header
       ref={headerRef}
@@ -48,7 +50,8 @@ export default function Header() {
             </div>
           ) : (
             <Button
-              onClick={() => openModal('SIGN_IN')}
+              onClick={() =>            router.push(Routes.private.account)
+              }
               className="ml-5 rounded-lg px-6 py-2 text-sm capitalize md:text-base 4xl:px-8 4xl:py-2.5  bg-primaryBg"
             >
                  Login

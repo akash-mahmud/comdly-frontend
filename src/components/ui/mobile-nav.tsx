@@ -39,9 +39,7 @@ export default function MobileNav() {
       <div className="flex items-center justify-center">
         <button
           onClick={() =>
-            isAuthorized
-              ? router.push(Routes.private.dashboard)
-              : openModal('SIGN_IN')
+           router.push(Routes.private.account)
           }
           className="inline-block hover:text-red"
         >

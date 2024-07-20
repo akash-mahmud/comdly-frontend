@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import Drawer from '@/components/ui/drawer';
 import clsx from 'clsx';
+import DashboardSidebar from '../dashboard/DashboardSidebar';
 
 const PhotoGallery = dynamic(
   () => import('@/components/ui/drawers/photo-gallery')
@@ -31,6 +32,8 @@ function renderDrawerContent(view: DRAWER_VIEW | string) {
       return <SideMenu />;
     case 'FILTER_MENU':
       return <Filter />;
+      case 'DASHBOARD_SIDEBAR':
+        return <DashboardSidebar />;
     case 'BOOKING_FORM':
       return <BookingFormModal />;
     default:

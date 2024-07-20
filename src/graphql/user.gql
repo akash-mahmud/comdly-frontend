@@ -12,6 +12,8 @@ query Me {
     firstname
     lastname
     email
+    phoneNumber
+    avater
   }
 }
 
@@ -42,4 +44,12 @@ mutation Login($password: String!, $email: String!) {
 
 mutation RefreshToken {
   refreshToken
+}
+
+
+mutation UpdateProfile($input: UpdateOneUserArgsCustom!, $passwordInput: UpdateProfilePaswordArgs!) {
+  updateProfile(input: $input, passwordInput: $passwordInput) {
+    message
+    success
+  }
 }

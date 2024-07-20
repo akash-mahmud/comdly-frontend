@@ -8,6 +8,7 @@ import { useModal } from '@/components/modals/context';
 import { useIsMounted } from '@/hooks/use-is-mounted';
 import Button from '@/components/ui/button';
 import { Spin } from 'antd';
+import { useRouter } from 'next/navigation';
 
 const menuItems = [
   {
@@ -33,10 +34,9 @@ const menuItems = [
 ];
 
 export default function Menu() {
-  const { openModal } = useModal();
   const { isAuthorized , loading } = useAuth();
   const mounted = useIsMounted();
-
+const router = useRouter()
   return (
     <nav className="primary-nav hidden items-center justify-between md:flex">
       <ul className="hidden flex-wrap md:flex">
@@ -63,7 +63,8 @@ export default function Menu() {
             </div>
           ) : (
             <Button
-              onClick={() => openModal('SIGN_IN')}
+              onClick={() =>            router.push(Routes.private.account)
+              }
               className="ml-5 rounded-lg px-6 py-2 text-sm capitalize md:text-base 4xl:px-8 4xl:py-2.5  bg-primaryBg"
             >
                  Login

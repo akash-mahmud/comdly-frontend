@@ -6,6 +6,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import Input from '@/components/ui/form-fields/input';
 import Text from '@/components/ui/typography/text';
 import Button from '@/components/ui/button';
+import { useUpdateProfileMutation } from '@/graphql/generated/schema';
+import { notification, Spin } from 'antd';
+import useAuth from '@/hooks/use-auth';
 
 const changePasswordSchema = z
   .object({
@@ -30,12 +33,44 @@ export default function ChangePassword() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<ChangePasswordType>({
     resolver: zodResolver(changePasswordSchema),
   });
-  function handleChangePassword(data: any) {
+  const [Update, {loading}] = useUpdateProfileMutation()
+  const { authorize} = useAuth()
+
+ async function handleChangePassword(data: any) {
     console.log('Data:', data);
+
+    try {
+      const {data:res} = await Update({
+        variables:{
+          input:{},
+          passwordInput:{
+            updatePassword:true,
+            oldPassword: data.currentPassword,
+            newPassword: data.newPassword
+          }
+        }
+      })
+      if (res?.updateProfile?.success) {
+        authorize()
+        reset()
+        notification.success({
+          message:"Updated"
+        })
+      }else{
+        notification.error({
+          message:res?.updateProfile?.message
+        })
+      }
+    } catch (error) {
+      notification.error({
+        message:"Something went wrong"
+      })
+    }
   }
 
   return (
@@ -46,12 +81,14 @@ export default function ChangePassword() {
       >
         Change Password
       </Text>
+      <Spin spinning={loading}>
+
       <form
         noValidate
         onSubmit={handleSubmit((data) => handleChangePassword(data))}
       >
         <div className="grid grid-cols-2 gap-x-3 gap-y-3 md:gap-y-4">
-          <Input
+          <Input 
             type="password"
             label="Current password"
             labelClassName="!font-normal lg:text-base"
@@ -71,7 +108,7 @@ export default function ChangePassword() {
             labelClassName="!font-normal lg:text-base"
             {...register('confirmPassword')}
             error={errors.confirmPassword?.message}
-            className="col-span-2 md:col-span-1"
+            className="col-span-2 md:col-span-2"
           />
         </div>
         <div className="mt-8 xl:mt-12">
@@ -84,6 +121,7 @@ export default function ChangePassword() {
           </Button>
         </div>
       </form>
+      </Spin>
     </div>
   );
 }

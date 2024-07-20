@@ -6190,11 +6190,8 @@ export type MutationUpdateOneUserTokensArgs = {
 
 
 export type MutationUpdateProfileArgs = {
-  email: Scalars['String']['input'];
-  input: UserUpdateInput;
-  newPass?: InputMaybe<Scalars['String']['input']>;
-  oldPassword?: InputMaybe<Scalars['String']['input']>;
-  updatePass?: InputMaybe<Scalars['Boolean']['input']>;
+  input: UpdateOneUserArgsCustom;
+  passwordInput: UpdateProfilePaswordArgs;
 };
 
 
@@ -11117,6 +11114,22 @@ export type SubscriptionWhereUniqueInput = {
   userId?: InputMaybe<Scalars['String']['input']>;
 };
 
+/** New user data */
+export type UpdateOneUserArgsCustom = {
+  avater?: InputMaybe<Scalars['String']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  firstname?: InputMaybe<Scalars['String']['input']>;
+  lastname?: InputMaybe<Scalars['String']['input']>;
+  phoneNumber?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** New user data */
+export type UpdateProfilePaswordArgs = {
+  newPassword?: InputMaybe<Scalars['String']['input']>;
+  oldPassword?: InputMaybe<Scalars['String']['input']>;
+  updatePassword: Scalars['Boolean']['input'];
+};
+
 export type User = {
   __typename?: 'User';
   _count?: Maybe<UserCount>;
@@ -11440,10 +11453,12 @@ export type UserCreateWithoutSubscriptionInput = {
 
 export type UserForResponsce = {
   __typename?: 'UserForResponsce';
+  avater?: Maybe<Scalars['String']['output']>;
   email?: Maybe<Scalars['String']['output']>;
   firstname?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['String']['output']>;
   lastname?: Maybe<Scalars['String']['output']>;
+  phoneNumber?: Maybe<Scalars['String']['output']>;
   role?: Maybe<Scalars['String']['output']>;
   status: Scalars['String']['output'];
 };
@@ -12101,7 +12116,7 @@ export type RegisterMutation = { __typename?: 'Mutation', register?: { __typenam
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MeQuery = { __typename?: 'Query', me?: { __typename?: 'UserForResponsce', id?: string | null, firstname?: string | null, lastname?: string | null, email?: string | null } | null };
+export type MeQuery = { __typename?: 'Query', me?: { __typename?: 'UserForResponsce', id?: string | null, firstname?: string | null, lastname?: string | null, email?: string | null, phoneNumber?: string | null, avater?: string | null } | null };
 
 export type LoginMutationVariables = Exact<{
   password: Scalars['String']['input'];
@@ -12115,6 +12130,14 @@ export type RefreshTokenMutationVariables = Exact<{ [key: string]: never; }>;
 
 
 export type RefreshTokenMutation = { __typename?: 'Mutation', refreshToken?: string | null };
+
+export type UpdateProfileMutationVariables = Exact<{
+  input: UpdateOneUserArgsCustom;
+  passwordInput: UpdateProfilePaswordArgs;
+}>;
+
+
+export type UpdateProfileMutation = { __typename?: 'Mutation', updateProfile?: { __typename?: 'defaultResponsce', message: string, success: boolean } | null };
 
 
 export const BuisnessCategoriesDocument = gql`
@@ -12386,6 +12409,8 @@ export const MeDocument = gql`
     firstname
     lastname
     email
+    phoneNumber
+    avater
   }
 }
     `;
@@ -12491,3 +12516,38 @@ export function useRefreshTokenMutation(baseOptions?: Apollo.MutationHookOptions
 export type RefreshTokenMutationHookResult = ReturnType<typeof useRefreshTokenMutation>;
 export type RefreshTokenMutationResult = Apollo.MutationResult<RefreshTokenMutation>;
 export type RefreshTokenMutationOptions = Apollo.BaseMutationOptions<RefreshTokenMutation, RefreshTokenMutationVariables>;
+export const UpdateProfileDocument = gql`
+    mutation UpdateProfile($input: UpdateOneUserArgsCustom!, $passwordInput: UpdateProfilePaswordArgs!) {
+  updateProfile(input: $input, passwordInput: $passwordInput) {
+    message
+    success
+  }
+}
+    `;
+export type UpdateProfileMutationFn = Apollo.MutationFunction<UpdateProfileMutation, UpdateProfileMutationVariables>;
+
+/**
+ * __useUpdateProfileMutation__
+ *
+ * To run a mutation, you first call `useUpdateProfileMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateProfileMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateProfileMutation, { data, loading, error }] = useUpdateProfileMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *      passwordInput: // value for 'passwordInput'
+ *   },
+ * });
+ */
+export function useUpdateProfileMutation(baseOptions?: Apollo.MutationHookOptions<UpdateProfileMutation, UpdateProfileMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateProfileMutation, UpdateProfileMutationVariables>(UpdateProfileDocument, options);
+      }
+export type UpdateProfileMutationHookResult = ReturnType<typeof useUpdateProfileMutation>;
+export type UpdateProfileMutationResult = Apollo.MutationResult<UpdateProfileMutation>;
+export type UpdateProfileMutationOptions = Apollo.BaseMutationOptions<UpdateProfileMutation, UpdateProfileMutationVariables>;

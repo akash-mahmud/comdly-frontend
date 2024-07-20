@@ -1,8 +1,6 @@
 import Companies from '@/components/Company/Companies'
-import ListingDetailsHeader from '@/components/header/listing-details'
 import Filter from '@/components/product/filter'
 import FilterTopbar from '@/components/product/filter-topbar'
-import Products from '@/components/product/products'
 import React from 'react'
 
 export default function page() {

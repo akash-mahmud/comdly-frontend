@@ -25,5 +25,7 @@ export const Routes = {
     accountSettings: '/account/settings',
     trips: '/trips',
     wishlist: '/wishlist',
+    account: '/dashboard/account',
+    bookings: '/dashboard/booking',
   },
 };
