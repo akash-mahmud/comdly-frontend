@@ -17,12 +17,17 @@ export const renewTokenApiClient = new ApolloClient({
     cache:new InMemoryCache(),
   })
   export const refreshToken = async ():Promise<string|null> => {
-  
-  const {data} = await renewTokenApiClient.mutate({
-    mutation:RefreshTokenDocument
-  })
-  
-    const newAccessToken = data?.refreshToken
+  try {
+    const {data} = await renewTokenApiClient.mutate({
+      mutation:RefreshTokenDocument
+    })
     
-  return newAccessToken
+      const newAccessToken = data?.refreshToken
+      
+    return newAccessToken
+  } catch (error) {
+    return ''
+
+  }
+
   };

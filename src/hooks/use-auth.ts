@@ -1,9 +1,7 @@
 'use client';
 
 import { useMeQuery, User } from '@/graphql/generated/schema';
-import { USER_COOKIE } from '@/utils/session';
-import { useAtom } from 'jotai';
-import { atomWithStorage } from 'jotai/utils';
+
 import { useEffect, useState } from 'react';
 
 interface UserType {
@@ -22,27 +20,18 @@ const demoUser = {
 export default function useAuth() {
   const [user, setUser] = useState< User | undefined>({});
   const [isAuthorized, setisAuthorized] = useState(false)
-const {data , loading} = useMeQuery()
-  useEffect(() => {
-if (data?.me) {
-  setUser(data?.me as User)
-  setisAuthorized(data?.me?.id?true:false)
-}
-    return ()=> {}
-  }, [loading, data])
-  console.log(user);
+const {data , loading, refetch} = useMeQuery()
+
   
   return {
-    isAuthorized,
-    user,
+    isAuthorized: data?.me?.id?true:false,
+    user: data?.me,
     loading,
-    authorize(user: User) {
-      setisAuthorized(true);
-      setUser(user);
+    authorize() {
+      refetch()
     },
     unauthorize() {
-      setisAuthorized(false);
-      setUser({});
+
       //? call server logout and all localstorage and cookie clear function
 
 

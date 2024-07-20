@@ -17,6 +17,7 @@ import theme from '@/themes/default.theme';
 import ClientProviders from '@/providers/ClientProviders';
 import StyledComponentsRegistry from '@/providers/StyledComponentsRegistry';
 import Head from 'next/head';
+import PublicApolloClient from '@/providers/PublicApolloClient';
 const lato = Lato({
   subsets: ['latin'],
   weight: ['300', '400', '700', '900'],
@@ -87,6 +88,8 @@ export default function RootLayout({ children }: React.PropsWithChildren<{}>) {
 <meta property="og:image" content="https://yourdomain.com/icons/apple-touch-icon.png" />
     </Head>
       <ClientProviders>
+      <PublicApolloClient>
+
       <StyledComponentsRegistry>
 
       <ReduxStoreProvider>
@@ -99,6 +102,7 @@ export default function RootLayout({ children }: React.PropsWithChildren<{}>) {
       </body>
       </ReduxStoreProvider>
       </StyledComponentsRegistry>
+      </PublicApolloClient>
 
       </ClientProviders>
     </html>

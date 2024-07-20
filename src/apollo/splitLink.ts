@@ -10,7 +10,6 @@ import { server1Link } from "./server1Link";
 export const splitLink = new ApolloLink((operation, forward) => {
   const serverName = operation.getContext().server; // Assumes that you set the server name in the operation context
   let selectedLink;
-  console.log(serverName);
   
   // Determine which server to use based on the serverName
   switch (serverName) {

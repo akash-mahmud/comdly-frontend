@@ -1,13 +1,20 @@
 import { TokenRefreshLink } from 'apollo-link-token-refresh';
 import {getAuthData, USER_COOKIE} from '../utils/session'
-const auth = getAuthData();
 import {isJwtExpired} from 'jwt-check-expiration'
 import { refreshToken } from './renew';
 
 export const tokenRefreshLink=   new TokenRefreshLink({
     isTokenValidOrUndefined: async () => {
+      console.log( String(localStorage.getItem(USER_COOKIE)));
+      
         try {
-            return !isJwtExpired(auth)
+          if (String(localStorage.getItem(USER_COOKIE)) ==='null' ||String(localStorage.getItem(USER_COOKIE))  ==='' ) {
+            
+return true            
+          }else{
+
+            return !isJwtExpired(localStorage.getItem(USER_COOKIE))
+          }
 
         } catch (error) {
             return false            
@@ -16,26 +23,54 @@ export const tokenRefreshLink=   new TokenRefreshLink({
     },
     // @ts-ignore
     fetchAccessToken: () => {
-      return refreshToken() 
+      try {
+console.log("fetching token");
+
+        return refreshToken() 
+
+      } catch (error) {
+
+        console.log(error);
+        return ''
+        
+      }
     },
     handleFetch: (accessToken , operation) => {
+      try {
         if (accessToken) {
-localStorage.setItem(USER_COOKIE , accessToken)
-          // store.dispatch(setRenewdToken(accessToken))
-     
+          localStorage.setItem(USER_COOKIE , accessToken)
+                    // store.dispatch(setRenewdToken(accessToken))
+               
+          
+                  }else{
+                    localStorage.setItem(USER_COOKIE , '')
 
-        }
+                  }
+          
+      } catch (error) {
+        console.log(error);
+        localStorage.setItem(USER_COOKIE , '')
 
+      }
+   
  
     },
     handleResponse: (operation, accessTokenField) => (responsce:string) => {
-      
-     return {
-         access_token: responsce
+      try {
+        return {
+          access_token: responsce
+       }
+      } catch (error) {
+        console.log(error);
+        return {
+          access_token: ''
+       }
       }
+  
     },
     handleError: err => {
-       // full control over handling token fetch Error
+      try {
+               // full control over handling token fetch Error
        console.warn('Your refresh token is invalid. Try to relogin');
        console.error(err);
        
@@ -52,5 +87,10 @@ localStorage.setItem(USER_COOKIE , accessToken)
 
          // your custom action here
       }       
+      } catch (error) {
+        console.log(error);
+        
+      }
+
     }
   })

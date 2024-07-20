@@ -27,11 +27,11 @@ export default function ListingDetailsHeader() {
     >
       <div className="container-fluid grid w-full grid-cols-2 items-center gap-0 lg:grid-cols-3 3xl:!px-12">
         <div className="flex items-center gap-2 md:gap-4 2xl:gap-5">
-          <SideNavButton className="!block" />
           <Logo className="!text-gray-dark" />
         </div>
         <Searchbox className="hidden lg:block" />
-        <div className="flex items-center justify-end gap-5">
+    
+        <div className=" hidden md:flex items-center justify-end gap-5">
           <SearchIconBtn className=' ' />
           {mounted ? (
         <>

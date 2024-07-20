@@ -18,7 +18,7 @@ import { useCallback, useState } from 'react';
 import { notification, Spin } from 'antd'
 import { useLoginMutation, User } from '@/graphql/generated/schema';
 import { USER_COOKIE } from '@/utils/session';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 const loginInfoSchema = z.object({
   email: z
@@ -37,8 +37,8 @@ export default function SigninForm() {
   const { authorize } = useAuth();
   const { closeModal } = useModal();
   
-  const [loading, setloading] = useState(false)
-
+const searchQuery = useSearchParams()
+const redirectTo = searchQuery?.get("redirectTo")
   const {
     register,
     
@@ -47,41 +47,49 @@ export default function SigninForm() {
   } = useForm<SignInType>({
     resolver: zodResolver(loginInfoSchema),
   });
-const [Login, {error}] = useLoginMutation()
+const [Login, {error , loading}] = useLoginMutation()
   // TO-DO: Send data to API onSubmit.
   const router = useRouter()
 const handleFormSubmit = useCallback(
   async(data: SignInType) => {
-    setloading(()=>true) 
 
-    const {data:res} = await Login({
-     variables:{
-     ...data
-     }
-    })
-    if (res?.login?.success) {
-     const {accessToken , user} = res?.login
-     const localStoreVal = {
-       token: accessToken
-     }
-     localStorage.setItem(USER_COOKIE,accessToken??"")
-     authorize(user as User)
-     router.push('/')
-     notification.success({
-      message:'Logged in'
-     })
-    }else{
- 
+    try {
+      const {data:res} = await Login({
+        variables:{
+        ...data
+        }
+       })
+       if (res?.login?.success) {
+        const {accessToken , user} = res?.login
+        const localStoreVal = {
+          token: accessToken
+        }
+        localStorage.setItem(USER_COOKIE,accessToken??"")
+        authorize()
+        if (redirectTo) {
+         router.push(redirectTo)
+   
+        }else{
+         router.push('/')
+   
+        }
+        notification.success({
+         message:'Logged in'
+        })
+       }else{
+    console.log(res);
+    
+       }
+    } catch (error) {
+      console.log(error);
+      
     }
-     // await dispatch(login({
-     //   email:data.email,
-     //   password:data.password,
-     //  }))
-     // authorize();
+
+
+
  
  
      closeModal();
-       setloading(()=>false);
   },
   [router],
 )
