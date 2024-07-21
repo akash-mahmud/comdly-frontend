@@ -190,11 +190,13 @@ export type AggregateUserTokens = {
 
 export type Booking = {
   __typename?: 'Booking';
-  bookingDateTime: Scalars['String']['output'];
+  bookingDate: Scalars['DateTime']['output'];
+  bookingTime: Scalars['DateTime']['output'];
   company: Company;
   companyId: Scalars['String']['output'];
   createdAt: Scalars['DateTime']['output'];
   id: Scalars['String']['output'];
+  note?: Maybe<Scalars['String']['output']>;
   status: BookingStatus;
   updatedAt: Scalars['DateTime']['output'];
   user: User;
@@ -204,39 +206,47 @@ export type Booking = {
 export type BookingCountAggregate = {
   __typename?: 'BookingCountAggregate';
   _all: Scalars['Int']['output'];
-  bookingDateTime: Scalars['Int']['output'];
+  bookingDate: Scalars['Int']['output'];
+  bookingTime: Scalars['Int']['output'];
   companyId: Scalars['Int']['output'];
   createdAt: Scalars['Int']['output'];
   id: Scalars['Int']['output'];
+  note: Scalars['Int']['output'];
   status: Scalars['Int']['output'];
   updatedAt: Scalars['Int']['output'];
   userId: Scalars['Int']['output'];
 };
 
 export type BookingCountOrderByAggregateInput = {
-  bookingDateTime?: InputMaybe<SortOrder>;
+  bookingDate?: InputMaybe<SortOrder>;
+  bookingTime?: InputMaybe<SortOrder>;
   companyId?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
+  note?: InputMaybe<SortOrder>;
   status?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
   userId?: InputMaybe<SortOrder>;
 };
 
 export type BookingCreateInput = {
-  bookingDateTime: Scalars['String']['input'];
+  bookingDate: Scalars['DateTime']['input'];
+  bookingTime: Scalars['DateTime']['input'];
   company: CompanyCreateNestedOneWithoutBookingInput;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
+  note?: InputMaybe<Scalars['String']['input']>;
   status?: InputMaybe<BookingStatus>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   user: UserCreateNestedOneWithoutBookingInput;
 };
 
 export type BookingCreateManyCompanyInput = {
-  bookingDateTime: Scalars['String']['input'];
+  bookingDate: Scalars['DateTime']['input'];
+  bookingTime: Scalars['DateTime']['input'];
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
+  note?: InputMaybe<Scalars['String']['input']>;
   status?: InputMaybe<BookingStatus>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userId: Scalars['String']['input'];
@@ -248,20 +258,24 @@ export type BookingCreateManyCompanyInputEnvelope = {
 };
 
 export type BookingCreateManyInput = {
-  bookingDateTime: Scalars['String']['input'];
+  bookingDate: Scalars['DateTime']['input'];
+  bookingTime: Scalars['DateTime']['input'];
   companyId: Scalars['String']['input'];
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
+  note?: InputMaybe<Scalars['String']['input']>;
   status?: InputMaybe<BookingStatus>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userId: Scalars['String']['input'];
 };
 
 export type BookingCreateManyUserInput = {
-  bookingDateTime: Scalars['String']['input'];
+  bookingDate: Scalars['DateTime']['input'];
+  bookingTime: Scalars['DateTime']['input'];
   companyId: Scalars['String']['input'];
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
+  note?: InputMaybe<Scalars['String']['input']>;
   status?: InputMaybe<BookingStatus>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
 };
@@ -296,19 +310,23 @@ export type BookingCreateOrConnectWithoutUserInput = {
 };
 
 export type BookingCreateWithoutCompanyInput = {
-  bookingDateTime: Scalars['String']['input'];
+  bookingDate: Scalars['DateTime']['input'];
+  bookingTime: Scalars['DateTime']['input'];
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
+  note?: InputMaybe<Scalars['String']['input']>;
   status?: InputMaybe<BookingStatus>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   user: UserCreateNestedOneWithoutBookingInput;
 };
 
 export type BookingCreateWithoutUserInput = {
-  bookingDateTime: Scalars['String']['input'];
+  bookingDate: Scalars['DateTime']['input'];
+  bookingTime: Scalars['DateTime']['input'];
   company: CompanyCreateNestedOneWithoutBookingInput;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
+  note?: InputMaybe<Scalars['String']['input']>;
   status?: InputMaybe<BookingStatus>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
 };
@@ -318,10 +336,12 @@ export type BookingGroupBy = {
   _count?: Maybe<BookingCountAggregate>;
   _max?: Maybe<BookingMaxAggregate>;
   _min?: Maybe<BookingMinAggregate>;
-  bookingDateTime: Scalars['String']['output'];
+  bookingDate: Scalars['DateTime']['output'];
+  bookingTime: Scalars['DateTime']['output'];
   companyId: Scalars['String']['output'];
   createdAt: Scalars['DateTime']['output'];
   id: Scalars['String']['output'];
+  note?: Maybe<Scalars['String']['output']>;
   status: BookingStatus;
   updatedAt: Scalars['DateTime']['output'];
   userId: Scalars['String']['output'];
@@ -335,20 +355,24 @@ export type BookingListRelationFilter = {
 
 export type BookingMaxAggregate = {
   __typename?: 'BookingMaxAggregate';
-  bookingDateTime?: Maybe<Scalars['String']['output']>;
+  bookingDate?: Maybe<Scalars['DateTime']['output']>;
+  bookingTime?: Maybe<Scalars['DateTime']['output']>;
   companyId?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   id?: Maybe<Scalars['String']['output']>;
+  note?: Maybe<Scalars['String']['output']>;
   status?: Maybe<BookingStatus>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   userId?: Maybe<Scalars['String']['output']>;
 };
 
 export type BookingMaxOrderByAggregateInput = {
-  bookingDateTime?: InputMaybe<SortOrder>;
+  bookingDate?: InputMaybe<SortOrder>;
+  bookingTime?: InputMaybe<SortOrder>;
   companyId?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
+  note?: InputMaybe<SortOrder>;
   status?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
   userId?: InputMaybe<SortOrder>;
@@ -356,20 +380,24 @@ export type BookingMaxOrderByAggregateInput = {
 
 export type BookingMinAggregate = {
   __typename?: 'BookingMinAggregate';
-  bookingDateTime?: Maybe<Scalars['String']['output']>;
+  bookingDate?: Maybe<Scalars['DateTime']['output']>;
+  bookingTime?: Maybe<Scalars['DateTime']['output']>;
   companyId?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   id?: Maybe<Scalars['String']['output']>;
+  note?: Maybe<Scalars['String']['output']>;
   status?: Maybe<BookingStatus>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   userId?: Maybe<Scalars['String']['output']>;
 };
 
 export type BookingMinOrderByAggregateInput = {
-  bookingDateTime?: InputMaybe<SortOrder>;
+  bookingDate?: InputMaybe<SortOrder>;
+  bookingTime?: InputMaybe<SortOrder>;
   companyId?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
+  note?: InputMaybe<SortOrder>;
   status?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
   userId?: InputMaybe<SortOrder>;
@@ -383,21 +411,25 @@ export type BookingOrderByWithAggregationInput = {
   _count?: InputMaybe<BookingCountOrderByAggregateInput>;
   _max?: InputMaybe<BookingMaxOrderByAggregateInput>;
   _min?: InputMaybe<BookingMinOrderByAggregateInput>;
-  bookingDateTime?: InputMaybe<SortOrder>;
+  bookingDate?: InputMaybe<SortOrder>;
+  bookingTime?: InputMaybe<SortOrder>;
   companyId?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
+  note?: InputMaybe<SortOrderInput>;
   status?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
   userId?: InputMaybe<SortOrder>;
 };
 
 export type BookingOrderByWithRelationInput = {
-  bookingDateTime?: InputMaybe<SortOrder>;
+  bookingDate?: InputMaybe<SortOrder>;
+  bookingTime?: InputMaybe<SortOrder>;
   company?: InputMaybe<CompanyOrderByWithRelationInput>;
   companyId?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
+  note?: InputMaybe<SortOrderInput>;
   status?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
   user?: InputMaybe<UserOrderByWithRelationInput>;
@@ -405,10 +437,12 @@ export type BookingOrderByWithRelationInput = {
 };
 
 export enum BookingScalarFieldEnum {
-  BookingDateTime = 'bookingDateTime',
+  BookingDate = 'bookingDate',
+  BookingTime = 'bookingTime',
   CompanyId = 'companyId',
   CreatedAt = 'createdAt',
   Id = 'id',
+  Note = 'note',
   Status = 'status',
   UpdatedAt = 'updatedAt',
   UserId = 'userId'
@@ -418,10 +452,12 @@ export type BookingScalarWhereInput = {
   AND?: InputMaybe<Array<BookingScalarWhereInput>>;
   NOT?: InputMaybe<Array<BookingScalarWhereInput>>;
   OR?: InputMaybe<Array<BookingScalarWhereInput>>;
-  bookingDateTime?: InputMaybe<StringFilter>;
+  bookingDate?: InputMaybe<DateTimeFilter>;
+  bookingTime?: InputMaybe<DateTimeFilter>;
   companyId?: InputMaybe<StringFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
   id?: InputMaybe<StringFilter>;
+  note?: InputMaybe<StringNullableFilter>;
   status?: InputMaybe<EnumBookingStatusFilter>;
   updatedAt?: InputMaybe<DateTimeFilter>;
   userId?: InputMaybe<StringFilter>;
@@ -431,10 +467,12 @@ export type BookingScalarWhereWithAggregatesInput = {
   AND?: InputMaybe<Array<BookingScalarWhereWithAggregatesInput>>;
   NOT?: InputMaybe<Array<BookingScalarWhereWithAggregatesInput>>;
   OR?: InputMaybe<Array<BookingScalarWhereWithAggregatesInput>>;
-  bookingDateTime?: InputMaybe<StringWithAggregatesFilter>;
+  bookingDate?: InputMaybe<DateTimeWithAggregatesFilter>;
+  bookingTime?: InputMaybe<DateTimeWithAggregatesFilter>;
   companyId?: InputMaybe<StringWithAggregatesFilter>;
   createdAt?: InputMaybe<DateTimeWithAggregatesFilter>;
   id?: InputMaybe<StringWithAggregatesFilter>;
+  note?: InputMaybe<StringNullableWithAggregatesFilter>;
   status?: InputMaybe<EnumBookingStatusWithAggregatesFilter>;
   updatedAt?: InputMaybe<DateTimeWithAggregatesFilter>;
   userId?: InputMaybe<StringWithAggregatesFilter>;
@@ -448,19 +486,23 @@ export enum BookingStatus {
 }
 
 export type BookingUpdateInput = {
-  bookingDateTime?: InputMaybe<StringFieldUpdateOperationsInput>;
+  bookingDate?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  bookingTime?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   company?: InputMaybe<CompanyUpdateOneRequiredWithoutBookingNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  note?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   status?: InputMaybe<EnumBookingStatusFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   user?: InputMaybe<UserUpdateOneRequiredWithoutBookingNestedInput>;
 };
 
 export type BookingUpdateManyMutationInput = {
-  bookingDateTime?: InputMaybe<StringFieldUpdateOperationsInput>;
+  bookingDate?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  bookingTime?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  note?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   status?: InputMaybe<EnumBookingStatusFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
@@ -514,19 +556,23 @@ export type BookingUpdateWithWhereUniqueWithoutUserInput = {
 };
 
 export type BookingUpdateWithoutCompanyInput = {
-  bookingDateTime?: InputMaybe<StringFieldUpdateOperationsInput>;
+  bookingDate?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  bookingTime?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  note?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   status?: InputMaybe<EnumBookingStatusFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   user?: InputMaybe<UserUpdateOneRequiredWithoutBookingNestedInput>;
 };
 
 export type BookingUpdateWithoutUserInput = {
-  bookingDateTime?: InputMaybe<StringFieldUpdateOperationsInput>;
+  bookingDate?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  bookingTime?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   company?: InputMaybe<CompanyUpdateOneRequiredWithoutBookingNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  note?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   status?: InputMaybe<EnumBookingStatusFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
@@ -547,11 +593,13 @@ export type BookingWhereInput = {
   AND?: InputMaybe<Array<BookingWhereInput>>;
   NOT?: InputMaybe<Array<BookingWhereInput>>;
   OR?: InputMaybe<Array<BookingWhereInput>>;
-  bookingDateTime?: InputMaybe<StringFilter>;
+  bookingDate?: InputMaybe<DateTimeFilter>;
+  bookingTime?: InputMaybe<DateTimeFilter>;
   company?: InputMaybe<CompanyRelationFilter>;
   companyId?: InputMaybe<StringFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
   id?: InputMaybe<StringFilter>;
+  note?: InputMaybe<StringNullableFilter>;
   status?: InputMaybe<EnumBookingStatusFilter>;
   updatedAt?: InputMaybe<DateTimeFilter>;
   user?: InputMaybe<UserRelationFilter>;
@@ -12056,6 +12104,25 @@ export type DefaultResponsce = {
   success: Scalars['Boolean']['output'];
 };
 
+export type CreateOneBookingMutationVariables = Exact<{
+  data: BookingCreateInput;
+}>;
+
+
+export type CreateOneBookingMutation = { __typename?: 'Mutation', createOneBooking: { __typename?: 'Booking', id: string } };
+
+export type BookingsQueryVariables = Exact<{
+  where?: InputMaybe<BookingWhereInput>;
+  orderBy?: InputMaybe<Array<BookingOrderByWithRelationInput> | BookingOrderByWithRelationInput>;
+  cursor?: InputMaybe<BookingWhereUniqueInput>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  distinct?: InputMaybe<Array<BookingScalarFieldEnum> | BookingScalarFieldEnum>;
+}>;
+
+
+export type BookingsQuery = { __typename?: 'Query', bookings: Array<{ __typename?: 'Booking', bookingDate: any, bookingTime: any, id: string, createdAt: any, note?: string | null, status: BookingStatus, company: { __typename?: 'Company', name: string, logo: string, buisnessCategory?: { __typename?: 'BuisnessCategory', name: string } | null } }> };
+
 export type BuisnessCategoriesQueryVariables = Exact<{
   where?: InputMaybe<BuisnessCategoryWhereInput>;
   orderBy?: InputMaybe<Array<BuisnessCategoryOrderByWithRelationInput> | BuisnessCategoryOrderByWithRelationInput>;
@@ -12140,6 +12207,98 @@ export type UpdateProfileMutationVariables = Exact<{
 export type UpdateProfileMutation = { __typename?: 'Mutation', updateProfile?: { __typename?: 'defaultResponsce', message: string, success: boolean } | null };
 
 
+export const CreateOneBookingDocument = gql`
+    mutation CreateOneBooking($data: BookingCreateInput!) {
+  createOneBooking(data: $data) {
+    id
+  }
+}
+    `;
+export type CreateOneBookingMutationFn = Apollo.MutationFunction<CreateOneBookingMutation, CreateOneBookingMutationVariables>;
+
+/**
+ * __useCreateOneBookingMutation__
+ *
+ * To run a mutation, you first call `useCreateOneBookingMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateOneBookingMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createOneBookingMutation, { data, loading, error }] = useCreateOneBookingMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useCreateOneBookingMutation(baseOptions?: Apollo.MutationHookOptions<CreateOneBookingMutation, CreateOneBookingMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateOneBookingMutation, CreateOneBookingMutationVariables>(CreateOneBookingDocument, options);
+      }
+export type CreateOneBookingMutationHookResult = ReturnType<typeof useCreateOneBookingMutation>;
+export type CreateOneBookingMutationResult = Apollo.MutationResult<CreateOneBookingMutation>;
+export type CreateOneBookingMutationOptions = Apollo.BaseMutationOptions<CreateOneBookingMutation, CreateOneBookingMutationVariables>;
+export const BookingsDocument = gql`
+    query Bookings($where: BookingWhereInput, $orderBy: [BookingOrderByWithRelationInput!], $cursor: BookingWhereUniqueInput, $take: Int, $skip: Int, $distinct: [BookingScalarFieldEnum!]) {
+  bookings(
+    where: $where
+    orderBy: $orderBy
+    cursor: $cursor
+    take: $take
+    skip: $skip
+    distinct: $distinct
+  ) {
+    bookingDate
+    bookingTime
+    id
+    createdAt
+    note
+    status
+    company {
+      name
+      logo
+      buisnessCategory {
+        name
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useBookingsQuery__
+ *
+ * To run a query within a React component, call `useBookingsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useBookingsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useBookingsQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *      orderBy: // value for 'orderBy'
+ *      cursor: // value for 'cursor'
+ *      take: // value for 'take'
+ *      skip: // value for 'skip'
+ *      distinct: // value for 'distinct'
+ *   },
+ * });
+ */
+export function useBookingsQuery(baseOptions?: Apollo.QueryHookOptions<BookingsQuery, BookingsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<BookingsQuery, BookingsQueryVariables>(BookingsDocument, options);
+      }
+export function useBookingsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<BookingsQuery, BookingsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<BookingsQuery, BookingsQueryVariables>(BookingsDocument, options);
+        }
+export type BookingsQueryHookResult = ReturnType<typeof useBookingsQuery>;
+export type BookingsLazyQueryHookResult = ReturnType<typeof useBookingsLazyQuery>;
+export type BookingsQueryResult = Apollo.QueryResult<BookingsQuery, BookingsQueryVariables>;
 export const BuisnessCategoriesDocument = gql`
     query BuisnessCategories($where: BuisnessCategoryWhereInput, $orderBy: [BuisnessCategoryOrderByWithRelationInput!], $cursor: BuisnessCategoryWhereUniqueInput, $take: Int, $skip: Int, $distinct: [BuisnessCategoryScalarFieldEnum!]) {
   buisnessCategories(

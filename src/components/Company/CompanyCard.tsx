@@ -33,7 +33,7 @@ export default function CompanyCard({
            
           
                     <Image
-                      className="aspect-[34/25] bg-gray-lighter"
+                      className="aspect-[34/25] bg-gray-lighter group-hover/item:scale-110 transition-all duration-500"
                       src={company.fetaureImage}
                       width={816}
                       height={600}
@@ -42,28 +42,7 @@ export default function CompanyCard({
                     />
               
         
-              <ActionIcon
-                rounded="full"
-                color="light"
-                size="sm"
-                className={clsx(
-                  'absolute top-1/2 left-4 z-10 hidden -translate-y-1/2 shadow-md !transition-all focus:!ring-0 md:invisible md:flex md:disabled:hidden md:group-hover/item:visible',
-                  `${id}-listing-item-button-prev`
-                )}
-              >
-                <ChevronLeftIcon className="-ml-0.5 h-auto w-[7px]" />
-              </ActionIcon>
-              <ActionIcon
-                rounded="full"
-                size="sm"
-                color="light"
-                className={clsx(
-                  'absolute top-1/2 right-4 z-10 hidden -translate-y-1/2 opacity-80 shadow-md !transition-all duration-300 focus:!ring-0 md:invisible md:flex md:disabled:hidden md:group-hover/item:visible md:group-hover/item:opacity-100',
-                  `${id}-listing-item-button-next`
-                )}
-              >
-                <ChevronRightIcon className="-mr-0.5 h-auto w-[7px]" />
-              </ActionIcon>
+           
             </div>
           </Link>
         </div>

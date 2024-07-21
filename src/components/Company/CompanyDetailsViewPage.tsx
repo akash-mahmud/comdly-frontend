@@ -27,6 +27,7 @@ import AgentDetailsPage, {
 import { Company, useCompanyQuery } from '@/graphql/generated/schema';
 import { useParams } from 'next/navigation';
 import Button from '../ui/button';
+import { useModal } from '../modals/context';
 
 const AgentFavItemLists = dynamic(() => import('./AgentFavItemLists'));
 const AgentContact = dynamic(() => import('./AgentContact'));
@@ -217,7 +218,7 @@ const AgentProfileInfo = ({company}:{company:Company}) => {
   //   cover_pic,
   //   social_profile,
   // } = processedData[0];
-
+const {openModal} = useModal()
   return (
     <Fragment>
       <BannerSection>
@@ -285,7 +286,7 @@ const AgentProfileInfo = ({company}:{company:Company}) => {
                 </a>
               </Popover>
             </SocialAccount>
-            <Button className=' mt-5'>
+            <Button className=' mt-5'  onClick={() =>openModal('BOOK_NOW_MODAL')}  >
               Book Now
             </Button>
 </div>

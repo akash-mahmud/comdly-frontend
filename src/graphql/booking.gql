@@ -1,0 +1,24 @@
+mutation CreateOneBooking($data: BookingCreateInput!) {
+  createOneBooking(data: $data) {
+    id
+  }
+}
+
+query Bookings($where: BookingWhereInput, $orderBy: [BookingOrderByWithRelationInput!], $cursor: BookingWhereUniqueInput, $take: Int, $skip: Int, $distinct: [BookingScalarFieldEnum!]) {
+  bookings(where: $where, orderBy: $orderBy, cursor: $cursor, take: $take, skip: $skip, distinct: $distinct) {
+    bookingDate
+    bookingTime
+    id
+    createdAt
+    note
+    status
+    company {
+      name
+      logo
+      buisnessCategory {
+        name
+      }
+    }
+  }
+}
+

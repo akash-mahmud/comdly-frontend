@@ -5,7 +5,7 @@ import Empty from '@/components/ui/empty';
 
 const classes = {
   table:
-    '[&_.rc-table-content]:overflow-x-auto [&_table]:w-full [&_.rc-table-row:hover]:bg-gray-lightest/50',
+    '[&_.rc-table-content]:overflow-x-auto [&_.rc-table-content]:min-h-[350px] [&_table]:w-full [&_.rc-table-row:hover]:bg-gray-lightest/50',
   thead:
     '[&_thead]:text-left [&_thead]:rtl:text-right [&_th.rc-table-cell]:uppercase [&_th.rc-table-cell]:text-xs [&_th.rc-table-cell]:font-medium [&_th.rc-table-cell]:tracking-wider',
   tCell:

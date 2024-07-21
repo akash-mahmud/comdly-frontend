@@ -23,6 +23,7 @@ export const renewTokenApiClient = new ApolloClient({
     })
     
       const newAccessToken = data?.refreshToken
+      console.log(data);
       
     return newAccessToken
   } catch (error) {

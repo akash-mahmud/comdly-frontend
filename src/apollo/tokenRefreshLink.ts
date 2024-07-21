@@ -8,6 +8,7 @@ export const tokenRefreshLink=   new TokenRefreshLink({
       console.log( String(localStorage.getItem(USER_COOKIE)));
       
         try {
+          
           if (String(localStorage.getItem(USER_COOKIE)) ==='null' ||String(localStorage.getItem(USER_COOKIE))  ==='' ) {
             
 return true            
@@ -22,11 +23,20 @@ return true
 
     },
     // @ts-ignore
-    fetchAccessToken: () => {
+    fetchAccessToken: async () => {
       try {
 console.log("fetching token");
+const token =await refreshToken() 
+console.log(token);
 
-        return refreshToken() 
+// if (token==='expired' || token ==='unathorized') {
+//   return ''
+
+// }else{
+  return token
+
+// }
+
 
       } catch (error) {
 
@@ -37,6 +47,7 @@ console.log("fetching token");
     },
     handleFetch: (accessToken , operation) => {
       try {
+        
         if (accessToken) {
           localStorage.setItem(USER_COOKIE , accessToken)
                     // store.dispatch(setRenewdToken(accessToken))

@@ -9,7 +9,8 @@ export type MODAL_VIEW =
   | 'REPORT_LISTING'
   | 'CONTACT_HOST'
   | 'SEARCH_MODAL'
-  | 'SHARE';
+  | 'SHARE'
+  | 'BOOK_NOW_MODAL'
 
 const modalAtom = atom({
   open: false,
