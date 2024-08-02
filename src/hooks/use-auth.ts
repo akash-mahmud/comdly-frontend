@@ -18,8 +18,7 @@ const demoUser = {
 };
 
 export default function useAuth() {
-  const [user, setUser] = useState< User | undefined>({});
-  const [isAuthorized, setisAuthorized] = useState(false)
+
 const {data , loading, refetch} = useMeQuery()
 
   

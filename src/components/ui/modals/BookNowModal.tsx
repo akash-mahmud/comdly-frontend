@@ -1,7 +1,5 @@
 'use client';
 
-import { vendorData } from 'public/data/listing-details';
-import { reviewsData } from 'public/data/reviews';
 import { z } from 'zod';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -30,7 +28,7 @@ import { notification, Spin } from 'antd';
 
 const ContactHostSchema = z.object({
     bookingDate: z.date().min(new Date(), { message: 'Select a date.' }),
-    bookingTime: z.date().min((new Date()), { message: 'Select end date!' }),
+    bookingTime: z.string(),
 
   note: z.string(),
 });
@@ -54,11 +52,25 @@ const {user} = useAuth()
   });
 const [Create, {loading}] = useCreateOneBookingMutation()
   async function handleReservation(data: any) {
+    console.log(data);
+    const timeValue = data.bookingTime;
+    
+    // Create a new Date object and set the time
+    const currentDate = new Date(data.bookingDate);
+    const [hours, minutes] = timeValue.split(':');
+    currentDate.setHours(hours);
+    currentDate.setMinutes(minutes);
+    currentDate.setSeconds(0);
+    currentDate.setMilliseconds(0);
+    
+    // Format the Date object as an ISO string
+    const isoString = currentDate.toISOString();
 try {
     const {data:res} = await Create({
         variables:{
             data:{
                 ...data,
+                bookingTime: isoString,
     user:{
         connect:{
             email:user?.email
@@ -141,34 +153,11 @@ try {
               />
             )}
           />
-          <Controller
-            name="bookingTime"
-            control={control}
-            render={({ field: { onChange, value } }) => (
-              <DateTime 
-                label="Time" 
-                placeholderText="Select time"
-                // minDate={addDays(new Date(), 1)}
-                selected={value}
-                onFocus={(e) => e.target.blur()}
-                onChange={onChange}
-                // dateFormat="eee dd / LL / yy"
-                startIcon={
-                  <ClockIcon className="h-4 w-4 text-gray xl:h-5 xl:w-5" />
-                }
-                startIconClassName="sm:left-2"
-                error={errors?.bookingTime?.message}
-                inputClassName={clsx(
-                  '!text-gray text-xs xl:text-sm sm:pl-12',
-                  stateTwo &&
-                    '!border !border-gray-1000 !ring-[1px] !ring-gray-900/20'
-                )}
-                labelClassName="!text-sm md:!text-base mb-1.5"
-                onCalendarOpen={() => setStateTwo(true)}
-                onCalendarClose={() => setStateTwo(false)}
-              />
-            )}
-          />
+           
+                  <Input {...register("bookingTime")} label='Time' className='mt-3'   type="time"        error={errors?.bookingTime?.message}/>
+
+       
+
         </div>
       
         <Textarea

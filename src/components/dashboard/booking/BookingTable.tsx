@@ -10,11 +10,21 @@ import Text from '@/components/ui/typography/text';
 import Table from '@/components/ui/table';
 import { BookingreservationColumn } from './Bookingreservation-col';
 import { useBookingsQuery } from '@/graphql/generated/schema';
+import useAuth from '@/hooks/use-auth';
 
 export default function BookingTable() {
   const [order, setOrder] = useState<string>('desc');
   const [column, setColumn] = useState<string>('');
-  const {data} = useBookingsQuery()
+  const {user} = useAuth()
+  const {data} = useBookingsQuery({
+ variables:{
+  where:{
+    userId: {
+      equals: user?.id
+    }
+  }
+ }
+  })
 //   const [data, setData] = useState<typeof reservationData>([]);
   const [searchfilter, setSearchFilter] = useState('');
   const [current, setCurrent] = useState(1);
@@ -140,7 +150,7 @@ export default function BookingTable() {
         variant="minimal"
         className="text-sm"
       />
-      <div className="mt-8 text-center">
+      {/* <div className="mt-8 text-center">
         <Pagination
           current={current}
           total={reservationData.length}
@@ -154,7 +164,7 @@ export default function BookingTable() {
             setCurrent(page);
           }}
         />
-      </div>
+      </div> */}
     </>
   );
 }
