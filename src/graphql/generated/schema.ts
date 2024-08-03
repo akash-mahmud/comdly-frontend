@@ -17,6 +17,7 @@ export type Scalars = {
   Float: { input: number; output: number; }
   DateTime: { input: any; output: any; }
   JSON: { input: any; output: any; }
+  Upload: { input: any; output: any; }
 };
 
 export type AffectedRowsOutput = {
@@ -2810,6 +2811,19 @@ export type CompanyUpsertWithoutUserInput = {
   update: CompanyUpdateWithoutUserInput;
 };
 
+export type CompanyUserForResponsce = {
+  __typename?: 'CompanyUserForResponsce';
+  avater?: Maybe<Scalars['String']['output']>;
+  company?: Maybe<Company>;
+  email?: Maybe<Scalars['String']['output']>;
+  firstname?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  lastname?: Maybe<Scalars['String']['output']>;
+  phoneNumber?: Maybe<Scalars['String']['output']>;
+  role?: Maybe<Scalars['String']['output']>;
+  status: Scalars['String']['output'];
+};
+
 export type CompanyWhereInput = {
   AND?: InputMaybe<Array<CompanyWhereInput>>;
   NOT?: InputMaybe<Array<CompanyWhereInput>>;
@@ -5427,6 +5441,7 @@ export type Mutation = {
   updateOneUser?: Maybe<User>;
   updateOneUserTokens?: Maybe<UserTokens>;
   updateProfile?: Maybe<DefaultResponsce>;
+  uploadFile?: Maybe<FileUploadResponsce>;
   upsertOneBooking: Booking;
   upsertOneBuisnessCategory: BuisnessCategory;
   upsertOneBuisnessSubCategory: BuisnessSubCategory;
@@ -6240,6 +6255,11 @@ export type MutationUpdateOneUserTokensArgs = {
 export type MutationUpdateProfileArgs = {
   input: UpdateOneUserArgsCustom;
   passwordInput: UpdateProfilePaswordArgs;
+};
+
+
+export type MutationUploadFileArgs = {
+  file: Scalars['Upload']['input'];
 };
 
 
@@ -8665,6 +8685,7 @@ export type Query = {
   location?: Maybe<Location>;
   locations: Array<Location>;
   me?: Maybe<UserForResponsce>;
+  meCompany?: Maybe<CompanyUserForResponsce>;
   owner?: Maybe<Owner>;
   owners: Array<Owner>;
   plan?: Maybe<Plan>;
@@ -12104,6 +12125,13 @@ export type DefaultResponsce = {
   success: Scalars['Boolean']['output'];
 };
 
+export type FileUploadResponsce = {
+  __typename?: 'fileUploadResponsce';
+  file?: Maybe<Scalars['String']['output']>;
+  message: Scalars['String']['output'];
+  success: Scalars['Boolean']['output'];
+};
+
 export type CreateOneBookingMutationVariables = Exact<{
   data: BookingCreateInput;
 }>;
@@ -12160,6 +12188,13 @@ export type CompanyQueryVariables = Exact<{
 
 
 export type CompanyQuery = { __typename?: 'Query', company?: { __typename?: 'Company', avater: string, description: string, fetaureImage: string, logo: string, name: string, slug: string } | null };
+
+export type UploadFileMutationVariables = Exact<{
+  file: Scalars['Upload']['input'];
+}>;
+
+
+export type UploadFileMutation = { __typename?: 'Mutation', uploadFile?: { __typename?: 'fileUploadResponsce', file?: string | null, message: string, success: boolean } | null };
 
 export type ProductsQueryVariables = Exact<{
   where?: InputMaybe<ProductWhereInput>;
@@ -12473,6 +12508,41 @@ export function useCompanyLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Co
 export type CompanyQueryHookResult = ReturnType<typeof useCompanyQuery>;
 export type CompanyLazyQueryHookResult = ReturnType<typeof useCompanyLazyQuery>;
 export type CompanyQueryResult = Apollo.QueryResult<CompanyQuery, CompanyQueryVariables>;
+export const UploadFileDocument = gql`
+    mutation UploadFile($file: Upload!) {
+  uploadFile(file: $file) {
+    file
+    message
+    success
+  }
+}
+    `;
+export type UploadFileMutationFn = Apollo.MutationFunction<UploadFileMutation, UploadFileMutationVariables>;
+
+/**
+ * __useUploadFileMutation__
+ *
+ * To run a mutation, you first call `useUploadFileMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUploadFileMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [uploadFileMutation, { data, loading, error }] = useUploadFileMutation({
+ *   variables: {
+ *      file: // value for 'file'
+ *   },
+ * });
+ */
+export function useUploadFileMutation(baseOptions?: Apollo.MutationHookOptions<UploadFileMutation, UploadFileMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UploadFileMutation, UploadFileMutationVariables>(UploadFileDocument, options);
+      }
+export type UploadFileMutationHookResult = ReturnType<typeof useUploadFileMutation>;
+export type UploadFileMutationResult = Apollo.MutationResult<UploadFileMutation>;
+export type UploadFileMutationOptions = Apollo.BaseMutationOptions<UploadFileMutation, UploadFileMutationVariables>;
 export const ProductsDocument = gql`
     query Products($where: ProductWhereInput, $orderBy: [ProductOrderByWithRelationInput!], $cursor: ProductWhereUniqueInput, $take: Int, $skip: Int, $distinct: [ProductScalarFieldEnum!]) {
   products(
